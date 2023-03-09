@@ -1,38 +1,776 @@
-.App {
+@import url(./Components/SourceFiles/templatemo-liberty-market.css);
+
+:root {
+  --pretty-modal-modal-container-background-color: #23222d;
+  --pretty-modal-modal-container-border-radius: 10px;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+.navbar-nav li a :hover {
+  color: white;
+  transition: all 0.2s ease 0s;
+  background-color: #7453fc;
+  border-radius: 18px;
+  padding: 7px 15px 7px 15px;
+}
+
+.borderSignup {
+  border-radius: 20px;
+  background-color: #7453fc;
+}
+.borderLogin {
+  border: 1px solid #7453fc;
+  border-radius: 20px;
+  color: #000;
+}
+
+@media screen and (max-width: 880px) {
+  .borderSignup {
+    margin-top: 4px;
+    border-radius: 20px;
+    background-color: #7453fc;
+  }
+}
+.imageBanner {
+  margin-left: 70px;
+}
+
+@media screen and (max-width: 880px) {
+  .imageBanner {
+    margin-top: 40px;
+    margin-left: 0px;
+  }
+}
+
+.mainModal {
+  z-index: 9920;
+  position: fixed;
+  background-image: url(..//src/Components/SourceFiles/images/dark-bg.jpg);
+}
+
+@media screen and (max-width: 880px) {
+  .mainModal {
+    margin-left: 30px;
+  }
+}
+
+/* button on sign sign up modal */
+
+.btnAnimate:hover {
+  animation: none;
+}
+
+.btnAnimate {
+  animation: wiggle 2s linear infinite;
+}
+
+/* Keyframes */
+@keyframes wiggle {
+  0%,
+  7% {
+    transform: rotateZ(0);
+  }
+
+  15% {
+    transform: rotateZ(-15deg);
+  }
+
+  20% {
+    transform: rotateZ(10deg);
+  }
+
+  25% {
+    transform: rotateZ(-10deg);
+  }
+
+  30% {
+    transform: rotateZ(6deg);
+  }
+
+  35% {
+    transform: rotateZ(-14deg);
+  }
+
+  40%,
+  100% {
+    transform: rotateZ(0);
+  }
+}
+
+/* button on sign sign up modal */
+
+/* button in shop cards */
+
+.btnShop {
+  border: none;
+  padding: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.borderClass {
+  border: 3px solid;
+  border-color: #7453fc;
+}
+
+.colorsbutton {
+  border: none;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 25px;
+  margin: 2px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.priceText {
+  color: #7453fc;
+}
+
+@media screen and (max-width: 880px) {
+  .form-text {
+    font-size: 8px;
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .lineBreaker {
+    max-width: 100px;
+  }
+}
+
+/* button in shop cards */
+
+/* main buttons */
+
+.buttonx {
+  font-size: 12px;
+  color: #fff;
+  background-color: transparent;
+  border: 1px solid #7453fc;
+  padding: 10px 20px;
+  border-radius: 25px;
+  text-transform: capitalize;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.buttonx:after {
+  width: 78%;
+  height: 2px;
+  background-color: #fff;
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+}
+
+.actives,
+.buttonx:hover {
+  background-color: #7453fc;
+  color: #fff;
+}
+
+/* buttons */
+
+/* sign in modal */
+
+.mainModal {
+  animation-duration: 0.5s;
+  animation-name: slidein;
+  animation-iteration-count: 1;
+  animation-direction: alternate;
+}
+
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
+
+@-webkit-keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    -webkit-transform: translatex(10px);
+    -moz-transform: translatex(10px);
+    -o-transform: translatex(10px);
+    transform: translatex(10px);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translatex(0);
+    -moz-transform: translatex(0);
+    -o-transform: translatex(0);
+    transform: translatex(0);
+  }
+}
+
+@-moz-keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    -webkit-transform: translatex(10px);
+    -moz-transform: translatex(10px);
+    -o-transform: translatex(10px);
+    transform: translatex(10px);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translatex(0);
+    -moz-transform: translatex(0);
+    -o-transform: translatex(0);
+    transform: translatex(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    -webkit-transform: translatex(100px);
+    -moz-transform: translatex(100px);
+    -o-transform: translatex(100px);
+    transform: translatex(100px);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translatex(0);
+    -moz-transform: translatex(0);
+    -o-transform: translatex(0);
+    transform: translatex(0);
+  }
+}
+
+.in-left {
+  -webkit-animation-name: fadeInLeft;
+  -moz-animation-name: fadeInLeft;
+  -o-animation-name: fadeInLeft;
+  animation-name: fadeInLeft;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  -o-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-delay: 1s;
+  -moz-animation-delay: 1s;
+  -o-animation-duration: 1s;
+  animation-delay: 0.2s;
+}
+
+/* sign in modal */
+
+/* items in the chop component */
+.shopItemImg {
+  /* border-radius: 20px 20px 0px 0px; */
+  height: 250px;
+  /* max-width: 413px; */
+}
+
+@media only screen and (max-width: 850px) {
+  .shopItemImg {
+    max-width: 364px;
+    height: 250px;
+  }
+}
+
+/* height: '360px', width: '364px'  */
+
+.shopItemBody {
+  border: 1px solid rgba(218, 209, 209, 0.2);
+  border-radius: 0px 0px 20px 20px;
+}
+
+.itemBtn {
+  margin-top: 20px;
+  margin-bottom: -43px;
+  padding: -3px;
+}
+
+/* transition */
+
+power::before {
+  transform: scaleX(0);
+  transform-origin: bottom right;
+}
+
+power:hover::before {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+power::before {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  inset: 0 0 0 0;
+  background: #00171f;
+  z-index: 9910;
+  transition: transform 0.3s ease;
+}
+
+/* tranistion */
+
+/* workingvide */
+
+@media only screen and (max-width: 880px) {
+  iframe {
+    width: 350px;
+    height: 300px;
+  }
+}
+
+input {
+  caret-color: #7453fc;
+}
+
+/* profile section */
+
+.profileImage {
+  margin-top: -70px;
+  border-radius: 10px;
+  max-width: 400px;
+  max-height: 650px;
+  margin-left: 15px;
+}
+
+.CoverImage {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  padding-top: 190px;
+  text-align: center;
+  background-color: #2a2a2a;
+}
+
+@media only screen and (max-width: 880px) {
+  .profileImage {
+    margin-top: -40px;
+    border-radius: 10px;
+    max-width: 250px;
+    max-height: 250px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.buttonProfile {
+  position: fixed;
+  right: 0;
+  z-index: 9799;
+  margin-top: -300px;
+}
+
+.hoverBtn {
+  box-shadow: 8px 5px 12px -2px rgba(0, 0, 0, 0.55);
+  -webkit-box-shadow: 8px 5px 12px -2px rgba(0, 0, 0, 0.55);
+  -moz-box-shadow: 8px 5px 12px -2px rgba(0, 0, 0, 0.55);
+}
+
+.hoverBtn:hover {
+  animation: MoveUpDown 0.8s linear infinite;
+}
+
+@keyframes MoveUpDown {
+  0%,
+  100% {
+    bottom: 0;
+  }
+
+  50% {
+    bottom: 5px;
+  }
+}
+
+@media only screen and (max-width: 995px) {
+  .buttonProfile {
+    position: fixed;
+    width: 100%;
+    bottom: 0px;
+    background-color: #23222d;
+    z-index: 999;
+    border-radius: 7px 7px 0px 0px;
+    text-align: center;
+    padding-top: 10px;
+    animation: none;
+  }
+}
+
+/* profile cards to show social and professional link */
+
+.profileCard {
+  background-color: #23222d;
+  border: 1px solid #7453fc;
+  border-radius: 15px;
+  padding: 10px;
+  box-shadow: 6px 7px 17px -1px rgba(0, 0, 0, 0.59);
+  -webkit-box-shadow: 6px 7px 17px -1px rgba(0, 0, 0, 0.59);
+  -moz-box-shadow: 6px 7px 17px -1px rgba(0, 0, 0, 0.59);
+  cursor: pointer;
+}
+
+.profileCard:hover {
+  animation: shake 1s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, -1px) rotate(-0.5deg);
+  }
+
+  50% {
+    transform: translate(4px, -4px) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(5px, -5px) rotate(+0.5deg);
+  }
+}
+
+/* dark Background */
+
+.darkbg {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-bottom: 25%;
+}
+
+/* contact rhiugh whatsapp button */
+
+.contactWhatsapp {
+  position: fixed;
+  right: 0;
+  border: 3px solid green;
+  background-color: #23222d;
+  color: green;
+  border-radius: 10px 10px 0px 10px;
+  margin-top: -100px;
+  margin-right: 20px;
+  box-shadow: 11px 10px 20px -3px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 11px 10px 20px -3px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 11px 10px 20px -3px rgba(0, 0, 0, 0.75);
+  animation: whatsappBar 0.7s linear infinite;
+  cursor: pointer;
+  z-index: 0;
+}
+
+@media only screen and (max-width: 995px) {
+  .contactWhatsapp {
+    position: fixed;
+    right: 0;
+    border: 3px solid green;
+    background-color: #23222d;
+    color: green;
+    border-radius: 10px 10px 0px 10px;
+    margin-top: -100px;
+    margin-right: 20px;
+    box-shadow: 11px 10px 20px -3px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 11px 10px 20px -3px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 11px 10px 20px -3px rgba(0, 0, 0, 0.75);
+    /* animation: whatsappBar 0.7s linear infinite; */
+    cursor: pointer;
+    z-index: 1;
+    width: 190px;
+    height: 85px;
+  }
+}
+
+@keyframes whatsappBar {
+  0%,
+  100% {
+    bottom: 50px;
+  }
+
+  50% {
+    bottom: 52px;
+  }
+}
+
+/* bage on homescreen */
+
+/* common */
+.ribbon {
+  width: 130px;
+  height: 150px;
+  overflow: hidden;
+  position: absolute;
+}
+
+.ribbon::before,
+.ribbon::after {
+  position: absolute;
+  z-index: -1;
+  content: "";
+  display: block;
+  border: 1px solid #2980b9;
+}
+
+.ribbon span {
+  position: absolute;
+  display: block;
+  width: 225px;
+  padding: 10px 0px;
+  background-color: #7453fc;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  font: 700 18px/1 "Lato", sans-serif;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* top right*/
+.ribbon-top-right {
+  top: 0px;
+  right: 0px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.ribbon-top-right::before,
+.ribbon-top-right::after {
+  border-top-color: transparent;
+  border-right-color: transparent;
+}
+
+.ribbon-top-right::before {
+  top: 0;
+  left: 0;
+}
+
+.ribbon-top-right::after {
+  bottom: 0;
+  right: 0;
+}
+
+.ribbon-top-right span {
+  left: -25px;
+  top: 30px;
+  transform: rotate(45deg);
+}
+
+.scroolToTop {
+  position: fixed;
+  width: 5%;
+  left: 50%;
+  bottom: 40px;
+  color: #fff;
+  z-index: 9999;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 995px) {
+  .scroolToTop {
+    position: fixed;
+    right: 0;
+    border: 1px solid #7453fc;
+    color: white;
+    margin-top: -100px;
+    box-shadow: 11px 10px 20px -3px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 11px 10px 20px -3px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 11px 10px 20px -3px rgba(0, 0, 0, 0.75);
+    cursor: pointer;
+    z-index: 999;
+    height: 35px;
+    width: 50px;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* loading on page shifting */
+
+.spinner{
+  width:5em;
+  height: 5rem;
+  margin-top: 40em;
+  margin-bottom: 10em;
+  color: #7453fc;
 }
 
-.App-link {
-  color: #61dafb;
+
+@media only screen and (max-width: 995px) {
+  .spinner {
+    width:5em;
+  height: 5rem;
+  margin-top: 60em;
+  margin-bottom: 10em;
+  color: #7453fc;
+  }
 }
 
-@keyframes App-logo-spin {
-  from {
+.loader {
+  color: #7453fc;
+  margin-top: 200px;
+  margin-bottom: 0px;
+
+  z-index: 9998;
+  font-size: 70px;
+  text-indent: -9999em;
+  /* overflow: hidden; */
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  -webkit-animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+  animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+}
+
+@-webkit-keyframes load6 {
+  0% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+
+  5%,
+  95% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+
+  10%,
+  59% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em,
+      -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em,
+      -0.297em -0.775em 0 -0.477em;
+  }
+
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em,
+      -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em,
+      -0.749em -0.34em 0 -0.477em;
+  }
+
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em,
+      -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em,
+      -0.82em -0.09em 0 -0.477em;
+  }
+
+  100% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+}
+
+@keyframes load6 {
+  0% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+
+  5%,
+  95% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+
+  10%,
+  59% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em,
+      -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em,
+      -0.297em -0.775em 0 -0.477em;
+  }
+
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em,
+      -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em,
+      -0.749em -0.34em 0 -0.477em;
+  }
+
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em,
+      -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em,
+      -0.82em -0.09em 0 -0.477em;
+  }
+
+  100% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+}
+
+@-webkit-keyframes round {
+  0% {
+    -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
   }
-  to {
+
+  100% {
+    -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
+
+@keyframes round {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.loaderSizing {
+  margin-top: 170px;
+  margin-bottom: 170px;
+}
+
+/* end of loader section */
+
+/* navlink active function */
+
+.enjoy {
+  border-bottom: 2px solid #7453fc;
+  text-transform: capitalize;
+}
+
+@media only screen and (max-width: 995px) {
+  .enjoy {
+    border-bottom: 2px solid #7453fc;
+    text-align: center;
+  }
+}
+/* Navbar mobile screen hover color change */
+.signinNav:hover {
+  background-color: #7e6bce;
+}
+.updateNav:hover {
+  background-color: gray;
+}
+
+.profileHeading {
+  margin-left: 30px;
+}
+
+@media only screen and (max-width: 995px) {
+  .profileHeading {
+    text-align: center;
+    margin: 0;
+  }
+}
+
+/* adding context to the table */
