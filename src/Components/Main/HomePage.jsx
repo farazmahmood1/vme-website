@@ -1,6 +1,6 @@
-import Instructions from '../Body/Instructions'
-import Categories from '../Body/Categories'
-import Banner from '../Body/Banner'
+import Instructions from '../Homepage/Instructions'
+import Categories from '../Homepage/Categories'
+import Banner from '../Homepage/Banner'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import SignIn from '../Auth/SignIn';
@@ -43,7 +43,7 @@ const HomePage = () => {
                                             </li>
 
                                             <li className="nav-item ">
-                                                <p className={'nav-link borderLogin  me-4 '} aria-current="page"><b> <p onClick={() => setOpenModal(true)} className='text-secondary' style={{ cursor: 'pointer' }}  >Login</p> </b></p>
+                                                <p className='nav-link borderLogin  me-4' aria-current="page"><b> <p onClick={() => setOpenModal(true)} className='text-secondary' style={{ cursor: 'pointer' }}  >Login</p> </b></p>
                                             </li>
 
                                             <li className="nav-item ">

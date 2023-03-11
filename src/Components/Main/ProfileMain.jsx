@@ -1,5 +1,5 @@
-import PageHeading from '../Explore/PageHeading'
-import Discover from '../Explore/Discover'
+import PageHeading from '../Profiles/PageHeading'
+import Discover from '../Profiles/Discover'
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import SignIn from '../Auth/SignIn';

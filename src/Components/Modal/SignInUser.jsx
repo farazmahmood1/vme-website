@@ -23,7 +23,7 @@ const SignInUser = () => {
                 email: emailLogin,
                 password: emailPassword
             }
-            axios.post(`${Baseurl}/login`, userobj)
+            axios.post(`${Baseurl}customerlogin`, userobj)
                 .then(res => {
                     toast.info('Email login successfully', { theme: "dark" })
                     localStorage.setItem('user', JSON.stringify(res.data.customer));

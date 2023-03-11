@@ -253,7 +253,7 @@ const ShopScreem = () => {
 
                                                 <hr style={{ width: "320px", height: "1px", color: "#7453fc" }} />
                                                 <h6 style={{ color: "#7453fc" }} className='mt-2 mb-2'>Color Avaiblable;</h6>
-                                                <button className={isActive ? 'btnShop borderClass' : 'btnShop'} onClick={changeClass} style={{ backgroundColor: `${data.color_avaliable}` }} ></button>
+                                                <button className={isActive ? 'btnShop borderClass' : 'btnShop'} onClick={changeClass} style={{ backgroundColor: `${data.item_color}` }} ></button>
 
                                                 <h6 className='mt-3' style={{ color: "#7459fc" }}>Describtion:</h6>
                                                 <p className='p-2'>{data.describtion}</p>

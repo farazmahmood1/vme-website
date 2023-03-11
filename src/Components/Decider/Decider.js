@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Route, Router, Routes, useParams } from "react-router-dom";
 import Discover from "../Explore/Discover";
 import HomePage from "../Main/HomePage";
-import UserProfile from "../Profile/UserProfile";
+import UserProfile from "../Main/UserProfile";
 
 const Decider = () => {
   const [id, setId] = useState("");

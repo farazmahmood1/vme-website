@@ -288,7 +288,7 @@ const ItemForm = () => {
                                     <div className="col-lg-6">
                                         <fieldset>
                                             <label htmlFor="title">Name*</label>
-                                            <input defaultValue={userName} onChange={(e) => setName(e.target.value)} style={{ borderRadius: "16px", backgroundColor: "#282b2f", borderColor: name === "" && submit === true ? "red" : '#404245' }} id="inputName5" placeholder="Ex. Ali Ahmed" autoComplete="on" type='text' />
+                                            <input onChange={(e) => setName(e.target.value)} style={{ borderRadius: "16px", backgroundColor: "#282b2f", borderColor: name === "" && submit === true ? "red" : '#404245' }} id="inputName5" placeholder="Ex. Ali Ahmed" autoComplete="on" type='text' />
                                             {/* {name === "" && submit === true ? <span className='text-danger'>input empty</span> : ""} */}
                                         </fieldset>
                                     </div>
@@ -311,7 +311,7 @@ const ItemForm = () => {
                                     <div className="col-lg-6">
                                         <fieldset>
                                             <label htmlFor="title">Email*</label>
-                                            <input defaultValue={userEmail} onChange={(e) => setEmail(e.target.value)} style={{ borderRadius: "16px", backgroundColor: "#282b2f", borderColor: email === "" && submit === true ? "red" : '#404245' }} id="inputName5" placeholder='Ex. user@mail.com' autoComplete="on" type='email' />
+                                            <input onChange={(e) => setEmail(e.target.value)} style={{ borderRadius: "16px", backgroundColor: "#282b2f", borderColor: email === "" && submit === true ? "red" : '#404245' }} id="inputName5" placeholder='Ex. user@mail.com' autoComplete="on" type='email' />
                                             {/* {name === "" && submit === true ? <span className='text-danger'>input empty</span> : ""} */}
                                         </fieldset>
                                     </div>

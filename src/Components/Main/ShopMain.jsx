@@ -1,4 +1,4 @@
-import Shop from '../Body/Shop'
+import Shop from '../Shop/Shop'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import SignIn from '../Auth/SignIn';
