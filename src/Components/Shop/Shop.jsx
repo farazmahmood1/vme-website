@@ -172,11 +172,11 @@ const Shop = () => {
                                   </h4>
                                   <hr className="bg-secondary" />
                                   <div className="d-flex justify-content-between">
-                                    <div>
+                                    <div className="text-center ms-2">
                                       <p>Price</p>
                                       <h5>{items.item_price}</h5>
                                     </div>
-                                    <div>
+                                    <div  className="text-center">
                                       <p>Item type</p>
                                       <h5>{items.item_type}</h5>
                                     </div>

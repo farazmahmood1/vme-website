@@ -265,7 +265,7 @@ const ShopScreem = () => {
                                         </div>
                                     </>
                             }
-                            <hr className='bg-secondary' />
+                            {/* <hr className='bg-secondary' />
                             <div className='d-flex justify-content-center mt-5'>
                                 <div className="buttons me-2">
                                     <div className="border-button">
@@ -278,7 +278,7 @@ const ShopScreem = () => {
                                     </div>
                                 </div>
 
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

@@ -151,6 +151,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html {
+  overscroll-behavior: none
+}
+
 a {
   text-decoration: none !important;
 }

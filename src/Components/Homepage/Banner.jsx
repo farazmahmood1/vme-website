@@ -2,6 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import crouselImg from "../SourceFiles/images/1.png";
 import crouselImg2 from "../SourceFiles/images/2.png";
+import crouselImg3 from "../SourceFiles/images/5.jpg";
+import crouselImg4 from "../SourceFiles/images/6.jpg";
+import crouselImg5 from "../SourceFiles/images/7.png";
+import crouselImg6 from "../SourceFiles/images/8.png";
 
 const Banner = () => {
   return (
@@ -80,91 +84,23 @@ const Banner = () => {
                 <div className="flip-box-inner">
                   <div className="flip-box-front">
                     <img
-                      className="d-block w-100"
-                      style={{ transform: "rotate(20deg)" }}
-                      src={crouselImg}
+                      className="d-block"
+                      style={{ transform: "rotate(60deg)" }}
+                      src={crouselImg5}
                       alt=""
                     />
                   </div>
                   <div className="flip-box-back">
                     <img
-                      className="d-block w-100"
-                      style={{ transform: "rotate(80deg)" }}
-                      src={crouselImg2}
+                      className="d-block"
+                      style={{ transform: "rotate(300deg)" }}
+                      src={crouselImg6}
                       alt=""
                     />
                   </div>
                 </div>
               </div>
             </div>
-
-{/* <div className="col-lg-5">
-
-<div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
-  <div className="carousel">
-    <div className="carousel-item active" data-bs-interval={2000}>
-
-    <div className="flip-box carouselx">
-                <div className="flip-box-inner">
-                  <div className="flip-box-front">
-                    <img
-                      className="d-block w-100"
-                      style={{ transform: "rotate(20deg)" }}
-                      src={crouselImg}
-                      alt=""
-                    />
-                  </div>
-                  <div className="flip-box-back">
-                    <img
-                      className="d-block w-100"
-                      style={{ transform: "rotate(80deg)" }}
-                      src={crouselImg2}
-                      alt=""
-                    />
-                  </div>
-                </div>
-              </div>
-
-    </div>
-    <div className="carousel-item" data-bs-interval={2000}>
-
-    <div className="flip-box carouselx">
-                <div className="flip-box-inner">
-                  <div className="flip-box-front">
-                    <img
-                      className="d-block w-100"
-                      style={{ transform: "rotate(20deg)" }}
-                      src={crouselImg}
-                      alt=""
-                    />
-                  </div>
-                  <div className="flip-box-back">
-                    <img
-                      className="d-block w-100"
-                      style={{ transform: "rotate(80deg)" }}
-                      src={crouselImg2}
-                      alt=""
-                    />
-                  </div>
-                </div>
-              </div>
-
-    </div>
-    
-  </div>
-  <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-    <span className="carousel-control-prev-icon" aria-hidden="true" />
-    <span className="visually-hidden">Previous</span>
-  </button>
-  <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-    <span className="carousel-control-next-icon" aria-hidden="true" />
-    <span className="visually-hidden">Next</span>
-  </button>
-</div>
-
-
-</div> */}
-
           </div>
         </div>
       </div>

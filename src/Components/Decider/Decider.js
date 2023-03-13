@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link, Route, Router, Routes, useParams } from "react-router-dom";
-import Discover from "../Explore/Discover";
 import HomePage from "../Main/HomePage";
 import UserProfile from "../Main/UserProfile";
 
