@@ -25,6 +25,18 @@ const Categories = () => {
       });
   };
 
+  const PrevArrow = (props) => (
+    <button {...props} className="slider-arrow slider-prev">
+<i className="fa-solid fa-chevron-left"/>
+    </button>
+  );
+  
+  const NextArrow = (props) => (
+    <button {...props} className="slider-arrow slider-next">
+      <i className="fa-solid fa-chevron-right"/>
+    </button>
+  );
+
   var settings = {
     dots: false,
     infinite: true,
@@ -35,6 +47,8 @@ const Categories = () => {
     speed: 800,
     autoplaySpeed: 2000,
     cssEase: "linear",
+    prevArrow: <PrevArrow />,
+  nextArrow: <NextArrow />,
     responsive: [
       {
         breakpoint: 1024,

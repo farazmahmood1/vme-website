@@ -45,7 +45,7 @@ body {
 
 @media screen and (max-width: 880px) {
   .imageBanner {
-    margin-top: 70px;
+    margin-top: 110px;
     margin-left: 10px;
     margin-bottom: 80px;
   }
@@ -357,9 +357,8 @@ input {
 .profileImage {
   margin-top: -70px;
   border-radius: 10px;
-  max-width: 400px;
-  max-height: 650px;
-  margin-left: 15px;
+  max-width: 150px;
+  margin-left: 0px;
 }
 
 .CoverImage {
@@ -773,7 +772,7 @@ input {
 }
 
 .profileHeading {
-  margin-left: 30px;
+  margin-left: 0px;
 }
 
 @media only screen and (max-width: 995px) {
@@ -793,44 +792,6 @@ input {
   transform-style: preserve-3d;
   animation: rotate360 3.5s infinite forwards linear;
 }
-
-.carousel__face:nth-child(1) {
-  transform: rotateY(0deg) translateZ(430px);
-}
-
-.carousel__face:nth-child(2) {
-  transform: rotateY(40deg) translateZ(430px);
-}
-
-.carousel__face:nth-child(3) {
-  transform: rotateY(80deg) translateZ(430px);
-}
-
-.carousel__face:nth-child(4) {
-  transform: rotateY(120deg) translateZ(430px);
-}
-
-.carousel__face:nth-child(5) {
-  transform: rotateY(160deg) translateZ(430px);
-}
-
-.carousel__face:nth-child(6) {
-  transform: rotateY(200deg) translateZ(430px);
-}
-
-.carousel__face:nth-child(7) {
-  transform: rotateY(240deg) translateZ(430px);
-}
-
-.carousel__face:nth-child(8) {
-  transform: rotateY(280deg) translateZ(430px);
-}
-
-.carousel__face:nth-child(9) {
-  transform: rotateY(320deg) translateZ(430px);
-}
-
-
 
 @keyframes rotate360 {
   from {
@@ -942,4 +903,52 @@ input {
   100% {
     filter: blur(5px) brightness(1);
   }
+}
+
+
+/* slider buttons */
+
+.slider-arrow {
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  border: 1px solid #7453fc;
+  color: #7453fc;
+  background-color: #fff;
+  cursor: pointer;
+  position: absolute;
+  width: 40px;
+  height: 50px;
+  text-align: center;
+  font-size: 20px;
+  outline: none;
+  transition: all ease 0.3s;
+  opacity: 0.3;
+}
+
+.slider-arrow:hover{
+  opacity: 1;
+
+  border: 1px solid #7453fc;
+  color: #fff;
+  background-color: #7453fc;
+}
+
+@media only screen and (max-width: 880px) {
+  .slider-arrow{
+  width: 10px;
+  }
+}
+
+
+.slider-prev {
+  left: -30px;
+  border-radius: 50% 0 0 50%;
+
+}
+
+.slider-next {
+  right: -30px;
+  border-radius: 0 50% 50% 0;
+
 }

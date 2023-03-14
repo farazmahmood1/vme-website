@@ -554,17 +554,34 @@ const UserProfile = (id) => {
 
 
           <div className="row">
-            <div className='col-lg-4' >
+            {/* <div className='col-lg-4' >
               <img src={`${allImagesUrl.itemImage}${pic}`} className='profileImage' alt="profile image" />
             </div>
             <div className="col-lg-6 profileHeading">
-              <hr className='w-75 ' style={{ height: "3px", color: "#7453fc" }} />
               <h1 className='mt-2'>{name}</h1>
               <p style={{ fontSize: '12px' }}>{phone}</p>
               <h2 className='mt-3'>{profession}</h2>
               <h4 className='mt-3' style={{ color: "#7453fc" }}>Bio</h4>
               <p>{bio}</p>
-              {/* <button className='buttonx w-25 mt-4 p-3' >View CV</button> */}
+              <button className='buttonx w-25 mt-4 p-3' >View CV</button>
+            </div> */}
+
+            <div className='d-flex'>
+              <div>
+                <img src={`${allImagesUrl.itemImage}${pic}`} className='profileImage' alt="profile image"  />
+              </div>
+              <div className='ms-4'>
+<p className='mt-3 fs-2'>{name}</p>
+<p className='fs-4 mt-1' style={{color:'gray'}}>{profession}</p>
+              </div>
+            </div>
+            <hr className='mx-auto w-100' style={{ height: "3px", color: "#7453fc", marginTop: '50px' }} />
+            <div className='d-flex'>
+            <p style={{color:'#7453fc'}} className='fs-2 mt-2'>Bio</p>
+            <div className='container'>
+<p>{bio}</p>
+
+            </div>
             </div>
           </div>
 
