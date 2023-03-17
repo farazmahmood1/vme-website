@@ -144,7 +144,7 @@ const UserProfile = (id) => {
       return (
         <>
           <div>
-            <hr className='mx-auto' style={{ width: "320px", height: "3px", color: "#7453fc", marginTop: '50px' }} />
+            <hr className='mx-auto' style={{ width: "320px", height: "3px", color: "#7453fc", marginTop: '20px' }} />
             <h2 className='mt-2 text-center'>My Social Accounts</h2>
             <div className='row mt-2'>
               <div className='col-lg-5 mx-auto'>
@@ -537,24 +537,7 @@ const UserProfile = (id) => {
     document.documentElement.scrollTop = 0;
   }
 
-  return (
-    <div>
-
-      <div className="CoverImage" style={{ backgroundImage: cover !== "" ? `url(${Imagesurl}${cover})` : "url(./source/assets/images/heading-bg.jpg)" }}>
-      </div>
-
-      <div className="darkbg" style={{ backgroundImage: "url(./source/assets/images/dark-bg.jpg)" }}>
-        <div className="container">
-          <div className='col-lg-1 ms-auto mt-5 buttonProfile'>
-            <button onClick={() => setProfile("userProfile")} className={profile === 'userProfile' ? 'btn  buttonx actives rounded-pill me-2 mb-2' : 'btn hoverBtn buttonx rounded-pill me-2 mb-2'} style={{ color: "white", borderColor: " #7453fc" }}><i className="fa-solid fa-house p-2" /></button>
-            <button onClick={() => setProfile("Portfolio")} className={profile === 'Portfolio' ? 'btn  buttonx actives rounded-pill me-2 mb-2' : 'btn hoverBtn buttonx rounded-pill me-2 mb-2'} style={{ color: "white", borderColor: "#7453fc" }} ><i className="fa-solid fa-newspaper p-2" /></button>
-            <button onClick={() => setProfile("About")} className={profile === 'About' ? 'btn  buttonx actives rounded-pill me-2 mb-2' : 'btn hoverBtn buttonx rounded-pill me-2 mb-2'} style={{ color: "white", borderColor: " #7453fc" }} ><i className="fa-solid fa-user p-2" /></button>
-            <button onClick={() => setProfile("Social")} className={profile === 'Social' ? 'btn  buttonx actives rounded-pill me-2 mb-2' : 'btn hoverBtn buttonx rounded-pill me-2 mb-2'} style={{ color: "white", borderColor: "#7453fc" }} ><i className="fa-solid fa-envelope p-2" /></button>
-          </div>
-
-
-          <div className="row">
-            {/* <div className='col-lg-4' >
+  {/* <div className='col-lg-4' >
               <img src={`${allImagesUrl.itemImage}${pic}`} className='profileImage' alt="profile image" />
             </div>
             <div className="col-lg-6 profileHeading">
@@ -566,21 +549,36 @@ const UserProfile = (id) => {
               <button className='buttonx w-25 mt-4 p-3' >View CV</button>
             </div> */}
 
+  return (
+    <div>
+
+      <div className="CoverImage" style={{ backgroundImage: cover !== "" ? `url(${Imagesurl}${cover})` : "url(./source/assets/images/heading-bg.jpg)" }} />
+
+        <div className="container">
+          <div className='col-lg-1 ms-auto mt-5 buttonProfile'>
+            <button onClick={() => setProfile("userProfile")} className={profile === 'userProfile' ? 'btn  buttonx actives rounded-pill me-2 mb-2' : 'btn hoverBtn buttonx rounded-pill me-2 mb-2'} style={{ color: "white", borderColor: " #7453fc" }}><i className="fa-solid fa-house p-2" /></button>
+            <button onClick={() => setProfile("Portfolio")} className={profile === 'Portfolio' ? 'btn  buttonx actives rounded-pill me-2 mb-2' : 'btn hoverBtn buttonx rounded-pill me-2 mb-2'} style={{ color: "white", borderColor: "#7453fc" }} ><i className="fa-solid fa-newspaper p-2" /></button>
+            <button onClick={() => setProfile("About")} className={profile === 'About' ? 'btn  buttonx actives rounded-pill me-2 mb-2' : 'btn hoverBtn buttonx rounded-pill me-2 mb-2'} style={{ color: "white", borderColor: " #7453fc" }} ><i className="fa-solid fa-user p-2" /></button>
+            <button onClick={() => setProfile("Social")} className={profile === 'Social' ? 'btn  buttonx actives rounded-pill me-2 mb-2' : 'btn hoverBtn buttonx rounded-pill me-2 mb-2'} style={{ color: "white", borderColor: "#7453fc" }} ><i className="fa-solid fa-envelope p-2" /></button>
+          </div>
+          </div>
+
+      <div className="darkbg" style={{ backgroundImage: "url(./source/assets/images/dark-bg.jpg)" }}>
+          <div className="row">
             <div className='d-flex'>
               <div>
                 <img src={`${allImagesUrl.itemImage}${pic}`} className='profileImage' alt="profile image"  />
               </div>
               <div className='ms-4'>
-<p className='mt-3 fs-2'>{name}</p>
-<p className='fs-4 mt-1' style={{color:'gray'}}>{profession}</p>
+                <p className='mt-3 fs-2' style={{letterSpacing:'5px'}}>{name}</p>
+                <p className='fs-4 mt-1' style={{color:'gray', letterSpacing:'5px'}}><b>{profession}</b></p>
               </div>
             </div>
-            <hr className='mx-auto w-100' style={{ height: "3px", color: "#7453fc", marginTop: '50px' }} />
-            <div className='d-flex'>
-            <p style={{color:'#7453fc'}} className='fs-2 mt-2'>Bio</p>
-            <div className='container'>
-<p>{bio}</p>
-
+            <div className='card border-line'>
+            <div className='bio-container mx-auto mt-3'>
+            <p style={{color:'#7453fc'}} className='bio-heading'>Bio</p>
+            <div className='bio-box '>
+              <p style={{letterSpacing:'2px'}}>{bio}</p>
             </div>
             </div>
           </div>
@@ -607,7 +605,7 @@ const UserProfile = (id) => {
               </>
           }
 
-        </div>
+</div>
       </div>
     </div >
   )

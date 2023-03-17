@@ -10,6 +10,7 @@ import ShopScreem from "./Components/Main/ShopScreem";
 import ItemForm from "./Components/Form.jsx/ItemForm";
 import UserForm from "./Components/Form.jsx/UserForm";
 import Decider from "./Components/Decider/Decider";
+import ErrorPage from "./Components/Main/ErrorPage";
 
 function App() {
   var mybutton = document.getElementById("myBtn");
@@ -41,14 +42,16 @@ function App() {
         <Routes>
           <Route path="/" element={<Decider />} />
 
-          <Route path="/ShopMain" element={<ShopMain />} />
-          <Route path="/ProfileMain" element={<ProfileMain />} />
           <Route path="/WorkingVideo" element={<WorkingVideo />} />
-          <Route path="/UserProfile/:id" element={<UserProfile />} />
+          <Route path="/ShopMain" element={<ShopMain />} />
           <Route path="/ShopScreem/:items" element={<ShopScreem />} />
+          <Route path="/ProfileMain" element={<ProfileMain />} />
+          <Route path="/UserProfile/:id" element={<UserProfile />} />
 
-          {/* <Route path="/UserForm" element={<UserForm />} /> */}
           <Route path="/ItemForm" element={<ItemForm />} />
+          {/* <Route path="/UserForm" element={<UserForm />} /> */}
+
+          <Route path='*' element={<ErrorPage/>} />
         </Routes>
 
         <Footer />
