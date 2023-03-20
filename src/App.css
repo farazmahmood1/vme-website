@@ -435,14 +435,16 @@ input {
 }
 
 .border-line{
-  border-radius: 25px;
   margin-top: 50px;
   background: transparent;
   border: none;
   width: 5000px !important;
-  box-shadow: 1px -8px 9px 0px rgba(0,0,0,1);
+  /* box-shadow: 1px -8px 9px 0px rgba(0,0,0,1); 
   -webkit-box-shadow: 1px -8px 9px 0px rgba(0,0,0,1);
-  -moz-box-shadow: 1px -8px 9px 0px rgba(0,0,0,1);
+  -moz-box-shadow: 1px -8px 9px 0px rgba(0,0,0,1); */
+
+  box-shadow: inset 6px 6px 10px 0 rgba(0, 0, 0, 0.2),
+  inset 6px 0px 0px 0 rgba(0, 0, 0, 0.5)
   }
   
   .bio-box{
