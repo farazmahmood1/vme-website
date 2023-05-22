@@ -3,6 +3,7 @@
 :root {
   --pretty-modal-modal-container-background-color: #23222d;
   --pretty-modal-modal-container-border-radius: 10px;
+  --pretty-modal-modal-container-box-shadow: 1px 1px 2rem rgba(0,0,0,.3);
 }
 
 html,
@@ -1218,4 +1219,46 @@ input {
     .central-body{
         padding-top: 25%;
     }
+}
+
+
+/* modal for subscribtion */
+
+.fas.fa-envelope {
+  color: #fff;
+  font-size: 2rem;
+  background: #333;
+  padding: 1rem;
+  border-radius: 100%;
+  margin: 0 0 1rem 0;
+}
+
+.card-contentx {
+  position: relative;
+  top: 50%;
+  border-radius: 1rem;
+  padding: 4rem .5rem;
+  /* box-shadow: 1px 1px 2rem rgba(0,0,0,.3); */
+  text-align: center;
+}
+
+
+.inputx {
+  padding: .8rem 1rem;
+  width: 40%;
+  border-radius: 5rem;
+  outline: none;
+  border: .1rem solid #d1d1d1;
+  font-size: .7rem;
+}
+
+.subscribe-btn {
+  padding: .9rem 3rem;
+  border-radius: 5rem;
+  background: linear-gradient(90deg, #ff9966, #ff5e62);
+  color: #fff;
+  font-size: .7rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }

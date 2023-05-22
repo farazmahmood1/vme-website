@@ -27,13 +27,13 @@ const Categories = () => {
 
   const PrevArrow = (props) => (
     <button {...props} className="slider-arrow slider-prev">
-<i className="fa-solid fa-chevron-left"/>
+      <i className="fa-solid fa-chevron-left" />
     </button>
   );
-  
+
   const NextArrow = (props) => (
     <button {...props} className="slider-arrow slider-next">
-      <i className="fa-solid fa-chevron-right"/>
+      <i className="fa-solid fa-chevron-right" />
     </button>
   );
 
@@ -48,7 +48,7 @@ const Categories = () => {
     autoplaySpeed: 2000,
     cssEase: "linear",
     prevArrow: <PrevArrow />,
-  nextArrow: <NextArrow />,
+    nextArrow: <NextArrow />,
     responsive: [
       {
         breakpoint: 1024,

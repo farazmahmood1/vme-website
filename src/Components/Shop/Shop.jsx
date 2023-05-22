@@ -7,7 +7,6 @@ import Imagesurl from "../SourceFiles/Imageurl";
 import ShopScreem from "../Main/ShopScreem";
 import { useLocation } from "react-router-dom";
 import coverUrl from "../SourceFiles/coverUrl";
-
 import allImagesUrl from "../SourceFiles/baseimageurl";
 
 const Shop = () => {
@@ -176,7 +175,7 @@ const Shop = () => {
                                       <p>Price</p>
                                       <h5>{items.item_price}</h5>
                                     </div>
-                                    <div  className="text-center">
+                                    <div className="text-center">
                                       <p>Item type</p>
                                       <h5>{items.item_type}</h5>
                                     </div>
