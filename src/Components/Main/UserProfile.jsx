@@ -27,10 +27,9 @@ const UserProfile = (id) => {
   // const queryParams = new URLSearchParams(window.location.search);
   // const id = queryParams.get('id');
   //   let { id } = useParams();
-
   const [openModal, setOpenModal] = useState(false);
   // const [openSignUp, setOpenSignUp] = useState(false)
-  const [purchasedProduct, setPurchased] = useState("0")
+  const [purchasedProduct, setPurchased] = useState("")
   const [gender, setGender] = useState('')
   const [profDes, setProfDesc] = useState('')
   const [cover, setCover] = useState('')
@@ -66,7 +65,6 @@ const UserProfile = (id) => {
   const [pic, setPic] = useState('')
   const [profile, setProfile] = useState('userProfile')
   const [loader, setLoader] = useState(false)
-
   const [datas, setDatas] = useState([])
 
   useEffect(() => {
@@ -128,7 +126,6 @@ const UserProfile = (id) => {
   }
 
   const getImages = () => {
-
     var requestOptions = {
       method: 'GET',
       redirect: 'follow'
@@ -144,7 +141,7 @@ const UserProfile = (id) => {
   }
 
   const showSocials = () => {
-    if (!purchasedProduct) {
+    if (purchasedProduct === "1") {
       return (
         <>
           <div className='col-lg-5 mx-auto'>
@@ -567,18 +564,6 @@ const UserProfile = (id) => {
     document.documentElement.scrollTop = 0;
   }
 
-  {/* <div className='col-lg-4' >
-              <img src={`${allImagesUrl.itemImage}${pic}`} className='profileImage' alt="profile image" />
-            </div>
-            <div className="col-lg-6 profileHeading">
-              <h1 className='mt-2'>{name}</h1>
-              <p style={{ fontSize: '12px' }}>{phone}</p>
-              <h2 className='mt-3'>{profession}</h2>
-              <h4 className='mt-3' style={{ color: "#7453fc" }}>Bio</h4>
-              <p>{bio}</p>
-              <button className='buttonx w-25 mt-4 p-3' >View CV</button>
-            </div> */}
-
   return (
     <div>
 
@@ -613,9 +598,7 @@ const UserProfile = (id) => {
 
         </Modal>
       </div>
-
       <div className="CoverImage" style={{ backgroundImage: cover !== "" ? `url(${Imagesurl}${cover})` : "url(./source/assets/images/heading-bg.jpg)" }} />
-
       <div className="container">
         <div className='col-lg-1 ms-auto mt-5 buttonProfile'>
           <button onClick={() => setProfile("userProfile")} className={profile === 'userProfile' ? 'btn  buttonx actives rounded-pill me-2 mb-2' : 'btn hoverBtn buttonx rounded-pill me-2 mb-2'} style={{ color: "white", borderColor: " #7453fc" }}><i className="fa-solid fa-house p-2" /></button>
@@ -635,9 +618,10 @@ const UserProfile = (id) => {
               <p className='mt-3 fs-2' style={{ letterSpacing: '5px' }}>{name}</p>
               <p className='fs-4 mt-1' style={{ color: 'gray', letterSpacing: '5px' }}><b>{profession}</b></p>
             </div>
-            <div className='ms-auto me-2'>
-              <p>User is not active</p>
-            </div>
+            {purchasedProduct === "0" ?
+              <div className='ms-auto me-2'>
+                <p>User is not active</p>
+              </div> : null}
           </div>
           <div className='card border-line'>
             <div className='bio-container mx-auto mt-3'>
@@ -650,10 +634,8 @@ const UserProfile = (id) => {
                     </div>
                   </> : null
               }
-
             </div>
           </div>
-
           {
             loader === true ?
               <>
@@ -661,9 +643,7 @@ const UserProfile = (id) => {
                   <div className='row loaderSizing'>
                     <div className='d-flex justify-content-center'>
                       <div className='position-absolute top-50 start-50 translate-middle'>
-
                         {/* // <div className="loader">Loading...</div> */}
-
                         <div className="spinner-border spinner" role="status">
                           <span className="visually-hidden">Loading...</span>
                         </div>
@@ -671,11 +651,8 @@ const UserProfile = (id) => {
                     </div>
                   </div>
                 </div>
-
-
               </> :
               <>
-
                 <ReturnData />
               </>
           }
