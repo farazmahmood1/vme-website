@@ -27,6 +27,20 @@ const UserProfile = (id) => {
   // const queryParams = new URLSearchParams(window.location.search);
   // const id = queryParams.get('id');
   //   let { id } = useParams();
+
+  const SetLocalLogin = async () => {
+    try {
+      let user = await localStorage.getItem("user");
+      let parsed_user = JSON.parse(user);
+      if (parsed_user) {
+        setBuyItems(parsed_user.is_purchased);
+      }
+    } catch {
+      return null;
+    }
+  };
+
+  const [buyItems, setBuyItems] = useState('')
   const [openModal, setOpenModal] = useState(false);
   // const [openSignUp, setOpenSignUp] = useState(false)
   const [purchasedProduct, setPurchased] = useState("")
@@ -68,10 +82,21 @@ const UserProfile = (id) => {
   const [datas, setDatas] = useState([])
 
   useEffect(() => {
-    topFunction();
+    SetLocalLogin();
+    showSubscribtionButton();
     profileData();
     getImages();
+    topFunction();
   }, [Id])
+
+  const showSubscribtionButton = () => {
+    if (buyItems === "1") {
+      setOpenModal(true)
+    }
+    else {
+      setOpenModal(false)
+    }
+  }
 
   const profileData = () => {
     setLoader(true)
@@ -571,8 +596,6 @@ const UserProfile = (id) => {
         <Modal
           open={openModal}
         >
-
-
           <div>
             <div className="card-contentx">
               <div className="container">
@@ -592,9 +615,6 @@ const UserProfile = (id) => {
               </div>
             </div>
           </div>
-
-
-
 
         </Modal>
       </div>
@@ -656,7 +676,6 @@ const UserProfile = (id) => {
                 <ReturnData />
               </>
           }
-
         </div>
       </div>
     </div >

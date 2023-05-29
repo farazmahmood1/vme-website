@@ -20,12 +20,11 @@ const SignIn = ({ setOpenModal }) => {
                 email: email,
                 password: password
             }
-            axios.post(`${Baseurl}customerlogin`, userObj)
+            axios.post(`${Baseurl}login`, userObj)
                 .then(res => {
                     console.log(res.data.customer)
                     toast.info('Logged in successfully', { theme: "dark" })
-                    localStorage.setItem('user', JSON.stringify(res.data.customer));
-
+                    localStorage.setItem('user', JSON.stringify(res.data.user));
                     // setInterval(() => {
                     //     window.location.reload()
                     // }, 1500);
@@ -41,7 +40,7 @@ const SignIn = ({ setOpenModal }) => {
     return (
         <div className='row'>
             <div className='col-lg-4  ms-auto'>
-                <div className='card in-left  mainModal mt-5' style={{  borderRadius: "15px" }}>
+                <div className='card in-left  mainModal mt-5' style={{ borderRadius: "15px" }}>
                     <div className='card-body'>
                         <div className='d-flex'>
                             <div className=' mt-3'>

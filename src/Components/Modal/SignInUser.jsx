@@ -23,10 +23,10 @@ const SignInUser = () => {
                 email: emailLogin,
                 password: emailPassword
             }
-            axios.post(`${Baseurl}customerlogin`, userobj)
+            axios.post(`${Baseurl}login`, userobj)
                 .then(res => {
                     toast.info('Email login successfully', { theme: "dark" })
-                    localStorage.setItem('user', JSON.stringify(res.data.customer));
+                    localStorage.setItem('user', JSON.stringify(res.data.user));
                     console.log(res)
                     setOpenModal(false)
                 })
@@ -61,9 +61,9 @@ const SignInUser = () => {
                     </div>
 
                     <div className='d-flex '>
-                        <a  id="emailHelp" style={{cursor:'pointer'}} className="form-text mt-3 me-2">You can Sign Up from Top</a>
+                        <a id="emailHelp" style={{ cursor: 'pointer' }} className="form-text mt-3 me-2">You can Sign Up from Top</a>
                         &nbsp;&nbsp;<div className="me-4 border-button ms-auto btnAnimate">
-                            <a style={{cursor:'pointer'}} onClick={loginData} className='text-white'>Login</a>
+                            <a style={{ cursor: 'pointer' }} onClick={loginData} className='text-white'>Login</a>
                         </div>
                     </div>
 

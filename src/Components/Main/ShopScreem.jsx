@@ -9,7 +9,6 @@ import axios from "axios";
 import Baseurl from "../SourceFiles/url";
 
 const ShopScreem = () => {
-    
   const [data, setData] = useState([]);
   const [loader, setLoader] = useState(false);
   const [openModal, setOpenModal] = useState(false);
@@ -112,7 +111,7 @@ const ShopScreem = () => {
                   <div className="collapse navbar-collapse " id="navbarNav">
                     <ul className="navbar-nav  ms-auto">
                       <li className="nav-item ">
-                        <p className={"nav-link me-4 "} aria-current="page">
+                        <p className="nav-link me-4 " aria-current="page">
                           <b>
                             <Link to="/" className="text-secondary">
                               Home
@@ -126,7 +125,7 @@ const ShopScreem = () => {
                           aria-current="page"
                         >
                           <b>
-                            {" "}
+
                             <Link
                               state={{ values: "Card" }}
                               className="text-secondary"
@@ -140,10 +139,10 @@ const ShopScreem = () => {
                       <li className="nav-item ">
                         <p className={"nav-link me-4 "} aria-current="page">
                           <b>
-                            {" "}
+
                             <Link to="/ProfileMain" className="text-secondary">
                               Profiles
-                            </Link>{" "}
+                            </Link>
                           </b>
                         </p>
                       </li>
@@ -154,14 +153,14 @@ const ShopScreem = () => {
                           aria-current="page"
                         >
                           <b>
-                            {" "}
+
                             <p
                               onClick={() => setOpenModal(true)}
                               className="text-secondary"
                               style={{ cursor: "pointer" }}
                             >
                               Login
-                            </p>{" "}
+                            </p>
                           </b>
                         </p>
                       </li>
@@ -172,14 +171,14 @@ const ShopScreem = () => {
                           aria-current="page"
                         >
                           <b>
-                            {" "}
+
                             <p
                               onClick={() => setOpenSignUp(true)}
                               style={{ cursor: "pointer" }}
                               className="text-white"
                             >
                               SIgn up for free
-                            </p>{" "}
+                            </p>
                           </b>
                         </p>
                       </li>
@@ -249,10 +248,10 @@ const ShopScreem = () => {
               <h6>DigiCard Market</h6>
               <h2>Buy Your DigiCard Now.</h2>
               <span className="">
-                {" "}
+
                 <Link state={{ values: "Card" }} to="/ShopMain">
                   Shop
-                </Link>{" "}
+                </Link>
                 &gt; <a style={{ cursor: "default" }}>Buy Item</a>
               </span>
             </div>
@@ -332,7 +331,7 @@ const ShopScreem = () => {
                                 <i className="fa-solid fa-angle-left" />
                               </button>
                             ) : (
-                              console.log(".-.")
+                              null
                             )}
                             <label
                               className="text-white"
@@ -351,16 +350,16 @@ const ShopScreem = () => {
                         </div>
                       </div>
 
-                      <hr className="w-100"
+                      <hr
+                        className="w-100"
                         style={{
                           height: "1px",
                           color: "#7453fc",
                         }}
                       />
 
-                      {/* <hr style={{ width: "320px", height: "1px", color: "#7453fc" }} />
-                                                <h6 style={{ color: "#7453fc" }} className='mt-2 mb-2'>Color Avaiblable;</h6>
-                                                <button className={isActive ? 'btnShop borderClass' : 'btnShop'} onClick={changeClass} style={{ backgroundColor: `${data.item_color}` }} ></button> */}
+                      <h6 style={{ color: "#7453fc" }} className='mt-2 mb-2'>Color Available</h6>
+                      <button className={isActive ? 'btnShop borderClass' : 'btnShop'} onClick={changeClass} style={{ backgroundColor: `${data.item_color}` }} ></button>
 
                       <h6 className="mt-3" style={{ color: "#7459fc" }}>
                         Describtion:
@@ -378,7 +377,7 @@ const ShopScreem = () => {
                           className="text-center buttonx col-11"
                         >
                           BUY NOW
-                        </Link>{" "}
+                        </Link>
                         <i className="fa-2x ms-2 mt-1 fa-solid fa-heart text-danger" />
                       </div>
                       <p

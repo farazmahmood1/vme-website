@@ -38,7 +38,7 @@ const SignUpUser = () => {
                 password: password,
                 password_confirmation: confirmPassword
             }
-            axios.post(`${Baseurl}createcustomer`, userObj)
+            axios.post(`${Baseurl}register`, userObj)
                 .then(res => {
                     console.log(res)
                     toast.info('Registered successfully', { theme: "dark" })

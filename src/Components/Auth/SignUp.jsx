@@ -28,7 +28,7 @@ const SignUp = ({ setOpenSignUp }) => {
                 password: password,
                 password_confirmation: confirmPassword
             }
-            axios.post(`${Baseurl}createcustomer`, userObj)
+            axios.post(`${Baseurl}register`, userObj)
                 .then(res => {
                     console.log(res.data.customer)
                     toast.info('Registered successfully', { theme: "dark" })
@@ -89,7 +89,6 @@ const SignUp = ({ setOpenSignUp }) => {
 
                             <div className='d-flex  me-3'>
                                 <a id="emailHelp" className="form-text mt-3"></a>
-
                                 <div className="border-button ms-auto btnAnimate">
                                     <a className='text-white' onClick={loginFunction}>Sign Up</a>
                                 </div>

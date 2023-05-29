@@ -42,91 +42,8 @@ const ItemForm = () => {
     const { itemColor } = location.state;
     const { item } = location.state;
 
-    const submitData = () => {
+    useEffect(() => { topFunction(); SetLocalLogin() }, [])
 
-        if (!name || !phone || !email || !address || !region || !city || !postal) {
-            toast.warn('Please fill all fields', { theme: "dark" })
-            setSubmit(true)
-        }
-        else {
-            // const userObj = {
-            //     name: name,
-            //     phone_number: phone,
-            //     contact_number: contact,
-            //     email: email,
-            //     address: address,
-            //     region: region,
-            //     city: city,
-            //     postal_code: postal,
-            //     quantity: counter,
-            //     color: itemColor,
-            //     profile_pic: profile,
-            //     buy_item: "",
-            //     order_status: "new",
-            //     payment_status: "COD",
-            //     ready_to_review: "",
-
-            // }
-            // axios.post(`${Baseurl}buy_item`, userObj)
-            //     .then(res => {
-            //         toast.info("Order Confirmed!")
-            //         setSubmit(true)
-            //         setOpenModals(true)
-            //         setInterval(() => {
-            //             window.location.reload(true)
-            //         }, 2000)
-            //         console.log(res)
-            //     })
-            //     .catch(err => {
-            //         toast.warn("Error while submitting response");
-            //         console.log(err)
-            //     })
-
-            var formdata = new FormData();
-            formdata.append("name", name);
-            formdata.append("phone_number", phone);
-            formdata.append("contact_number", contact);
-            formdata.append("email", email);
-            formdata.append("address", address);
-            formdata.append("region", region);
-            formdata.append("city", city);
-            formdata.append("postal_code", postal);
-            formdata.append("quantity", counter);
-            formdata.append("color", itemColor);
-            formdata.append("profile_pic", profile, "[PROXY]");
-            formdata.append("order_status", 'new');
-            formdata.append('payment_status', 'cod');
-            formdata.append('ready_to_review', 0);
-            formdata.append('user_id', userID);
-            formdata.append('product_id', item.id);
-
-            var requestOptions = {
-                method: 'POST',
-                body: formdata,
-                redirect: 'follow'
-            };
-
-            fetch(`${Baseurl}buy_item`, requestOptions)
-                .then(response => response.json())
-                .then(result => {
-                    console.log(result)
-                    toast.info("Order Confirmed!", { theme: "dark" })
-                    setSubmit(true)
-                    setOpenModals(true)
-
-                    setInterval(() => {
-                        window.location.reload(true)
-                    }, 2000)
-                })
-                .catch(error => {
-                    toast.warn("Error while submitting response", { theme: "dark" });
-                    console.log('error', error)
-                });
-        }
-    }
-
-
-    console.log(userID)
     const SetLocalLogin = async () => {
         try {
             let user = await localStorage.getItem('user');
@@ -142,26 +59,62 @@ const ItemForm = () => {
         }
     }
 
-    var mybutton = document.getElementById("myBtn");
-  window.onscroll = function () {
-    scrollFunction();
-  };
-  function scrollFunction() {
-    if (
-      document.body.scrollTop > 400 ||
-      document.documentElement.scrollTop > 400
-    ) {
-      mybutton = "block";
-    } else {
-      mybutton = "none";
-    }
-  }
-  function topFunction() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-  }
+    const submitData = () => {
 
-    useEffect(() => { topFunction(); SetLocalLogin() }, [])
+        if (!name || !phone || !email || !address || !region || !city || !postal) {
+            toast.warn('Please fill all fields', { theme: "dark" })
+            setSubmit(true)
+        }
+        else {
+            var formdata = new FormData();
+            formdata.append("user_id", userID);
+            formdata.append("address", address);
+            formdata.append("city", city);
+            formdata.append("state", region);
+            formdata.append("quantity", counter);
+            formdata.append("contact_address", phone);
+            formdata.append("product_id", item.id);
+            formdata.append("status", "new");
+            formdata.append("payment_status", "unpaid");
+
+            var requestOptions = {
+                method: 'POST',
+                body: formdata,
+                redirect: 'follow'
+            };
+
+            fetch(`${Baseurl}post_order`, requestOptions)
+                .then(response => response.json())
+                .then(result => {
+                    console.log(result)
+                    toast.success('Order Generated Successfully')
+                })
+                .catch(error => {
+                    console.log('error', error)
+                    toast.warn('Error while ordering')
+                });
+
+        }
+    }
+
+    var mybutton = document.getElementById("myBtn");
+    window.onscroll = function () {
+        scrollFunction();
+    };
+    function scrollFunction() {
+        if (
+            document.body.scrollTop > 400 ||
+            document.documentElement.scrollTop > 400
+        ) {
+            mybutton = "block";
+        } else {
+            mybutton = "none";
+        }
+    }
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
 
     return (
         <div>
@@ -268,7 +221,7 @@ const ItemForm = () => {
 
                         <div className='contactWhatsapp card-body col-lg-2' >
                             <div className='d-flex '>
-                                <a className='text-white mt-1 me-2' target={'_blank'} href="tel:03034450790" >Buy through Whatsapp</a>
+                                <a className='text-white mt-1 me-2' target={'_blank'} href="https://api.whatsapp.com/send?phone=00923034450790&text=Hello%20I%20would%20like%20more%20information" >Buy through Whatsapp</a>
                                 <img src="./source/assets/images/whatsapp-color-icon.png" alt="whatsapp icon" style={{ height: "40px", width: "40px" }} />
                             </div>
                         </div>
@@ -285,15 +238,15 @@ const ItemForm = () => {
                                     <hr style={{ width: "320px", height: "3px", color: "#7453fc", borderRadius: "10px" }} />
                                     <h3 className='mb-4' style={{ color: "#7453fc" }}>Digi Card:
                                     </h3>
-                                    <div className="col-lg-6">
+                                    {/* <div className="col-lg-6">
                                         <fieldset>
                                             <label htmlFor="title">Name*</label>
                                             <input onChange={(e) => setName(e.target.value)} style={{ borderRadius: "16px", backgroundColor: "#282b2f", borderColor: name === "" && submit === true ? "red" : '#404245' }} id="inputName5" placeholder="Ex. Ali Ahmed" autoComplete="on" type='text' />
-                                            {/* {name === "" && submit === true ? <span className='text-danger'>input empty</span> : ""} */}
+                                            {name === "" && submit === true ? <span className='text-danger'>input empty</span> : ""}
                                         </fieldset>
-                                    </div>
+                                    </div> */}
 
-                                    <div className="col-lg-6">
+                                    <div className="col-lg-12">
                                         <fieldset>
                                             <label htmlFor="title">Phone Number*</label>
                                             <input onChange={(e) => setPhone(e.target.value)} style={{ borderRadius: "16px", backgroundColor: "#282b2f", borderColor: phone === "" && submit === true ? "red" : '#404245' }} id="inputName5" placeholder="Enter your current phone no." autoComplete="on" type='number' />
@@ -301,20 +254,21 @@ const ItemForm = () => {
                                         </fieldset>
                                     </div>
 
-                                    <div className="col-lg-6">
+                                    {/* <div className="col-lg-6">
                                         <fieldset>
                                             <label htmlFor="title">Secondary Number</label>
                                             <input onChange={(e) => setContact(e.target.value)} style={{ borderRadius: "16px", backgroundColor: "#282b2f", borderColor: '#404245' }} id="inputName5" placeholder="Enter your whatsapp number" autoComplete="on" type='number' />
-                                            {/* {name === "" && submit === true ? <span className='text-danger'>input empty</span> : ""} */}
+                                            {name === "" && submit === true ? <span className='text-danger'>input empty</span> : ""}
                                         </fieldset>
-                                    </div>
-                                    <div className="col-lg-6">
+                                    </div> */}
+
+                                    {/* <div className="col-lg-6">
                                         <fieldset>
                                             <label htmlFor="title">Email*</label>
                                             <input onChange={(e) => setEmail(e.target.value)} style={{ borderRadius: "16px", backgroundColor: "#282b2f", borderColor: email === "" && submit === true ? "red" : '#404245' }} id="inputName5" placeholder='Ex. user@mail.com' autoComplete="on" type='email' />
-                                            {/* {name === "" && submit === true ? <span className='text-danger'>input empty</span> : ""} */}
+                                            {name === "" && submit === true ? <span className='text-danger'>input empty</span> : ""}
                                         </fieldset>
-                                    </div>
+                                    </div> */}
 
                                     <div className="col-lg-12 mb-3">
                                         <fieldset>
@@ -337,20 +291,20 @@ const ItemForm = () => {
                                             {/* {name === "" && submit === true ? <span className='text-danger'>input empty</span> : ""} */}
                                         </fieldset>
                                     </div>
-                                    <div className="col-lg-6">
+                                    {/* <div className="col-lg-6">
                                         <fieldset>
                                             <label htmlFor="title">Postal Code*</label>
                                             <input onChange={(e) => setPostal(e.target.value)} style={{ borderRadius: "16px", backgroundColor: "#282b2f", borderColor: postal === "" && submit === true ? "red" : '#404245' }} id="inputName5" placeholder="Your city Postal code" autoComplete="on" type='number' />
-                                            {/* {name === "" && submit === true ? <span className='text-danger'>input empty</span> : ""} */}
+                                            {name === "" && submit === true ? <span className='text-danger'>input empty</span> : ""}
                                         </fieldset>
-                                    </div>
+                                    </div> */}
 
-                                    <div className="col-lg-6">
+                                    {/* <div className="col-lg-6">
                                         <fieldset>
                                             <label htmlFor="file"  >Upload Profile Picture*</label>
                                             <input onChange={(e) => setProfile(e.target.files[0])} type="file" id="file" name="myfiles[]" multiple />
                                         </fieldset>
-                                    </div>
+                                    </div> */}
 
                                     <div class="col-lg-6 mx-auto">
                                         <fieldset>
