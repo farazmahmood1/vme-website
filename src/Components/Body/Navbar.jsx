@@ -6,7 +6,6 @@ import SignUp from '../Auth/SignUp'
 const Navbar = () => {
 
   const [index, setIndex] = useState(1);
-
   const [openModal, setOpenModal] = useState(false);
   const [openSignUp, setOpenSignUp] = useState(false)
 

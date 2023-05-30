@@ -248,7 +248,6 @@ const ShopScreem = () => {
               <h6>DigiCard Market</h6>
               <h2>Buy Your DigiCard Now.</h2>
               <span className="">
-
                 <Link state={{ values: "Card" }} to="/ShopMain">
                   Shop
                 </Link>
@@ -362,7 +361,7 @@ const ShopScreem = () => {
                       <button className={isActive ? 'btnShop borderClass' : 'btnShop'} onClick={changeClass} style={{ backgroundColor: `${data.item_color}` }} ></button>
 
                       <h6 className="mt-3" style={{ color: "#7459fc" }}>
-                        Describtion:
+                        Description:
                       </h6>
                       <p className="p-2">{data.describtion}</p>
 
@@ -384,7 +383,7 @@ const ShopScreem = () => {
                         style={{ fontSize: "11px" }}
                         className="text-secondary text-center"
                       >
-                        Pyament method is COD, other methods are comming soon!
+                        Payment method is COD, other methods are coming soon!
                       </p>
                     </div>
                   </div>

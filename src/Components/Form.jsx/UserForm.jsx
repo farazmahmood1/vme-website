@@ -57,55 +57,6 @@ const UserForm = () => {
             toast.warn('Please fill All fields', { theme: "dark" })
         }
         else {
-
-            // const userobj = {
-            //     profile_photo: profile,
-            //     cover_photo: cover,
-            //     name: name,
-            //     phone: phone,
-            //     gmail: email,
-            //     snapchat: snapchat,
-            //     instagram: instagram,
-            //     linkedin: linkedin,
-            //     twitter: twiter,
-            //     github: github,
-            //     facebook: facebook,
-            //     bio: bio,
-            //     short_desc: shortdisc,
-            //     whatsapp: whatsapp,
-            //     whatsapp_b: whatsappbuss,
-            //     telegram: telegram,
-            //     tiktok: tiktok,
-            //     skype: skype,
-            //     printest: pinterest,
-            //     age: age,
-            //     religion: religion,
-            //     region: region,
-            //     cnic: cnic,
-            //     stackoverflow: stackoverflow,
-            //     fiverr: fiver,
-            //     upword: upwork,
-            //     gender: gender,
-            //     profession: profession,
-            //     designation: designation,
-            //     cv: cv,
-            //     address: address
-            // }
-            // axios.post(`${Baseurl}adddata`, requestOptions)
-            //     .then((response) => {
-            //         toast.info("Data sumbitted!")
-            //         setSubmit(true)
-            //         // setInterval(() => {
-            //         //     window.location.reload(true)
-            //         // }, 2000)
-            //         console.log(response)
-            //     })
-            //     .catch((error) => {
-            //         toast.warn("error while submitting");
-            //         console.log(error)
-            //     })
-
-
             var formdata = new FormData();
             formdata.append("profile_photo", profile, "[PROXY]");
 
@@ -224,13 +175,13 @@ const UserForm = () => {
                                     <div className="collapse navbar-collapse " id="navbarNav">
                                         <ul className="navbar-nav  ms-auto">
                                             <li className="nav-item ">
-                                                <p className={'nav-link me-4 '} aria-current="page"><b><Link to='/' className='text-secondary' >Home</Link></b></p>
+                                                <p className='nav-link me-4 ' aria-current="page"><b><Link to='/' className='text-secondary' >Home</Link></b></p>
                                             </li>
                                             <li className="nav-item ">
-                                                <p className={'nav-link me-4 '} aria-current="page"><b> <Link state={{ values: 'Card' }} className='text-secondary' to='/ShopMain'>Shop</Link></b></p>
+                                                <p className='nav-link me-4 ' aria-current="page"><b> <Link state={{ values: 'Card' }} className='text-secondary' to='/ShopMain'>Shop</Link></b></p>
                                             </li>
                                             <li className="nav-item ">
-                                                <p className={'nav-link me-4 enjoy'} aria-current="page"><b> <Link to='/ProfileMain' className='text-secondary' >Profiles</Link> </b></p>
+                                                <p className='nav-link me-4 enjoy' aria-current="page"><b> <Link to='/ProfileMain' className='text-secondary' >Profiles</Link> </b></p>
                                             </li>
                                             <li className="nav-item dropdown">
                                                 <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
