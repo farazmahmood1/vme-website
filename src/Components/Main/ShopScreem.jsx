@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useParams } from "react-router-dom";
@@ -16,27 +16,34 @@ const ShopScreem = () => {
   const [addCount, setAddCount] = useState(1);
   const [getColor, setColor] = useState("");
   const [isActive, setIsActive] = useState(false);
-  // product attributes
 
   const { items } = useParams();
-  console.log(items);
 
-  // const location = useLocation();
-  // const { items } = location.state
+
+  useEffect(() => {
+    topFunction();
+    fetchData();
+  }, []);
 
   const fetchData = () => {
     setLoader(true);
+    const userObj = {
+      id: items
+    }
+
     axios
-      .get(`${Baseurl}getitemwithid/${items}`)
+      .post(`${Baseurl}getproducts_with_productid`, userObj)
       .then((res) => {
-        setData(res.data);
-        console.log(res);
+        setData(res.data.Data);
+        console.log(res)
         setLoader(false);
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
+
 
   const changeClass = () => {
     setIsActive((current) => !current);
@@ -67,11 +74,6 @@ const ShopScreem = () => {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
   }
-
-  useEffect(() => {
-    topFunction();
-    fetchData();
-  }, []);
 
   return (
     <div>
@@ -125,7 +127,6 @@ const ShopScreem = () => {
                           aria-current="page"
                         >
                           <b>
-
                             <Link
                               state={{ values: "Card" }}
                               className="text-secondary"
@@ -139,7 +140,6 @@ const ShopScreem = () => {
                       <li className="nav-item ">
                         <p className={"nav-link me-4 "} aria-current="page">
                           <b>
-
                             <Link to="/ProfileMain" className="text-secondary">
                               Profiles
                             </Link>
@@ -153,7 +153,6 @@ const ShopScreem = () => {
                           aria-current="page"
                         >
                           <b>
-
                             <p
                               onClick={() => setOpenModal(true)}
                               className="text-secondary"
@@ -171,7 +170,6 @@ const ShopScreem = () => {
                           aria-current="page"
                         >
                           <b>
-
                             <p
                               onClick={() => setOpenSignUp(true)}
                               style={{ cursor: "pointer" }}
@@ -259,152 +257,161 @@ const ShopScreem = () => {
       </div>
       <div className="currently-market">
         <div className="container">
-          <div className="row">
-            <div className="col-lg-6">
-              <div className="section-heading">
-                <div className="line-dec" />
-                <h2>
-                  <em>Items</em> Currently In The Market.
-                </h2>
-              </div>
-            </div>
+          {
 
-            <div className="col-lg-12">
-              {loader === true ? (
-                <>
-                  <div className="col-lg-12">
-                    <div className="row loaderSizing">
-                      <div className="d-flex justify-content-center">
-                        <div className="position-absolute top-50 start-50 translate-middle">
-                          <div
-                            className="spinner-border"
-                            style={{
-                              width: "5rem",
-                              height: "5rem",
-                              color: "#7453fc",
-                            }}
-                            role="status"
-                          >
-                            <span className="visually-hidden">Loading...</span>
-                          </div>
+            loader === true ?
+
+              <>
+                <div className="col-lg-12">
+                  <div className="row loaderSizing">
+                    <div className="d-flex justify-content-center">
+                      <div className="position-absolute top-50 start-50 translate-middle">
+                        <div
+                          className="spinner-border"
+                          style={{
+                            width: "5rem",
+                            height: "5rem",
+                            color: "#7453fc",
+                          }}
+                          role="status"
+                        >
+                          <span className="visually-hidden">Loading...</span>
                         </div>
                       </div>
                     </div>
                   </div>
-                </>
-              ) : (
-                <>
-                  <div className="row">
-                    <div className="col-lg-6">
-                      <div className="col-lg-12 mb-4">
-                        <img
-                          src={`${allImagesUrl.itemImage}${data.item_pic}`}
-                          alt=""
-                        />
-                      </div>
-                    </div>
-                    <div className="col-lg-5 ms-1 ps-4 pe-4">
-                      <div className="d-flex">
-                        <div>
-                          <h3>{data.item_name}</h3>
-                          <h5 className="mt-2">
-                            Rs.
-                            <span
-                              style={{ fontSize: "12px" }}
-                              className="text-secondary text-decoration-line-through"
-                            >
-                              <span>{data.previous_price}</span>
-                            </span>
-                            {data.item_price}
-                          </h5>
-                        </div>
-                        <div className="ms-auto me-3">
-                          <h6 style={{ color: "#7453fc" }}>Quantity:</h6>
-                          <div className="mt-2">
-                            {addCount > 1 ? (
-                              <button
-                                className="btn btn-secondary me-2 btn-sm"
-                                style={{ backgroundColor: "#7453fc" }}
-                                onClick={decrementCount}
-                              >
-                                <i className="fa-solid fa-angle-left" />
-                              </button>
-                            ) : (
-                              null
-                            )}
-                            <label
-                              className="text-white"
-                              htmlFor="exampleInputPassword1"
-                            >
-                              {addCount}
-                            </label>
-                            <button
-                              className="btn btn-secondary ms-2 btn-sm"
-                              style={{ backgroundColor: "#7453fc" }}
-                              onClick={incrementCount}
-                            >
-                              <i className="fa-solid fa-angle-right" />
-                            </button>
+                </div>
+              </>
+
+              :
+
+              data.map((items) => {
+                return (
+                  <>
+                    <div className="row">
+                      <div className="col-lg-6">
+                        <div className="product-image">
+                          <div className="product-image-main">
+                            <img src={`${allImagesUrl}${items.image_1}`} alt id="product-main-image" />
+                          </div>
+                          <div className="product-image-slider">
+                            <img src={`${allImagesUrl}${items.image_1}`} alt className="image-list" />
+                            <img src={`${allImagesUrl}${items.image_2}`} alt className="image-list" />
                           </div>
                         </div>
                       </div>
+                      <div className="col-lg-6">
 
-                      <hr
-                        className="w-100"
+                        <div className="product">
+                          <div className="product-title">
+                            <h2>{items.name}</h2>
+                          </div>
+                          <div className="product-rating">
+                            <span><i className="bx bxs-star" /></span>
+                            <span><i className="bx bxs-star" /></span>
+                            <span><i className="bx bxs-star" /></span>
+                            <span><i className="bx bxs-star" /></span>
+                            <span><i className="bx bxs-star" /></span>
+                            <span className="review text-secondary">(47 Review)</span>
+                          </div>
+                          <div className="product-price">
+                            <span className="offer-price text-white">{items.actual_price} PKR</span>
+                            <span className="sale-price text-secondary">{items.item_price} PKR</span>
+                          </div>
+                          <div className="product-details">
+                            <h3 className="mt-4">Description:</h3>
+                            <p>{items.description}</p>
+                          </div>
+
+                          <div className="ms-auto me-3">
+                            <h6>Quantity:</h6>
+                            <div className="mt-2">
+                              {addCount > 1 ? (
+                                <button
+                                  className="btn btn-secondary me-2 "
+                                  style={{ backgroundColor: "#7453fc", borderRadius: '100%' }}
+                                  onClick={decrementCount}
+                                >
+                                  <i className="fa-solid fa-angle-left" />
+                                </button>
+                              ) : null}
+                              <label
+                                className="text-white"
+                                htmlFor="exampleInputPassword1"
+                              >
+                                {addCount}
+                              </label>
+                              <button
+                                className="btn btn-secondary ms-2 "
+                                style={{ backgroundColor: "#7453fc", borderRadius: '100%' }}
+                                onClick={incrementCount}
+                              >
+                                <i className="fa-solid fa-angle-right" />
+                              </button>
+                            </div>
+                          </div>
+
+
+                          <div className="product-color">
+                            <h4>Color</h4>
+                            <div className="color-layout">
+                              <input type="radio" name="color" defaultValue="black" className="color-input" />
+                              <label htmlFor="black" className="black" />
+                              <input type="radio" name="color" defaultValue="red" className="color-input" />
+                              <label htmlFor="red" className="red" />
+                              <input type="radio" name="color" defaultValue="blue" className="color-input" />
+                              <label htmlFor="blue" className="blue" />
+                            </div>
+                          </div>
+
+
+                          <div className="mt-2 d-flex">
+                            <Link
+                              to="/ItemForm"
+                              state={{
+                                counter: addCount,
+                                itemColor: getColor,
+                                item: data,
+                              }}
+                              className="text-center buttonx col-11"
+                            >
+                              BUY NOW
+                            </Link>
+                            <i className="fa-2x ms-2 mt-1 fa-solid fa-heart text-danger" />
+                          </div>
+                          <p
+                            style={{ fontSize: "11px" }}
+                            className="text-secondary text-center"
+                          >
+                            Payment method is COD, other methods are coming soon!
+                          </p>
+
+                        </div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="w-50 mt-5"
                         style={{
-                          height: "1px",
-                          color: "#7453fc",
+                          height: "2px",
+                          backgroundColor: '#7453fc',
                         }}
                       />
+                      <div className="row">
+                        <div className="col-lg-12">
+                          <h3 className="mt-4">{items.category_name}</h3>
 
-                      <h6 style={{ color: "#7453fc" }} className='mt-2 mb-2'>Color Available</h6>
-                      <button className={isActive ? 'btnShop borderClass' : 'btnShop'} onClick={changeClass} style={{ backgroundColor: `${data.item_color}` }} ></button>
+                          <p>{items.category_description}</p>
 
-                      <h6 className="mt-3" style={{ color: "#7459fc" }}>
-                        Description:
-                      </h6>
-                      <p className="p-2">{data.describtion}</p>
-
-                      <div className="mt-2 d-flex">
-                        <Link
-                          to="/ItemForm"
-                          state={{
-                            counter: addCount,
-                            itemColor: getColor,
-                            item: data,
-                          }}
-                          className="text-center buttonx col-11"
-                        >
-                          BUY NOW
-                        </Link>
-                        <i className="fa-2x ms-2 mt-1 fa-solid fa-heart text-danger" />
+                        </div>
                       </div>
-                      <p
-                        style={{ fontSize: "11px" }}
-                        className="text-secondary text-center"
-                      >
-                        Payment method is COD, other methods are coming soon!
-                      </p>
                     </div>
-                  </div>
-                </>
-              )}
-              {/* <hr className='bg-secondary' />
-                            <div className='d-flex justify-content-center mt-5'>
-                                <div className="buttons me-2">
-                                    <div className="border-button">
-                                        <Link to='/ShopMain?Card' >Explore more products</Link>
-                                    </div>
-                                </div>
-                                <div className='buttons'>
-                                    <div className="main-button">
-                                        <Link to='/ProfileMain' >View Profiles</Link>
-                                    </div>
-                                </div>
 
-                            </div> */}
-            </div>
-          </div>
+                  </>
+                )
+              })
+          }
+
         </div>
       </div>
     </div>

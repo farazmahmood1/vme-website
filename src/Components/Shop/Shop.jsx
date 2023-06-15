@@ -10,8 +10,11 @@ import coverUrl from "../SourceFiles/coverUrl";
 import allImagesUrl from "../SourceFiles/baseimageurl";
 
 const Shop = () => {
-  // const params = useParams()
-  // const { shop } = params
+
+  const [categories, setCategories] = useState([])
+  const [card, setCard] = useState([]);
+  const [type, setType] = useState("tatto");
+  const [loader, setLoader] = useState(false);
 
   const getLink = () => {
     const url = `${window.location.href}`;
@@ -20,28 +23,39 @@ const Shop = () => {
     setType(path);
   };
 
-  // const location = useLocation();
-  // const { values } = location.state;
-  // console.log(values)
 
-  const [card, setCard] = useState([]);
-  const [type, setType] = useState("");
-  const [loader, setLoader] = useState(false);
+  useEffect(() => {
+    fetchCategories()
+    getLink();
+    dataRender();
+    topFunction();
+  }, []);
+
+  const fetchCategories = () => {
+    setLoader(true)
+    axios.get(`${Baseurl}fetchAllcategory`)
+      .then((res) => {
+        setLoader(false)
+        setCategories(res.data.data)
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
 
   const dataRender = () => {
     setLoader(true);
     axios
-      .get(`${Baseurl}getallitems`)
+      .post(`${Baseurl}getallproducts`)
       .then((res) => {
         setLoader(false);
-        setCard(res.data.items);
+        setCard(res.data.Data);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-
-  const filtered = card.filter((item) => item.item_type === type);
 
   var mybutton = document.getElementById("myBtn");
   window.onscroll = function () {
@@ -62,11 +76,6 @@ const Shop = () => {
     document.documentElement.scrollTop = 0;
   }
 
-  useEffect(() => {
-    topFunction();
-    dataRender();
-    getLink();
-  }, []);
 
   return (
     <div>
@@ -122,34 +131,37 @@ const Shop = () => {
             ) : (
               <>
                 <div className="col-lg-6">
+
+
+
+
                   <div className="filters">
                     <ul>
-                      {/* <li onClick={() => setType("All")} data-filter="*" className="active">All Items</li> */}
-                      <Link to="/ShopMain?Card">
-                        <li
-                          onClick={() => setType("Card")}
-                          className={type === "Card" ? "active" : "kuchNai"}
-                          data-filter=".msc"
-                        >
-                          Digi Cards
-                        </li>
-                      </Link>
-                      <Link to="/ShopMain?Tattos">
-                        <li
-                          onClick={() => setType("Tattos")}
-                          className={type === "Tattos" ? "active" : "kuchNai"}
-                          data-filter=".dig"
-                        >
-                          Tattoos
-                        </li>
-                      </Link>
+                      {
+                        categories.map((items) => {
+                          return (
+                            <>
+                              <Link to={`/ShopMain?${items.category_name}`}>
+                                <li
+                                  onClick={() => setType(items.category_name)}
+                                  className={type === items.category_name ? "active" : "null"}
+                                >
+                                  {items.category_name}
+                                </li>
+                              </Link>
+                            </>
+                          )
+                        })
+                      }
+
                     </ul>
                   </div>
+
                 </div>
                 <div className="col-lg-12">
                   <div className="row">
                     {card
-                      .filter((item) => item.item_type === type)
+                      .filter((item) => item.category_name === type)
                       .map((items) => {
                         return (
                           <>
@@ -161,7 +173,7 @@ const Shop = () => {
                                 <div>
                                   <img
                                     className="shopItemImg"
-                                    src={`${allImagesUrl.itemImage}${items.item_pic}`}
+                                    src={`${allImagesUrl}${items.image_1}`}
                                     alt="item image"
                                   />
                                 </div>
@@ -173,11 +185,11 @@ const Shop = () => {
                                   <div className="d-flex justify-content-between">
                                     <div className="text-center ms-2">
                                       <p>Price</p>
-                                      <h5>{items.item_price}</h5>
+                                      <h5>{items.actual_price}</h5>
                                     </div>
                                     <div className="text-center">
                                       <p>Item type</p>
-                                      <h5>{items.item_type}</h5>
+                                      <h5>{items.category_name}</h5>
                                     </div>
                                   </div>
                                   <div className="d-flex justify-content-center ">

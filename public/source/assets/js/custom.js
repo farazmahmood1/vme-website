@@ -9,6 +9,7 @@
 
     });
 
+
 	// WOW JS
 	$(window).on ('load', function (){
         if ($(".wow").length) { 

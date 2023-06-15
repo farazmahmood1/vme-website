@@ -41,7 +41,6 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Decider />} />
-
           <Route path="/WorkingVideo" element={<WorkingVideo />} />
           <Route path="/ShopMain" element={<ShopMain />} />
           <Route path="/ShopScreem/:items" element={<ShopScreem />} />
