@@ -112,12 +112,23 @@ body {
 
 /* button in shop cards */
 
-.btnShop {
-  border: none;
-  padding: 14px;
-  margin: 4px 2px;
-  cursor: pointer;
+.btn-shop {
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
+  border: none;
+  outline: none;
+}
+
+.btn-active {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  outline-offset: 5px;
+  display: inline-block;
 }
 
 .borderClass {

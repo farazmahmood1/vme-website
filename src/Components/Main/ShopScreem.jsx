@@ -17,6 +17,9 @@ const ShopScreem = () => {
   const [getColor, setColor] = useState("");
   const [isActive, setIsActive] = useState(false);
 
+  const [selectedColor, setSelectedColor] = useState("");
+
+
   const { items } = useParams();
 
 
@@ -43,6 +46,10 @@ const ShopScreem = () => {
       });
   };
 
+  const handleColorSelection = (color) => {
+    setSelectedColor(color);
+  };
+
 
 
   const changeClass = () => {
@@ -53,7 +60,10 @@ const ShopScreem = () => {
     setAddCount(addCount + 1);
   };
   const decrementCount = () => {
-    setAddCount(addCount - 1);
+    if (addCount !== 0) {
+      setAddCount(addCount - 1);
+    }
+
   };
 
   var mybutton = document.getElementById("myBtn");
@@ -326,15 +336,15 @@ const ShopScreem = () => {
                           <div className="ms-auto me-3">
                             <h6>Quantity:</h6>
                             <div className="mt-2">
-                              {addCount > 1 ? (
-                                <button
-                                  className="btn btn-secondary me-2 "
-                                  style={{ backgroundColor: "#7453fc", borderRadius: '100%' }}
-                                  onClick={decrementCount}
-                                >
-                                  <i className="fa-solid fa-angle-left" />
-                                </button>
-                              ) : null}
+
+                              <button
+                                className="btn btn-secondary me-2 "
+                                style={{ backgroundColor: "#7453fc", borderRadius: '100%' }}
+                                onClick={decrementCount}
+                              >
+                                <i className="fa-solid fa-angle-left" />
+                              </button>
+
                               <label
                                 className="text-white"
                                 htmlFor="exampleInputPassword1"
@@ -354,18 +364,25 @@ const ShopScreem = () => {
 
                           <div className="product-color">
                             <h4>Color</h4>
-                            <div className="color-layout">
-                              <input type="radio" name="color" defaultValue="black" className="color-input" />
-                              <label htmlFor="black" className="black" />
-                              <input type="radio" name="color" defaultValue="red" className="color-input" />
-                              <label htmlFor="red" className="red" />
-                              <input type="radio" name="color" defaultValue="blue" className="color-input" />
-                              <label htmlFor="blue" className="blue" />
+                            <div className="color-layout mt-3">
+
+                              {items.item_colour.map((color) => (
+                                <button
+                                  key={color}
+                                  className={`btn-shop me-1 ${selectedColor === color ? "btn-active" : ""}`}
+                                  style={{
+                                    backgroundColor: color,
+                                    outline: selectedColor === color ? "2px solid black" : "none",
+                                  }}
+                                  onClick={() => handleColorSelection(color)}
+                                ></button>
+                              ))}
+
                             </div>
                           </div>
 
 
-                          <div className="mt-2 d-flex">
+                          <div className="mt-4 d-flex">
                             <Link
                               to="/ItemForm"
                               state={{

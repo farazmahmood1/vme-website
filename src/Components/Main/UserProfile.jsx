@@ -7,6 +7,7 @@ import allImagesUrl from '../SourceFiles/baseimageurl';
 import coverImage from '../SourceFiles/heading-bg.jpg'
 import { useSearchParams, useParams } from 'react-router-dom';
 import { Modal } from 'pretty-modal'
+import { toast } from 'react-toastify';
 
 
 const UserProfile = (id) => {
@@ -570,6 +571,17 @@ const UserProfile = (id) => {
     saveAs(`${Imagesurl}${cv}`);
   };
 
+  const copyUrl = () => {
+    const currentUrl = window.location.href;
+    navigator.clipboard.writeText(currentUrl)
+      .then(() => {
+        toast.success("URL copied to clipboard", { theme: "dark" });
+      })
+      .catch((error) => {
+        toast.warn("Failed to copy URL");
+      });
+  }
+
   var mybutton = document.getElementById("myBtn");
   window.onscroll = function () {
     scrollFunction();
@@ -625,6 +637,7 @@ const UserProfile = (id) => {
           <button onClick={() => setProfile("Portfolio")} className={profile === 'Portfolio' ? 'btn  buttonx actives rounded-pill me-2 mb-2' : 'btn hoverBtn buttonx rounded-pill me-2 mb-2'} style={{ color: "white", borderColor: "#7453fc" }} ><i className="fa-solid fa-newspaper p-2" /></button>
           <button onClick={() => setProfile("About")} className={profile === 'About' ? 'btn  buttonx actives rounded-pill me-2 mb-2' : 'btn hoverBtn buttonx rounded-pill me-2 mb-2'} style={{ color: "white", borderColor: " #7453fc" }} ><i className="fa-solid fa-user p-2" /></button>
           <button onClick={() => setProfile("Social")} className={profile === 'Social' ? 'btn  buttonx actives rounded-pill me-2 mb-2' : 'btn hoverBtn buttonx rounded-pill me-2 mb-2'} style={{ color: "white", borderColor: "#7453fc" }} ><i className="fa-solid fa-envelope p-2" /></button>
+          <button onClick={copyUrl} className='btn hoverBtn buttonx rounded-pill me-2 mb-2' style={{ color: "white", borderColor: "#7453fc" }} ><i className="fa-solid fa-copy p-2" /></button>
         </div>
       </div>
 
@@ -632,7 +645,7 @@ const UserProfile = (id) => {
         <div className="row">
           <div className='d-flex'>
             <div>
-              <img src={`${allImagesUrl.itemImage}${pic}`} className='profileImage' alt="profile image" />
+              <img src={`${allImagesUrl}${pic}`} className='profileImage' alt="profile image" />
             </div>
             <div className='ms-4'>
               <p className='mt-3 fs-2' style={{ letterSpacing: '5px' }}>{name}</p>
