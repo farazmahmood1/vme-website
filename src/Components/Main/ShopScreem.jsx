@@ -9,19 +9,16 @@ import axios from "axios";
 import Baseurl from "../SourceFiles/url";
 
 const ShopScreem = () => {
+  const { items } = useParams();
+
   const [data, setData] = useState([]);
   const [loader, setLoader] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [openSignUp, setOpenSignUp] = useState(false);
   const [addCount, setAddCount] = useState(1);
-  const [getColor, setColor] = useState("");
-  const [isActive, setIsActive] = useState(false);
-
   const [selectedColor, setSelectedColor] = useState("");
-
-
-  const { items } = useParams();
-
+  const [error, setError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('Seems you forgot to select your favorite color')
 
   useEffect(() => {
     topFunction();
@@ -34,8 +31,7 @@ const ShopScreem = () => {
       id: items
     }
 
-    axios
-      .post(`${Baseurl}getproducts_with_productid`, userObj)
+    axios.post(`${Baseurl}getproducts_with_productid`, userObj)
       .then((res) => {
         setData(res.data.Data);
         console.log(res)
@@ -51,16 +47,11 @@ const ShopScreem = () => {
   };
 
 
-
-  const changeClass = () => {
-    setIsActive((current) => !current);
-  };
-
   const incrementCount = () => {
     setAddCount(addCount + 1);
   };
   const decrementCount = () => {
-    if (addCount !== 0) {
+    if (addCount !== 1) {
       setAddCount(addCount - 1);
     }
 
@@ -378,16 +369,21 @@ const ShopScreem = () => {
                                 ></button>
                               ))}
 
+                              {
+                                selectedColor === "" ? errorMessage : null
+                              }
+
                             </div>
                           </div>
 
 
-                          <div className="mt-4 d-flex">
+                          <div
+                            className="mt-4 d-flex">
                             <Link
                               to="/ItemForm"
                               state={{
                                 counter: addCount,
-                                itemColor: getColor,
+                                itemColor: selectedColor,
                                 item: data,
                               }}
                               className="text-center buttonx col-11"

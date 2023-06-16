@@ -131,10 +131,6 @@ const Shop = () => {
             ) : (
               <>
                 <div className="col-lg-6">
-
-
-
-
                   <div className="filters">
                     <ul>
                       {
@@ -153,7 +149,6 @@ const Shop = () => {
                           )
                         })
                       }
-
                     </ul>
                   </div>
 

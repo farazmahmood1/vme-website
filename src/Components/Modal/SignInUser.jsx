@@ -27,7 +27,6 @@ const SignInUser = () => {
                 .then(res => {
                     toast.info('Email login successfully', { theme: "dark" })
                     localStorage.setItem('user', JSON.stringify(res.data.user));
-                    console.log(res)
                     setOpenModal(false)
                 })
                 .catch(err => {
@@ -60,8 +59,8 @@ const SignInUser = () => {
                         <label className="form-check-label text-white" htmlFor="exampleCheck1" >Check me out</label>
                     </div>
 
-                    <div className='d-flex '>
-                        <a id="emailHelp" style={{ cursor: 'pointer' }} className="form-text mt-3 me-2">You can Sign Up from Top</a>
+                    <div className='d-flex mt-3'>
+                        <a id="emailHelp" style={{ cursor: 'pointer', fontSize:'12px' }} className="form-text  me-2">Sign into the world of VME</a>
                         &nbsp;&nbsp;<div className="me-4 border-button ms-auto btnAnimate">
                             <a style={{ cursor: 'pointer' }} onClick={loginData} className='text-white'>Login</a>
                         </div>

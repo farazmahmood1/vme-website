@@ -16,25 +16,18 @@ const ItemForm = () => {
 
     const [openModal, setOpenModal] = useState(false);
     const [openSignUp, setOpenSignUp] = useState(false)
-
-    const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
-    const [contact, setContact] = useState("");
-    const [email, setEmail] = useState("");
     const [address, setAddress] = useState("");
     const [region, setRegion] = useState("");
     const [city, setCity] = useState("");
-    const [postal, setPostal] = useState("");
-    const [profile, setProfile] = useState("");
 
     // userData
-    const [userEmail, setUserEmail] = useState()
     const [userName, setUserName] = useState()
     const [userLname, setUserLname] = useState()
     const [submit, setSubmit] = useState(false);
     const [openModals, setOpenModals] = useState(false)
-    const [login, setLogin] = useState(false)
     const [userID, setUserID] = useState()
+    const [loader, setLoader] = useState(false)
 
     const location = useLocation();
     const { counter } = location.state;
@@ -49,9 +42,8 @@ const ItemForm = () => {
             let parsed_user = JSON.parse(user)
             if (parsed_user) {
                 setUserID(parsed_user.id)
-                setUserEmail(parsed_user.email)
-                setUserName(parsed_user.firstname)
                 setUserLname(parsed_user.lastname)
+                setUserName(parsed_user.firstname)
             }
         } catch {
             return null;
@@ -60,11 +52,12 @@ const ItemForm = () => {
 
     const submitData = () => {
 
-        if (!name || !phone || !email || !address || !region || !city || !postal) {
+        if (!phone || !address || !region || !city) {
             toast.warn('Please fill all fields', { theme: "dark" })
             setSubmit(true)
         }
         else {
+            setLoader(true)
             var formdata = new FormData();
             formdata.append("user_id", userID);
             formdata.append("address", address);
@@ -73,6 +66,7 @@ const ItemForm = () => {
             formdata.append("quantity", counter);
             formdata.append("contact_address", phone);
             formdata.append("product_id", item.id);
+            formdata.append("colour", itemColor);
             formdata.append("status", "new");
             formdata.append("payment_status", "unpaid");
 
@@ -85,11 +79,13 @@ const ItemForm = () => {
             fetch(`${Baseurl}post_order`, requestOptions)
                 .then(response => response.json())
                 .then(result => {
+                    setLoader(false)
                     console.log(result)
                     toast.success('Order Generated Successfully')
                 })
                 .catch(error => {
                     console.log('error', error)
+                    setLoader(false)
                     toast.warn('Error while ordering')
                 });
 
@@ -234,16 +230,10 @@ const ItemForm = () => {
                         <div className="col-lg-12">
                             <div id="contact" >
                                 <div className="row">
+                                    <p>Hello <span style={{ fontSize: '20px', color: "#7453fc" }}>{userName}&nbsp;{userLname}</span> , Thank you for trusting VME, Please verify the mailing address</p>
                                     <hr style={{ width: "320px", height: "3px", color: "#7453fc", borderRadius: "10px" }} />
                                     <h3 className='mb-4' style={{ color: "#7453fc" }}>Digi Card:
                                     </h3>
-                                    {/* <div className="col-lg-6">
-                                        <fieldset>
-                                            <label htmlFor="title">Name*</label>
-                                            <input onChange={(e) => setName(e.target.value)} style={{ borderRadius: "16px", backgroundColor: "#282b2f", borderColor: name === "" && submit === true ? "red" : '#404245' }} id="inputName5" placeholder="Ex. Ali Ahmed" autoComplete="on" type='text' />
-                                            {name === "" && submit === true ? <span className='text-danger'>input empty</span> : ""}
-                                        </fieldset>
-                                    </div> */}
 
                                     <div className="col-lg-12">
                                         <fieldset>
@@ -252,23 +242,6 @@ const ItemForm = () => {
                                             {/* {name === "" && submit === true ? <span className='text-danger'>input empty</span> : ""} */}
                                         </fieldset>
                                     </div>
-
-                                    {/* <div className="col-lg-6">
-                                        <fieldset>
-                                            <label htmlFor="title">Secondary Number</label>
-                                            <input onChange={(e) => setContact(e.target.value)} style={{ borderRadius: "16px", backgroundColor: "#282b2f", borderColor: '#404245' }} id="inputName5" placeholder="Enter your whatsapp number" autoComplete="on" type='number' />
-                                            {name === "" && submit === true ? <span className='text-danger'>input empty</span> : ""}
-                                        </fieldset>
-                                    </div> */}
-
-                                    {/* <div className="col-lg-6">
-                                        <fieldset>
-                                            <label htmlFor="title">Email*</label>
-                                            <input onChange={(e) => setEmail(e.target.value)} style={{ borderRadius: "16px", backgroundColor: "#282b2f", borderColor: email === "" && submit === true ? "red" : '#404245' }} id="inputName5" placeholder='Ex. user@mail.com' autoComplete="on" type='email' />
-                                            {name === "" && submit === true ? <span className='text-danger'>input empty</span> : ""}
-                                        </fieldset>
-                                    </div> */}
-
                                     <div className="col-lg-12 mb-3">
                                         <fieldset>
                                             <label htmlFor="title">Address</label>
@@ -290,24 +263,16 @@ const ItemForm = () => {
                                             {/* {name === "" && submit === true ? <span className='text-danger'>input empty</span> : ""} */}
                                         </fieldset>
                                     </div>
-                                    {/* <div className="col-lg-6">
-                                        <fieldset>
-                                            <label htmlFor="title">Postal Code*</label>
-                                            <input onChange={(e) => setPostal(e.target.value)} style={{ borderRadius: "16px", backgroundColor: "#282b2f", borderColor: postal === "" && submit === true ? "red" : '#404245' }} id="inputName5" placeholder="Your city Postal code" autoComplete="on" type='number' />
-                                            {name === "" && submit === true ? <span className='text-danger'>input empty</span> : ""}
-                                        </fieldset>
-                                    </div> */}
 
-                                    {/* <div className="col-lg-6">
+                                    <div className="col-lg-6 mx-auto">
                                         <fieldset>
-                                            <label htmlFor="file"  >Upload Profile Picture*</label>
-                                            <input onChange={(e) => setProfile(e.target.files[0])} type="file" id="file" name="myfiles[]" multiple />
-                                        </fieldset>
-                                    </div> */}
+                                            {
+                                                loader === true ?
+                                                    <button type="submit" id="form-submit" className="orange-button" >Loading <i className="fa-solid fa-spinner fa-spin-pulse" /></button>
+                                                    :
 
-                                    <div class="col-lg-6 mx-auto">
-                                        <fieldset>
-                                            <button onClick={() => { submitData() }} type="submit" id="form-submit" class="orange-button" >Submit Your Applying</button>
+                                                    <button onClick={() => { submitData() }} type="submit" id="form-submit" className="orange-button" >Submit Your Applying</button>
+                                            }
                                         </fieldset>
                                     </div>
 
@@ -318,12 +283,10 @@ const ItemForm = () => {
                         {
                             !userID ?
                                 <>
-                                    <SignUpUser />
-                                </>
-                                :
-                                <>
                                     <SignInUser />
                                 </>
+                                :
+                                null
                         }
                     </div>
                 </div>
