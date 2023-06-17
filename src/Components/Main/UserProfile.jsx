@@ -11,23 +11,8 @@ import { toast } from 'react-toastify';
 
 
 const UserProfile = (id) => {
+
   const Id = id.id
-  console.log(Id)
-  // const params = useParams();
-  // const { userId } = useParams()
-  // const [searchParams, setSearchParams] = useSearchParams()
-
-  // const location = useLocation()
-  // const IDD = location.state.coustomerData;
-  // console.log(IDD)
-
-  // const location = useLocation()
-  // const IDD = location.state.userDataa
-  // console.log(location)
-
-  // const queryParams = new URLSearchParams(window.location.search);
-  // const id = queryParams.get('id');
-  //   let { id } = useParams();
 
   const SetLocalLogin = async () => {
     try {
@@ -43,7 +28,6 @@ const UserProfile = (id) => {
 
   const [buyItems, setBuyItems] = useState('')
   const [openModal, setOpenModal] = useState(false);
-  // const [openSignUp, setOpenSignUp] = useState(false)
   const [purchasedProduct, setPurchased] = useState("")
   const [gender, setGender] = useState('')
   const [profDes, setProfDesc] = useState('')

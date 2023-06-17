@@ -2,8 +2,6 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import Slider from "react-slick";
 
-
-
 const PageHeading = () => {
 
   var settings = {

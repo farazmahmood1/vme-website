@@ -1,6 +1,5 @@
 import axios from 'axios'
-import React from 'react'
-import { useState } from 'react'
+import React,{useState} from 'react'
 import { toast } from 'react-toastify'
 import Baseurl from '../SourceFiles/url'
 
@@ -25,10 +24,6 @@ const SignIn = ({ setOpenModal }) => {
                     console.log(res.data.customer)
                     toast.info('Logged in successfully', { theme: "dark" })
                     localStorage.setItem('user', JSON.stringify(res.data.user));
-                    // setInterval(() => {
-                    //     window.location.reload()
-                    // }, 1500);
-
                 })
                 .catch(err => {
                     console.log(err)

@@ -1,10 +1,8 @@
-import React from "react";
+import React,{ useState, useEffect } from "react";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import axios from "axios";
 import Baseurl from "../SourceFiles/url";
-import { useEffect } from "react";
 import allImagesUrl from "../SourceFiles/baseimageurl";
 import GetCategories from "./GetCategories";
 
@@ -12,8 +10,6 @@ const Categories = () => {
 
   const [data, setData] = useState([]);
   const [loader, setLoader] = useState(false);
-  // categories
-
 
   const fetchData = () => {
     setLoader(true);

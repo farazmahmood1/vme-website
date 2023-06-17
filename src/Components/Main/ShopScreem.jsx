@@ -18,7 +18,7 @@ const ShopScreem = () => {
   const [addCount, setAddCount] = useState(1);
   const [selectedColor, setSelectedColor] = useState("");
   const [error, setError] = useState(false)
-  const [errorMessage, setErrorMessage] = useState('Seems you forgot to select your favorite color')
+  const [errorMessage, setErrorMessage] = useState('')
 
   useEffect(() => {
     topFunction();
@@ -55,7 +55,6 @@ const ShopScreem = () => {
   const handleColorSelection = (color) => {
     setSelectedColor(color);
   };
-
 
   const incrementCount = () => {
     setAddCount(addCount + 1);

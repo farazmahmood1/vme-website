@@ -7,13 +7,17 @@ import Baseurl from '../SourceFiles/url';
 import '../Modal/SignInUser'
 import { useLocation } from 'react-router-dom';
 import SignInUser from '../Modal/SignInUser';
-import SignUpUser from '../Modal/SignUpUser'
 import SignIn from '../Auth/SignIn';
 import SignUp from '../Auth/SignUp';
 
 toast.configure()
 const ItemForm = () => {
 
+    const location = useLocation();
+    const { counter } = location.state;
+    const { itemColor } = location.state;
+    const { item } = location.state;
+    
     const [openModal, setOpenModal] = useState(false);
     const [openSignUp, setOpenSignUp] = useState(false)
     const [phone, setPhone] = useState("");
@@ -21,18 +25,12 @@ const ItemForm = () => {
     const [region, setRegion] = useState("");
     const [city, setCity] = useState("");
 
-    // userData
     const [userName, setUserName] = useState()
     const [userLname, setUserLname] = useState()
     const [submit, setSubmit] = useState(false);
     const [openModals, setOpenModals] = useState(false)
     const [userID, setUserID] = useState()
     const [loader, setLoader] = useState(false)
-
-    const location = useLocation();
-    const { counter } = location.state;
-    const { itemColor } = location.state;
-    const { item } = location.state;
 
     useEffect(() => { topFunction(); SetLocalLogin() }, [])
 
@@ -51,7 +49,6 @@ const ItemForm = () => {
     }
 
     const submitData = () => {
-
         if (!phone || !address || !region || !city) {
             toast.warn('Please fill all fields', { theme: "dark" })
             setSubmit(true)
@@ -88,7 +85,6 @@ const ItemForm = () => {
                     setLoader(false)
                     toast.warn('Error while ordering')
                 });
-
         }
     }
 

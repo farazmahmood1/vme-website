@@ -1,4 +1,3 @@
-import axios from 'axios'
 import React, { useState } from 'react'
 import Baseurl from '../SourceFiles/url'
 import { toast } from 'react-toastify'
@@ -112,9 +111,8 @@ const SignUp = ({ setOpenSignUp }) => {
                                 <input className="form-control text-white" onChange={(e) => setProfilePic(e.target.files[0])} type="file" id="formFile" style={{ backgroundColor: 'rgb(35, 34, 45)', borderColor: 'rgb(146, 84, 243)' }} />
                             </div>
 
-
                             <div className='d-flex mt-2 me-3'>
-                                {/* <a id="emailHelp" className="form-text mt-3">sdfsa</a> */}
+                                {/* <a id="emailHelp" className="form-text mt-3"></a> */}
                                 <div className="border-button ms-auto btnAnimate" style={{ cursor: 'pointer' }}>
                                     <a className='text-white' onClick={loginFunction}>Sign Up</a>
                                 </div>

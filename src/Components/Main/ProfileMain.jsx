@@ -1,10 +1,9 @@
+import React, { useState, useEffect } from 'react'
 import PageHeading from '../Profiles/PageHeading'
 import Discover from '../Profiles/Discover'
-import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import SignIn from '../Auth/SignIn';
 import SignUp from '../Auth/SignUp'
-
 
 const ProfileMain = () => {
 

@@ -1,9 +1,8 @@
-import Shop from '../Shop/Shop'
 import React, { useState } from 'react'
+import Shop from '../Shop/Shop'
 import { Link } from 'react-router-dom'
 import SignIn from '../Auth/SignIn';
 import SignUp from '../Auth/SignUp'
-
 
 const ShopMain = () => {
 
