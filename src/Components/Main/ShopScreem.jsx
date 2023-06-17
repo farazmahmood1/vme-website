@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import allImagesUrl from "../SourceFiles/baseimageurl";
 import SignIn from "../Auth/SignIn";
 import SignUp from "../Auth/SignUp";
@@ -10,7 +10,7 @@ import Baseurl from "../SourceFiles/url";
 
 const ShopScreem = () => {
   const { items } = useParams();
-
+  const navigate = useNavigate()
   const [data, setData] = useState([]);
   const [loader, setLoader] = useState(false);
   const [openModal, setOpenModal] = useState(false);
@@ -40,6 +40,16 @@ const ShopScreem = () => {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const colorValidation = () => {
+    if (selectedColor === "") {
+      setError(true);
+      setErrorMessage('Seems you forgot to select your favorite color');
+    } else {
+      setError(false);
+      setErrorMessage('');
+    }
   };
 
   const handleColorSelection = (color) => {
@@ -368,32 +378,44 @@ const ShopScreem = () => {
                                   onClick={() => handleColorSelection(color)}
                                 ></button>
                               ))}
-
-                              {
-                                selectedColor === "" ? errorMessage : null
-                              }
-
                             </div>
+
+
                           </div>
+
+                          {
+                            errorMessage !== "" && error === true ? <p className="text-danger">Seems you forgot to select your favorite color</p> : null
+                          }
 
 
                           <div
                             className="mt-4 d-flex">
-                            <Link
-                              to="/ItemForm"
-                              state={{
-                                counter: addCount,
-                                itemColor: selectedColor,
-                                item: data,
-                              }}
-                              className="text-center buttonx col-11"
-                            >
-                              BUY NOW
-                            </Link>
+
+                            {
+                              selectedColor !== "" ?
+                                <Link
+                                  to="/ItemForm"
+                                  state={{
+                                    counter: addCount,
+                                    itemColor: selectedColor,
+                                    item: data,
+                                  }}
+                                  className="text-center buttonx col-11"
+                                >
+                                  BUY NOW
+                                </Link> :
+                                <button
+                                  onClick={colorValidation}
+                                  className="text-center buttonx col-11"
+                                >
+                                  BUY NOW
+                                </button>
+                            }
+
                             <i className="fa-2x ms-2 mt-1 fa-solid fa-heart text-danger" />
                           </div>
                           <p
-                            style={{ fontSize: "11px" }}
+                            style={{ fontSize: "13px" }}
                             className="text-secondary text-center"
                           >
                             Payment method is COD, other methods are coming soon!
