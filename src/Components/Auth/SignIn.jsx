@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import { toast } from 'react-toastify'
 import Baseurl from '../SourceFiles/url'
 
@@ -21,9 +21,14 @@ const SignIn = ({ setOpenModal }) => {
             }
             axios.post(`${Baseurl}login`, userObj)
                 .then(res => {
-                    console.log(res.data.customer)
-                    toast.info('Logged in successfully', { theme: "dark" })
-                    localStorage.setItem('user', JSON.stringify(res.data.user));
+                    console.log(res.data.status)
+                    if (res.data.status === "200") {
+                        toast.info('Logged in successfully', { theme: "dark" })
+                        localStorage.setItem('user', JSON.stringify(res.data.user));
+                    }
+                    else if (res.data.status === "401") {
+                        toast.info(res.data.message, { theme: "dark" })
+                    }
                 })
                 .catch(err => {
                     console.log(err)

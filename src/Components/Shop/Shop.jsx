@@ -1,19 +1,15 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import Baseurl from "../SourceFiles/url";
-import Imagesurl from "../SourceFiles/Imageurl";
-import ShopScreem from "../Main/ShopScreem";
-import { useLocation } from "react-router-dom";
-import coverUrl from "../SourceFiles/coverUrl";
 import allImagesUrl from "../SourceFiles/baseimageurl";
 
 const Shop = () => {
 
   const [categories, setCategories] = useState([])
   const [card, setCard] = useState([]);
-  const [type, setType] = useState("tatto");
+  const [type, setType] = useState("All");
   const [loader, setLoader] = useState(false);
 
   const getLink = () => {
@@ -22,7 +18,6 @@ const Shop = () => {
     const path = part[1];
     setType(path);
   };
-
 
   useEffect(() => {
     fetchCategories()
@@ -56,6 +51,51 @@ const Shop = () => {
         console.log(err);
       });
   };
+
+  function CardInfo({ items }) {
+    return (
+      <div className="col-lg-4">
+        <div
+          className="card mb-5 bg-dark"
+          style={{ borderRadius: "20px" }}
+        >
+          <div>
+            <img
+              className="shopItemImg"
+              src={`${allImagesUrl}${items.image_1}`}
+              alt="item image"
+            />
+          </div>
+          <div className="card-body shopItemBody">
+            <h4 className="mt-2 ms-2">
+              {items.item_name}
+            </h4>
+            <hr className="bg-secondary" />
+            <div className="d-flex justify-content-between">
+              <div className="text-center ms-2">
+                <p>Price</p>
+                <h5>{items.actual_price}</h5>
+              </div>
+              <div className="text-center">
+                <p>Item type</p>
+                <h5>{items.category_name}</h5>
+              </div>
+            </div>
+            <div className="d-flex justify-content-center ">
+              <div className="main-button ms-2 itemBtn">
+                <Link
+                  state={{ items: items }}
+                  to={`/ShopScreem/${items.id}`}
+                >
+                  View
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   var mybutton = document.getElementById("myBtn");
   window.onscroll = function () {
@@ -133,6 +173,14 @@ const Shop = () => {
                 <div className="col-lg-6">
                   <div className="filters">
                     <ul>
+                      <Link to={`/ShopMain?All`}>
+                        <li
+                          onClick={() => setType('All')}
+                          className={type === 'All' ? "active" : "null"}
+                        >
+                          All
+                        </li>
+                      </Link>
                       {
                         categories.map((items) => {
                           return (
@@ -155,54 +203,26 @@ const Shop = () => {
                 </div>
                 <div className="col-lg-12">
                   <div className="row">
-                    {card
-                      .filter((item) => item.category_name === type)
-                      .map((items) => {
-                        return (
-                          <>
-                            <div className="col-lg-4">
-                              <div
-                                className="card mb-5 bg-dark"
-                                style={{ borderRadius: "20px" }}
-                              >
-                                <div>
-                                  <img
-                                    className="shopItemImg"
-                                    src={`${allImagesUrl}${items.image_1}`}
-                                    alt="item image"
-                                  />
-                                </div>
-                                <div className="card-body shopItemBody">
-                                  <h4 className="mt-2 ms-2">
-                                    {items.item_name}
-                                  </h4>
-                                  <hr className="bg-secondary" />
-                                  <div className="d-flex justify-content-between">
-                                    <div className="text-center ms-2">
-                                      <p>Price</p>
-                                      <h5>{items.actual_price}</h5>
-                                    </div>
-                                    <div className="text-center">
-                                      <p>Item type</p>
-                                      <h5>{items.category_name}</h5>
-                                    </div>
-                                  </div>
-                                  <div className="d-flex justify-content-center ">
-                                    <div className="main-button ms-2 itemBtn">
-                                      <Link
-                                        state={{ items: items }}
-                                        to={`/ShopScreem/${items.id}`}
-                                      >
-                                        View
-                                      </Link>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </>
-                        );
-                      })}
+                    {
+
+                      type === 'All' ?
+
+                        card.map((items) => {
+                          return (
+                            <CardInfo items={items} />
+                          );
+                        })
+
+                        :
+                        card
+                          .filter((item) => item.category_name === type)
+                          .map((items) => {
+                            return (
+                              <CardInfo items={items} />
+                            );
+                          })
+
+                    }
                   </div>
                 </div>
               </>

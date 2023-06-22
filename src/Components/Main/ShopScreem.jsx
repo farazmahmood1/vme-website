@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import allImagesUrl from "../SourceFiles/baseimageurl";
 import SignIn from "../Auth/SignIn";
 import SignUp from "../Auth/SignUp";
@@ -10,7 +10,7 @@ import Baseurl from "../SourceFiles/url";
 
 const ShopScreem = () => {
   const { items } = useParams();
-  const navigate = useNavigate()
+
   const [data, setData] = useState([]);
   const [loader, setLoader] = useState(false);
   const [openModal, setOpenModal] = useState(false);
@@ -383,7 +383,9 @@ const ShopScreem = () => {
                           </div>
 
                           {
-                            errorMessage !== "" && error === true ? <p className="text-danger">Seems you forgot to select your favorite color</p> : null
+                            errorMessage !== "" && error === true && selectedColor === "" ? (
+                              <p className="text-danger">Seems you forgot to select your favorite color</p>
+                            ) : null
                           }
 
 

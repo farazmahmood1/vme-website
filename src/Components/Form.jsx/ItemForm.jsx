@@ -17,7 +17,7 @@ const ItemForm = () => {
     const { counter } = location.state;
     const { itemColor } = location.state;
     const { item } = location.state;
-    
+
     const [openModal, setOpenModal] = useState(false);
     const [openSignUp, setOpenSignUp] = useState(false)
     const [phone, setPhone] = useState("");
@@ -210,12 +210,12 @@ const ItemForm = () => {
                 <div className="container">
                     <div className="row">
 
-                        <div className='contactWhatsapp card-body col-lg-2' >
+                        <a target={'_blank'} href="https://api.whatsapp.com/send?phone=00923034450790&text=Hello%20I%20would%20like%20more%20information" className='contactWhatsapp card-body col-lg-2' >
                             <div className='d-flex '>
-                                <a className='text-white mt-1 me-2' target={'_blank'} href="https://api.whatsapp.com/send?phone=00923034450790&text=Hello%20I%20would%20like%20more%20information" >Buy through Whatsapp</a>
+                                <a className='text-white mt-1 me-2'  >Buy through Whatsapp</a>
                                 <img src="./source/assets/images/whatsapp-color-icon.png" alt="whatsapp icon" style={{ height: "40px", width: "40px" }} />
                             </div>
-                        </div>
+                        </a>
 
                         <div className="col-lg-12">
                             <div className="section-heading">

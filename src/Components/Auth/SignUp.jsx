@@ -13,6 +13,7 @@ const SignUp = ({ setOpenSignUp }) => {
     const [phone, setPhone] = useState('')
     const [profilePic, setProfilePic] = useState('')
     const [fieldStatus, setFieldStatus] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const loginFunction = () => {
         if (!name || !lastn || !email || !password || !confirmPassword || !username || !phone) {
@@ -23,7 +24,7 @@ const SignUp = ({ setOpenSignUp }) => {
             toast.warn('password does not match', { theme: "dark" })
         }
         else {
-
+            setLoading(true)
             var formdata = new FormData();
             formdata.append("username", username);
             formdata.append("email", email);
@@ -33,7 +34,11 @@ const SignUp = ({ setOpenSignUp }) => {
             formdata.append("phone", phone);
             formdata.append("firstname", name);
             formdata.append("lastname", lastn);
-            formdata.append("profile_pic", profilePic, "[PROXY]");
+            {
+                profilePic === "" ?
+                    console.log('hello') :
+                    formdata.append("profile_pic", profilePic, "[PROXY]")
+            }
 
             var requestOptions = {
                 method: 'POST',
@@ -44,13 +49,15 @@ const SignUp = ({ setOpenSignUp }) => {
             fetch(`${Baseurl}register`, requestOptions)
                 .then(response => response.json())
                 .then(result => {
-                    console.log(result.data.user)
-                    if (result.response === "200") {
+                    console.log(result.data)
+                    if (result.status === "200") {
+                        setLoading(false)
                         toast.success('User Registered Successfully')
-                        localStorage.setItem('user', JSON.stringify(result.data.user));
+                        localStorage.setItem('user', JSON.stringify(result.user));
                     }
-                    else if (result.response === "401") {
-                        toast.warn('Something went wrong...')
+                    else if (result.status === "401") {
+                        setLoading(false)
+                        toast.warn(result.message)
                     }
                 })
                 .catch(error => {
@@ -114,7 +121,12 @@ const SignUp = ({ setOpenSignUp }) => {
                             <div className='d-flex mt-2 me-3'>
                                 {/* <a id="emailHelp" className="form-text mt-3"></a> */}
                                 <div className="border-button ms-auto btnAnimate" style={{ cursor: 'pointer' }}>
-                                    <a className='text-white' onClick={loginFunction}>Sign Up</a>
+                                    {
+                                        loading === true ?
+                                            <a className='text-white'>Loading ...</a>
+                                            : <a className='text-white' onClick={loginFunction}>Sign Up</a>
+                                    }
+
                                 </div>
                             </div>
                         </div>

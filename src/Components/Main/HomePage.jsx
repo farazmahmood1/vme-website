@@ -13,6 +13,7 @@ const HomePage = () => {
     const [openModal, setOpenModal] = useState(false);
     const [openSignUp, setOpenSignUp] = useState(false)
 
+
     return (
         <div>
             {/* Navbar */}
@@ -43,11 +44,23 @@ const HomePage = () => {
                                             </li>
 
                                             <li className="nav-item ">
-                                                <p className='nav-link borderLogin  me-4' aria-current="page"><b> <p onClick={() => setOpenModal(true)} className='text-secondary' style={{ cursor: 'pointer' }}  >Login</p> </b></p>
+
+                                                {
+                                                    openSignUp === false ?
+                                                        <p className='nav-link borderLogin  me-4' aria-current="page"><b> <p onClick={() => setOpenModal(true)} className='text-secondary' style={{ cursor: 'pointer' }}  >Login</p> </b></p>
+                                                        :
+                                                        <p className='nav-link borderLogin  me-4' aria-current="page"><b> <p className='text-secondary' style={{ cursor: 'pointer' }}  >Login</p> </b></p>
+                                                }
                                             </li>
 
                                             <li className="nav-item ">
-                                                <p className={'nav-link borderSignup me-4 '} aria-current="page"><b> <p onClick={() => setOpenSignUp(true)} style={{ cursor: 'pointer' }} className='text-white' >SIgn up for free</p> </b></p>
+
+                                                {
+                                                    openModal === false ?
+                                                        <p className={'nav-link borderSignup me-4 '} aria-current="page"><b> <p onClick={() => setOpenSignUp(true)} style={{ cursor: 'pointer' }} className='text-white' >Sign up for free</p> </b></p>
+                                                        :
+                                                        <p className={'nav-link borderSignup me-4 '} aria-current="page"><b> <p style={{ cursor: 'pointer' }} className='text-white' >Sign up for free</p> </b></p>
+                                                }
                                             </li>
 
                                             <li className="nav-item dropdown" >
