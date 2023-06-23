@@ -11,6 +11,7 @@ import ItemForm from "./Components/Form.jsx/ItemForm";
 import UserForm from "./Components/Form.jsx/UserForm";
 import Decider from "./Components/Decider/Decider";
 import ErrorPage from "./Components/Main/ErrorPage";
+import MyOrders from "./Components/Main/MyOrders";
 
 function App() {
   var mybutton = document.getElementById("myBtn");
@@ -44,6 +45,7 @@ function App() {
           <Route path="/WorkingVideo" element={<WorkingVideo />} />
           <Route path="/ShopMain" element={<ShopMain />} />
           <Route path="/ShopScreem/:items" element={<ShopScreem />} />
+          <Route path="/MyOrders" element={<MyOrders />} />
           <Route path="/ProfileMain" element={<ProfileMain />} />
           <Route path="/UserProfile/:id" element={<UserProfile />} />
 

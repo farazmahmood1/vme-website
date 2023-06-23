@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Modal } from 'pretty-modal'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import Baseurl from '../SourceFiles/url';
 import '../Modal/SignInUser'
-import { useLocation } from 'react-router-dom';
 import SignInUser from '../Modal/SignInUser';
 import SignIn from '../Auth/SignIn';
 import SignUp from '../Auth/SignUp';
@@ -24,13 +23,15 @@ const ItemForm = () => {
     const [address, setAddress] = useState("");
     const [region, setRegion] = useState("");
     const [city, setCity] = useState("");
+    const [additionalDirection, setAdditionalDirection] = useState('')
 
     const [userName, setUserName] = useState()
     const [userLname, setUserLname] = useState()
     const [submit, setSubmit] = useState(false);
-    const [openModals, setOpenModals] = useState(false)
+    const [openModals, setOpenModals] = useState(true)
     const [userID, setUserID] = useState()
     const [loader, setLoader] = useState(false)
+    const [orderData, setOrderData] = useState([])
 
     useEffect(() => { topFunction(); SetLocalLogin() }, [])
 
@@ -64,6 +65,7 @@ const ItemForm = () => {
             formdata.append("contact_address", phone);
             formdata.append("product_id", item.id);
             formdata.append("colour", itemColor);
+            formdata.append("additional_directions", additionalDirection);
             formdata.append("status", "new");
             formdata.append("payment_status", "unpaid");
 
@@ -78,12 +80,20 @@ const ItemForm = () => {
                 .then(result => {
                     setLoader(false)
                     console.log(result)
-                    toast.success('Order Generated Successfully')
+                    if (result.status === "200") {
+                        toast.success('Order Generated Successfully')
+                        console.log(orderData)
+                        setOrderData(result.order.id)
+                        setOpenModals(true)
+                    }
+                    else if (result.status === "401") {
+                        toast.warn('Something went wrong, Try again later')
+                    }
                 })
                 .catch(error => {
                     console.log('error', error)
                     setLoader(false)
-                    toast.warn('Error while ordering')
+                    toast.danger('Error while ordering')
                 });
         }
     }
@@ -179,19 +189,34 @@ const ItemForm = () => {
             <Modal open={openModals} >
                 <div className='card-body'>
                     <button onClick={() => setOpenModals(false)} className='btn btn-sm btn-danger float-end'>X</button>
-                    <div className="row">
-                        <h3 className="text-center mt-2">YOUR ORDER HAS BEEN RECEIVED!</h3>
-                        <h4 className="text-center mt-2">Thank you for your purchasing</h4>
-                        <p className="text-center">Your order id # is: 000023</p>
-                        <p className="text-center mt-3">You will receive an order confirmation email with details of your order &#128512;</p>
-                        {/* <h2 className='mt-3 text-center'>Do You want to Create your Digital Website? </h2>
-                        <div className='mx-auto'>
+                    <div className="d-flex justify-content-center">
+                        <div className="p-4">
+                            <div className="first d-flex justify-content-between align-items-center mb-3">
+                                <div className="info-order">
+                                    <span className="d-block name">Thank you, {userName}&nbsp;{userLname}</span>
+                                    <span className="order">Order ID - {orderData}</span>
+                                </div>
+                                <img src="https://i.imgur.com/NiAVkEw.png" style={{ width: '40px' }} />
+                            </div>
+                            <div className="detail">
+                                <span className="d-block summery">Your exquisite order is being crafted and promptly delivered</span>
+                            </div>
 
-                            <Link to='/UserForm' className="btn btn-secondary float-end mt-4">Yes sure!</Link>
-                            <button onClick={() => setOpenModals(false)} className="btn btn-danger float-end me-2 mt-4">Maybe Later</button>
-                        </div> */}
+                            <hr style={{ width: "220px", height: "3px", color: "#7453fc", borderRadius: "10px" }} />
+                            <div className="text">
+                                <span className="d-block new text-white mb-1">Shipping Address:</span>
+                            </div>
+                            <span className="d-block address mb-3">{address}, {city}</span>
+                            <div className="  money d-flex flex-row mt-2 align-items-center">
+                                <div>
+                                    <img src="https://i.imgur.com/ppwgjMU.png" style={{ width: '30px' }} />
+
+                                    &nbsp;&nbsp; <span className="ml-2 text-white">Cash on Delivery</span>
+                                </div>
+                                <Link to='/MyOrders' className='btn btn-sm btn-outline-secondary p-2 ms-auto rounded-pill'>My Orders</Link>
+                            </div>
+                        </div>
                     </div>
-
                 </div>
             </Modal>
 
@@ -226,12 +251,11 @@ const ItemForm = () => {
                         <div className="col-lg-12">
                             <div id="contact" >
                                 <div className="row">
-                                    <p>Hello <span style={{ fontSize: '20px', color: "#7453fc" }}>{userName}&nbsp;{userLname}</span> , Thank you for trusting VME, Please verify the mailing address</p>
+                                    <p style={{ zIndex: '0' }}>Hello <span style={{ fontSize: '20px', color: "#7453fc" }}>{userName}&nbsp;{userLname}</span> , Thank you for trusting VME, Please verify the mailing address</p>
                                     <hr style={{ width: "320px", height: "3px", color: "#7453fc", borderRadius: "10px" }} />
-                                    <h3 className='mb-4' style={{ color: "#7453fc" }}>Digi Card:
-                                    </h3>
+                                    <h3 className='mb-2' style={{ color: "#7453fc" }}></h3>
 
-                                    <div className="col-lg-12">
+                                    <div className="col-lg-6">
                                         <fieldset>
                                             <label htmlFor="title">Phone Number*</label>
                                             <input onChange={(e) => setPhone(e.target.value)} style={{ borderRadius: "16px", backgroundColor: "#282b2f", borderColor: phone === "" && submit === true ? "red" : '#404245' }} id="inputName5" placeholder="Enter your current phone no." autoComplete="on" type='number' />
@@ -242,6 +266,13 @@ const ItemForm = () => {
                                         <fieldset>
                                             <label htmlFor="title">Address</label>
                                             <textarea className="form-control text-white" onChange={(e) => setAddress(e.target.value)} style={{ borderRadius: "16px", backgroundColor: '#282b2f', borderColor: address === '' && submit === true ? 'red' : '#404245', borderRadius: "20px" }} id="exampleFormControlTextarea1" rows={7} placeholder="Enter your shipping address ..." defaultValue={""} />
+                                            {/* {name === "" && submit === true ? <span className='text-danger'>input empty</span> : ""} */}
+                                        </fieldset>
+                                    </div>
+                                    <div className="col-lg-12 mb-3">
+                                        <fieldset>
+                                            <label htmlFor="title">Additional Directions</label>
+                                            <textarea className="form-control text-white" onChange={(e) => setAdditionalDirection(e.target.value)} style={{ borderRadius: "16px", backgroundColor: '#282b2f', borderColor: address === '' && submit === true ? 'red' : '#404245', borderRadius: "20px" }} id="exampleFormControlTextarea1" rows={3} placeholder="Additional directions for the rider" defaultValue={""} />
                                             {/* {name === "" && submit === true ? <span className='text-danger'>input empty</span> : ""} */}
                                         </fieldset>
                                     </div>

@@ -97,20 +97,6 @@ const Shop = () => {
     )
   }
 
-  var mybutton = document.getElementById("myBtn");
-  window.onscroll = function () {
-    scrollFunction();
-  };
-  function scrollFunction() {
-    if (
-      document.body.scrollTop > 400 ||
-      document.documentElement.scrollTop > 400
-    ) {
-      mybutton = "block";
-    } else {
-      mybutton = "none";
-    }
-  }
   function topFunction() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
@@ -204,24 +190,19 @@ const Shop = () => {
                 <div className="col-lg-12">
                   <div className="row">
                     {
-
                       type === 'All' ?
-
                         card.map((items) => {
                           return (
                             <CardInfo items={items} />
                           );
                         })
-
                         :
-                        card
-                          .filter((item) => item.category_name === type)
+                        card.filter((item) => item.category_name === type)
                           .map((items) => {
                             return (
                               <CardInfo items={items} />
                             );
                           })
-
                     }
                   </div>
                 </div>
