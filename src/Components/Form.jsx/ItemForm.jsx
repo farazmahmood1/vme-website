@@ -28,7 +28,7 @@ const ItemForm = () => {
     const [userName, setUserName] = useState()
     const [userLname, setUserLname] = useState()
     const [submit, setSubmit] = useState(false);
-    const [openModals, setOpenModals] = useState(true)
+    const [openModals, setOpenModals] = useState(false)
     const [userID, setUserID] = useState()
     const [loader, setLoader] = useState(false)
     const [orderData, setOrderData] = useState([])

@@ -68,7 +68,7 @@ const Shop = () => {
           </div>
           <div className="card-body shopItemBody">
             <h4 className="mt-2 ms-2">
-              {items.item_name}
+              {items.name}
             </h4>
             <hr className="bg-secondary" />
             <div className="d-flex justify-content-between">
