@@ -85,7 +85,7 @@ const Shop = () => {
               <div className="main-button ms-2 itemBtn">
                 <Link
                   state={{ items: items }}
-                  to={`/ShopScreem/${items.id}`}
+                  to={`/Buy-now/${items.id}`}
                 >
                   View
                 </Link>

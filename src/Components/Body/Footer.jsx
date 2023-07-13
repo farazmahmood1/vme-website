@@ -7,7 +7,7 @@ const Footer = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
-                            <p>Copyright © 2022 <a href="#">Alphanites</a>  ~All rights reserved. Designed by <a title="HTML CSS Templates" rel="sponsored" href="#" target="_blank">Faraz</a></p>
+                            <p>Copyright © 2022 <a href="#">Alphanites</a>  ~All rights reserved.</p>
                         </div>
                     </div>
                 </div>

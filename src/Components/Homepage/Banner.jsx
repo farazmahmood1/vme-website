@@ -31,7 +31,7 @@ const Banner = () => {
                 </p>
                 <div className="buttons">
                   <div className="border-button">
-                    <Link to="/ShopMain?Card">Explore Shop</Link>
+                    <Link to="/Shop-now?Card">Explore Shop</Link>
                   </div>
                   <div className="main-button">
                     <Link to="/WorkingVideo">How to buy</Link>

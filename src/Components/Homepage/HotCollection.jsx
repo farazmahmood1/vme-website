@@ -6,7 +6,7 @@ import Baseurl from "../SourceFiles/url";
 import allImagesUrl from "../SourceFiles/baseimageurl";
 import GetCategories from "./GetCategories";
 
-const Categories = () => {
+const HotCollection = () => {
 
   const [data, setData] = useState([]);
   const [loader, setLoader] = useState(false);
@@ -133,7 +133,7 @@ const Categories = () => {
                             return (
                               <div>
                                 <Link
-                                  to={`/ShopScreem/${items.id}`}
+                                  to={`/Buy-now/${items.id}`}
                                   className="main-button"
                                 >
                                   <div className="owl-collection p-2">
@@ -178,4 +178,4 @@ const Categories = () => {
   );
 };
 
-export default Categories;
+export default HotCollection;
