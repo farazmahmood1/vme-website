@@ -120,7 +120,7 @@ const GetCategories = () => {
                               </div>
                               <h4>{items.category_name}</h4>
                               <div className="icon-button">
-                                <Link to={`/ShopMain?${items.category_name}`}>
+                                <Link to={`/Shop-now?${items.category_name}`}>
                                   <i className="fa fa-angle-right" />
                                 </Link>
                               </div>

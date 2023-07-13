@@ -14,6 +14,7 @@ import MyOrders from "./Components/Main/MyOrders";
 import FAQ from "./Components/Main/FAQ";
 import Navbar from "./Components/Body/Navbar";
 import Shop from "./Components/Main/Shop";
+import Blogs from "./Components/Main/Blogs";
 
 function App() {
   var mybutton = document.getElementById("myBtn");
@@ -52,6 +53,7 @@ function App() {
           <Route path="/UserProfile/:id" element={<UserProfile />} />
           <Route path="/FAQ" element={<FAQ />} />
           <Route path="/ItemForm" element={<ItemForm />} />
+          <Route path="/Our-Blogs" element={<Blogs />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
         <Footer />

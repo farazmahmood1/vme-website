@@ -62,7 +62,7 @@ const Navbar = () => {
                       <p className='nav-link me-4 ' aria-current="page"><b><Link to='/FAQ' className='text-secondary' >FAQ</Link></b></p>
                     </li>
                     <li className="nav-item ">
-                      <p className='nav-link me-4 ' aria-current="page"><b><Link to='/Blogs' className='text-secondary' >Blogs</Link></b></p>
+                      <p className='nav-link me-4 ' aria-current="page"><b><Link to='/Our-Blogs' className='text-secondary' >Blogs</Link></b></p>
                     </li>
                     {
                       userID ?
@@ -76,7 +76,6 @@ const Navbar = () => {
                           </li>
                         </>
                         :
-
                         <>
                           <li className="nav-item ">
                             <p className='nav-link borderLogin  me-4' aria-current="page"><b> <p onClick={openSignUp === false ? () => setOpenModal(true) : null} className='text-secondary' style={{ cursor: 'pointer' }}  >Login</p> </b></p>

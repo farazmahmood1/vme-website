@@ -159,7 +159,7 @@ const Shop = () => {
                 <div className="col-lg-6">
                   <div className="filters">
                     <ul>
-                      <Link to={`/ShopMain?All`}>
+                      <Link to={`/Shop-now?All`}>
                         <li
                           onClick={() => setType('All')}
                           className={type === 'All' ? "active" : "null"}
@@ -171,7 +171,7 @@ const Shop = () => {
                         categories.map((items) => {
                           return (
                             <>
-                              <Link to={`/ShopMain?${items.category_name}`}>
+                              <Link to={`/Shop-now?${items.category_name}`}>
                                 <li
                                   onClick={() => setType(items.category_name)}
                                   className={type === items.category_name ? "active" : "null"}
