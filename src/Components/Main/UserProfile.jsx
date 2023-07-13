@@ -8,23 +8,11 @@ import coverImage from '../SourceFiles/heading-bg.jpg'
 import { useSearchParams, useParams } from 'react-router-dom';
 import { Modal } from 'pretty-modal'
 import { toast } from 'react-toastify';
-
+import MainLogo from '../../Components/SourceFiles/images/MainLogo.png'
 
 const UserProfile = (id) => {
 
   const Id = id.id
-
-  const SetLocalLogin = async () => {
-    try {
-      let user = await localStorage.getItem("user");
-      let parsed_user = JSON.parse(user);
-      if (parsed_user) {
-        setBuyItems(parsed_user.is_purchased);
-      }
-    } catch {
-      return null;
-    }
-  };
 
   const [buyItems, setBuyItems] = useState('')
   const [openModal, setOpenModal] = useState(false);
@@ -62,6 +50,9 @@ const UserProfile = (id) => {
   const [designation, setDesignation] = useState('')
   const [name, setName] = useState('')
   const [pic, setPic] = useState('')
+  const [userName, setuserName] = useState()
+  const [userLname, setUserLname] = useState()
+
   const [profile, setProfile] = useState('userProfile')
   const [loader, setLoader] = useState(false)
   const [datas, setDatas] = useState([])
@@ -72,10 +63,26 @@ const UserProfile = (id) => {
     profileData();
     getImages();
     topFunction();
-  }, [Id])
+  }, [id])
+
+  const SetLocalLogin = async () => {
+    try {
+      let user = await localStorage.getItem("user");
+      let parsed_user = JSON.parse(user);
+      if (parsed_user) {
+        setBuyItems(parsed_user.is_purchased);
+        setEmail(parsed_user.is_purchased);
+        setName(parsed_user.firstname)
+        setUserLname(parsed_user.lastname)
+        setProfile(parsed_user.profile_pic)
+      }
+    } catch {
+      return null;
+    }
+  };
 
   const showSubscribtionButton = () => {
-    if (buyItems === "1") {
+    if (buyItems === "0") {
       setOpenModal(true)
     }
     else {
@@ -90,6 +97,7 @@ const UserProfile = (id) => {
       redirect: 'follow'
     };
 
+    // fetch(`${Baseurl}fetch_webdata_by_userid/${id}`, requestOptions)
     fetch(`${Baseurl}fetch_webdata_by_userid/${String(Id)}`, requestOptions)
       .then(response => response.json())
       .then(result => {
@@ -135,6 +143,7 @@ const UserProfile = (id) => {
       .catch(error => console.log('error', error));
   }
 
+  // get images of the user
   const getImages = () => {
     var requestOptions = {
       method: 'GET',
@@ -150,6 +159,7 @@ const UserProfile = (id) => {
       .catch(error => console.log('error', error));
   }
 
+  // show social button
   const showSocials = () => {
     if (purchasedProduct === "1") {
       return (
@@ -287,6 +297,7 @@ const UserProfile = (id) => {
     }
   }
 
+  // show about of the user
   const showAbout = () => {
     if (purchasedProduct === "1") {
       return (
@@ -386,6 +397,7 @@ const UserProfile = (id) => {
     }
   }
 
+  // show professional describtions
   const showProfessional = () => {
     if (purchasedProduct === "1") {
       return (
@@ -479,6 +491,7 @@ const UserProfile = (id) => {
     }
   }
 
+  // All user data of The user
   const ReturnData = () => {
     if (profile === 'userProfile') {
       return (
@@ -551,6 +564,7 @@ const UserProfile = (id) => {
     }
   }
 
+  // Save the CV
   const saveFile = () => {
     saveAs(`${Imagesurl}${cv}`);
   };
@@ -614,6 +628,7 @@ const UserProfile = (id) => {
 
         </Modal>
       </div>
+
       <div className="CoverImage" style={{ backgroundImage: cover !== "" ? `url(${Imagesurl}${cover})` : "url(./source/assets/images/heading-bg.jpg)" }} />
       <div className="container">
         <div className='col-lg-1 ms-auto mt-5 buttonProfile'>
@@ -629,7 +644,10 @@ const UserProfile = (id) => {
         <div className="row">
           <div className='d-flex'>
             <div>
-              <img src={`${allImagesUrl}${pic}`} className='profileImage' alt="profile image" />
+              {
+                pic ?
+                  <img src={`${allImagesUrl}${pic}`} className='profileImage' alt="profile-image" /> : <img src={MainLogo} className='profileImage' alt="profile-image" />
+              }
             </div>
             <div className='ms-4'>
               <p className='mt-3 fs-2' style={{ letterSpacing: '5px' }}>{name}</p>

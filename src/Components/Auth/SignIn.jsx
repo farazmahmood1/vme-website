@@ -25,6 +25,10 @@ const SignIn = ({ setOpenModal }) => {
                     if (res.data.status === "200") {
                         toast.info('Logged in successfully', { theme: "dark" })
                         localStorage.setItem('user', JSON.stringify(res.data.user));
+
+                        setInterval(() => {
+                            window.location.reload()
+                        }, 1500);
                     }
                     else if (res.data.status === "401") {
                         toast.info(res.data.message, { theme: "dark" })

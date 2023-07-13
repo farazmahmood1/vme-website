@@ -529,6 +529,7 @@ input {
   background-repeat: no-repeat;
   background-size: cover;
   padding-bottom: 25%;
+  height: 100vh;
 }
 
 /* contact rhiugh whatsapp button */
@@ -1573,3 +1574,4 @@ input {
   --bs-text-opacity: 1;
   color: inherit!important;
 }
+
