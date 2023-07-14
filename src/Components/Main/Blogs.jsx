@@ -11,16 +11,16 @@ const Blogs = () => {
                     <div className="row">
                         <div className="col-lg-12 mb-4">
                             <h6 className="">DigiCard Market</h6>
-                            <h2>Buy Your DigiCard Now.</h2>
+                            <h2>Our blogs</h2>
                             <span className="">
                                 <Link to="/">Home</Link> &gt;
-                                <a style={{ cursor: "default" }}>Shop</a>
+                                <a style={{ cursor: "default" }}>Blogs</a>
                             </span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="categories-collections" style={{ paddingTop: "0px" }}>
+            <div className="categories-collections" style={{ paddingTop: "0px", paddingBottom: "0px" }}>
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
@@ -30,7 +30,7 @@ const Blogs = () => {
                                         <div className="section-heading">
                                             <div className="line-dec" />
                                             <h2>
-                                                Our Hot <em>Collections</em> In Market.
+                                                What's <em>Trending</em> In Market.
                                             </h2>
                                         </div>
                                     </div>
@@ -38,7 +38,7 @@ const Blogs = () => {
 
                                 <div className="blog-home5">
                                     <div className="container">
-                                        <div className="row mt-4">
+                                        <div className="row mb-5">
                                             {/* Column */}
                                             <div className="col-md-4">
                                                 <div className="card b-h-box position-relative font-14 border-0 mb-4">
@@ -55,8 +55,6 @@ const Blogs = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            {/* Column */}
-                                            {/* Column */}
                                             <div className="col-md-4">
                                                 <div className="card b-h-box position-relative font-14 border-0 mb-4">
                                                     <img className="card-img" src="https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/blog/blog-home/img10.jpg" alt="Card image" />

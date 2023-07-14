@@ -53,36 +53,36 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse " id="navbarNav">
                   <ul className="navbar-nav  ms-auto">
                     <li className="nav-item ">
-                      <p className='nav-link me-4 enjoy' aria-current="page"><b><Link to='/' className='text-secondary' >Home</Link></b></p>
+                      <p className='nav-link me-3 enjoy' aria-current="page"><b><Link to='/' className='text-secondary' >Home</Link></b></p>
                     </li>
                     <li className="nav-item ">
-                      <p className='nav-link me-4 ' aria-current="page"><b> <Link className='text-secondary' to='/Shop-now?All'>Shop</Link></b></p>
+                      <p className='nav-link me-3 ' aria-current="page"><b> <Link className='text-secondary' to='/Shop-now?All'>Shop</Link></b></p>
                     </li>
                     <li className="nav-item ">
-                      <p className='nav-link me-4 ' aria-current="page"><b><Link to='/FAQ' className='text-secondary' >FAQ</Link></b></p>
+                      <p className='nav-link me-3 ' aria-current="page"><b><Link to='/FAQ' className='text-secondary' >FAQ</Link></b></p>
                     </li>
                     <li className="nav-item ">
-                      <p className='nav-link me-4 ' aria-current="page"><b><Link to='/Our-Blogs' className='text-secondary' >Blogs</Link></b></p>
+                      <p className='nav-link me-3 ' aria-current="page"><b><Link to='/Our-Blogs' className='text-secondary' >Blogs</Link></b></p>
                     </li>
                     {
                       userID ?
                         <>
                           <li className="nav-item ">
-                            <p className='nav-link borderLogin  me-4' aria-current="page"><b> <p onClick={deleteUserFromLocalStorage} className='text-secondary' style={{ cursor: 'pointer' }}  >Logout</p> </b></p>
+                            <p className='nav-link borderLogin  me-3' aria-current="page"><b> <p onClick={deleteUserFromLocalStorage} className='text-secondary' style={{ cursor: 'pointer' }}  >Logout</p> </b></p>
                           </li>
 
                           <li className="nav-item ">
-                            <p className='nav-link borderSignup me-2' aria-current="page"><b> <Link to={`/?${userID}`} style={{ cursor: 'pointer' }} className='text-white' >View my website</Link> </b></p>
+                            <p className='nav-link borderSignup me-3' aria-current="page"><b> <Link to={`/?${userID}`} style={{ cursor: 'pointer' }} className='text-white' >View my website</Link> </b></p>
                           </li>
                         </>
                         :
                         <>
                           <li className="nav-item ">
-                            <p className='nav-link borderLogin  me-4' aria-current="page"><b> <p onClick={openSignUp === false ? () => setOpenModal(true) : null} className='text-secondary' style={{ cursor: 'pointer' }}  >Login</p> </b></p>
+                            <p className='nav-link borderLogin  me-3' aria-current="page"><b> <p onClick={openSignUp === false ? () => setOpenModal(true) : null} className='text-secondary' style={{ cursor: 'pointer' }}  >Login</p> </b></p>
                           </li>
 
                           <li className="nav-item ">
-                            <p className='nav-link borderSignup me-2' aria-current="page"><b> <p onClick={openModal === false ? () => setOpenSignUp(true) : null} style={{ cursor: 'pointer' }} className='text-white' >Sign up for free</p> </b></p>
+                            <p className='nav-link borderSignup me-3' aria-current="page"><b> <p onClick={openModal === false ? () => setOpenSignUp(true) : null} style={{ cursor: 'pointer' }} className='text-white' >Sign up for free</p> </b></p>
                           </li>
                         </>
                     }
@@ -92,6 +92,10 @@ const Navbar = () => {
                         {/* <i className="fa-solid fa-gear" /> */}
                       </a>
                       <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <li className='d-flex updateNav'>
+                          <i className="fa-solid fa-boxes-stacked mt-2 ms-2" />
+                          <Link className="dropdown-item updateNav" to='/MyOrders'>My Orders</Link>
+                        </li>
                         <li className='d-flex updateNav'>
                           <i className="fa-solid fa-question mt-2 ms-2" />
                           <Link className="dropdown-item updateNav" to='/WorkingVideo'>Need Help</Link>

@@ -108,7 +108,7 @@ const UserForm = () => {
                 .then(response => response.json())
                 .then(result => {
                     console.log(result)
-                    toast.info("Data sumbitted!", { theme: "dark" })
+                    toast.info("Data submitted!", { theme: "dark" })
                     setSubmit(true)
                     // setInterval(() => {
                     //     window.location.reload(true)

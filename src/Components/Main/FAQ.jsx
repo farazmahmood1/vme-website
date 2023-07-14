@@ -17,16 +17,16 @@ const FAQ = () => {
                     <div className="row">
                         <div className="col-lg-12 mb-4">
                             <h6 className="">DigiCard Market</h6>
-                            <h2>Buy Your DigiCard Now.</h2>
+                            <h2>Frequently asked questions</h2>
                             <span className="">
                                 <Link to="/">Home</Link> &gt;
-                                <a style={{ cursor: "default" }}>Shop</a>
+                                <a style={{ cursor: "default" }}>FAQ</a>
                             </span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="categories-collections" style={{ paddingTop: "0px" }}>
+            <div className="categories-collections" style={{ paddingTop: "0px", paddingBottom: "0px" }}>
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
@@ -36,13 +36,13 @@ const FAQ = () => {
                                         <div className="section-heading">
                                             <div className="line-dec" />
                                             <h2>
-                                                Our Hot <em>Collections</em> In Market.
+                                                Some <em>Interesting</em> Questions.
                                             </h2>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="">
+                                <div className="" style={{ marginBottom: '80px' }}>
                                     <div className="accordion" id="accordionExample">
                                         <div className="accordion-item mb-3" style={{ backgroundColor: '#37393C', borderRadius: '25px' }}>
                                             <h2 className="accordion-header" id="headingOne">

@@ -152,7 +152,7 @@ body {
 }
 
 html {
-  overscroll-behavior: none
+  overscroll-behavior: none;
 }
 
 a {
@@ -916,7 +916,7 @@ Categories & Collections Style
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  padding: 120px 0px 150px 0px;
+  padding: 70px 0px 70px 0px;
   position: relative;
 }
 
@@ -989,7 +989,7 @@ Categories & Collections Style
 }
 
 .collections {
-  margin-top: 140px;
+  margin-top: 70px;
 }
 
 .collections .item img {
@@ -1190,7 +1190,7 @@ Currently Market Style
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  padding: 120px 0px;
+  padding: 90px 0px;
   position: relative;
 }
 
@@ -1355,7 +1355,7 @@ Page Heading Style
 */
 
 .normal-space {
-  padding: 150px 0px 110px 0px !important;
+  padding: 150px 0px 50px 0px !important;
   margin-top: 0px;
 }
 

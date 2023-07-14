@@ -63,3 +63,95 @@ function App() {
 }
 
 export default App;
+
+{/* <div>
+<Router>
+  <Routes>
+    <Route
+      path="/"
+      element={
+        <div>
+          <Decider />
+        </div>
+      }
+    />
+    <Route
+      path="/WorkingVideo"
+      element={
+        <div>
+          <Navbar />
+          <WorkingVideo />
+        </div>
+      }
+    />
+    <Route
+      path="/Shop-now"
+      element={
+        <div>
+          <Navbar />
+          <Shop />
+        </div>
+      }
+    />
+    <Route
+      path="/Buy-now/:items"
+      element={
+        <div>
+          <Navbar />
+          <BuyNow />
+        </div>
+      }
+    />
+    <Route
+      path="/MyOrders"
+      element={
+        <div>
+          <Navbar />
+          <MyOrders />
+        </div>
+      }
+    />
+    <Route
+      path="/UserProfile/:id"
+      element={<UserProfile />}
+    />
+    <Route
+      path="/FAQ"
+      element={
+        <div>
+          <Navbar />
+          <FAQ />
+        </div>
+      }
+    />
+    <Route
+      path="/ItemForm"
+      element={
+        <div>
+          <Navbar />
+          <ItemForm />
+        </div>
+      }
+    />
+    <Route
+      path="/Our-Blogs"
+      element={
+        <div>
+          <Navbar />
+          <Blogs />
+        </div>
+      }
+    />
+    <Route
+      path="*"
+      element={
+        <div>
+          <Navbar />
+          <ErrorPage />
+        </div>
+      }
+    />
+  </Routes>
+  <Footer />
+</Router>
+</div> */}

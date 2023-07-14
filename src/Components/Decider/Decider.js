@@ -15,7 +15,10 @@ const Decider = () => {
     getLink();
   }, []);
 
-  return <>{!id ? <HomePage /> : <UserProfile id={id} />}</>;
+  return <>{!id ?
+     <HomePage /> 
+     
+     : <UserProfile id={id} />}</>;
 };
 
 export default Decider;
