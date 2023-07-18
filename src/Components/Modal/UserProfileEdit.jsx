@@ -26,6 +26,8 @@ const UserProfileEdit = ({ closeModal, editProfileModal }) => {
             return null;
         }
     }
+
+    const [valueLimit, setValueLimit] = useState('')
     const [index, setIndex] = useState(0)
     const [userID, setUserID] = useState()
     const [name, Setname] = useState("");
@@ -213,10 +215,10 @@ const UserProfileEdit = ({ closeModal, editProfileModal }) => {
                             <>
                                 <h5 className='mt-3 mb-1'>Add Information to your website:</h5>
                                 <div className="mb-3">
-                                    <textarea type="text" onChange={(e) => setBio(e.target.value)} className="form-control text-white" style={{ backgroundColor: "#23222D", borderColor: "#9254F3" }} placeholder='Write short bio' defaultValue={bio} id="exampleFormControlTextarea1" rows={2} />
+                                    <textarea maxLength={80} type="text" onChange={(e) => setBio(e.target.value)} className="form-control text-white" style={{ backgroundColor: "#23222D", borderColor: "#9254F3" }} placeholder='Write short bio' defaultValue={bio} id="exampleFormControlTextarea1" rows={2} />
                                 </div>
                                 <div className="mb-3">
-                                    <textarea type="text" onChange={(e) => setProfessionalDesc(e.target.value)} className="form-control text-white" style={{ backgroundColor: "#23222D", borderColor: "#9254F3" }} placeholder='Write professional description' defaultValue={bio} id="exampleFormControlTextarea1" rows={8} />
+                                    <textarea type="text" onChange={(e) => setProfessionalDesc(e.target.value)} className="form-control text-white" style={{ backgroundColor: "#23222D", borderColor: "#9254F3" }} placeholder='Write professional description' defaultValue={proffesionalDesc} id="exampleFormControlTextarea1" rows={8} />
                                 </div>
                             </>
                         ) : null
@@ -246,7 +248,6 @@ const UserProfileEdit = ({ closeModal, editProfileModal }) => {
                                 <div className="mb-3">
                                     <input type="text" onChange={(e) => setTiktok(e.target.value)} className="form-control text-white" style={{ backgroundColor: "#23222D", borderColor: "#9254F3" }} placeholder='Your Tiktok link' defaultValue={tiktok} id="exampleInputEmail1" aria-describedby="emailHelp" />
                                 </div>
-
                             </>
                         ) : null
                     }
@@ -276,7 +277,6 @@ const UserProfileEdit = ({ closeModal, editProfileModal }) => {
                                 <div className="mb-3">
                                     <input type="text" onChange={(e) => setUpwork(e.target.value)} className="form-control text-white" style={{ backgroundColor: "#23222D", borderColor: "#9254F3" }} placeholder='Your Upwork link' defaultValue={upwork} id="exampleInputEmail1" aria-describedby="emailHelp" />
                                 </div>
-
                             </>
                         ) : null
                     }

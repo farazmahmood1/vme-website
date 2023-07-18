@@ -9,6 +9,7 @@ import { Modal } from 'pretty-modal'
 import { toast } from 'react-toastify';
 import MainLogo from '../../Components/SourceFiles/images/MainLogo.png'
 import UserProfileEdit from '../Modal/UserProfileEdit';
+import axios from 'axios';
 
 const UserProfile = (id) => {
 
@@ -19,42 +20,13 @@ const UserProfile = (id) => {
   const [editProfileModal, setProfileModal] = useState(false)
   const [openModal, setOpenModal] = useState(false);
   const [purchasedProduct, setPurchased] = useState("")
-  const [gender, setGender] = useState('')
-  const [profDes, setProfDesc] = useState('')
-  const [cover, setCover] = useState('')
-  const [phone, setPhone] = useState('')
-  const [mail, setEmail] = useState('')
-  const [snapchat, setSnapchat] = useState('')
-  const [instagram, setInstagram] = useState('')
-  const [linkedin, setLinkedin] = useState('')
-  const [twitter, setTwitter] = useState('')
-  const [github, setGithub] = useState('')
-  const [facebook, setFacebook] = useState('')
-  const [bio, setBio] = useState('')
-  const [cv, setCv] = useState('')
-  const [whatsapp, setWhatsapp] = useState('')
-  const [whatsappBusiness, setWhatsappBusiness] = useState('')
-  const [telegram, setTelegram] = useState('')
-  const [tiktok, setTiktok] = useState('')
-  const [skype, setSkype] = useState('')
-  const [pintrest, setPintrest] = useState('')
-  const [age, setAge] = useState('')
-  const [religion, setReligion] = useState('')
-  const [region, setRegion] = useState('')
-  const [cnic, setCnic] = useState('')
-  const [stackoverflow, setStackOverflow] = useState('')
-  const [fiver, setFiver] = useState('')
-  const [upwork, setUpwork] = useState('')
-  const [address, setAdress] = useState('')
-  const [profession, setProfession] = useState('')
-  const [designation, setDesignation] = useState('')
-  const [name, setName] = useState('')
-  const [pic, setPic] = useState('')
-
 
   const [userData, setUserData] = useState('')
   const [profile, setProfile] = useState("userProfile")
   const [loader, setLoader] = useState(false)
+
+  // Images
+  const [file, setFile] = useState('');
   const [datas, setDatas] = useState([])
 
   useEffect(() => {
@@ -72,7 +44,6 @@ const UserProfile = (id) => {
       if (parsed_user) {
         setUserID(parsed_user.id)
         setBuyItems(parsed_user.is_purchased);
-        setEmail(parsed_user.is_purchased);
       }
     } catch {
       return null;
@@ -98,14 +69,45 @@ const UserProfile = (id) => {
     fetch(`${Baseurl}fetch_webdata_by_userid/${String(Id)}`, requestOptions)
       .then(response => response.json())
       .then(result => {
-
         setLoader(false)
-
         setUserData(result.Data)
         setPurchased(result.Data.is_purchased)
 
       })
       .catch(error => console.log('error', error));
+  }
+
+  // post images
+
+  const postImages = () => {
+    if (!file) {
+      toast.warn('Please select a file')
+    }
+    else {
+      var formdata = new FormData();
+      formdata.append("image", file, "[PROXY]");
+      formdata.append("user_id", userID);
+
+      var requestOptions = {
+        method: 'POST',
+        body: formdata,
+        redirect: 'follow',
+      };
+
+      fetch(`${Baseurl}post_image`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          toast.info('Image uploaded successfully')
+          console.log(result)
+          setInterval(() => {
+            window.location.reload();
+          }, 1500);
+        })
+        .catch(error => {
+          toast.warn('Error while uploading image')
+          console.log('error', error)
+        });
+    }
   }
 
   // get images of the user
@@ -123,6 +125,23 @@ const UserProfile = (id) => {
       })
       .catch(error => console.log('error', error));
   }
+
+  // delete images of the user
+  const deleteImage = (id) => {
+    axios.post(`${Baseurl}delete_image/${id}`)
+      .then((res) => {
+        console.log(res)
+        toast.warn('Image deleted successfully')
+        setInterval(() => {
+          window.location.reload()
+        }, 1500);
+      })
+      .catch((err) => {
+        console.log(err)
+        toast.error('Error while deleting image')
+      })
+  }
+
 
   // show social button
   const showSocials = () => {
@@ -169,7 +188,7 @@ const UserProfile = (id) => {
             }
 
             {
-        userData.twitter !== '' ?
+              userData.twitter !== '' ?
                 <>
                   <a href={`${userData.twitter}`} target="_blank">
                     <div className='card-body d-flex mt-2 profileCard'>
@@ -181,7 +200,7 @@ const UserProfile = (id) => {
             }
 
             {
-            userData.snapchat !== '' ?
+              userData.snapchat !== '' ?
                 <>
                   <a href={`${userData.snapchat}`} target="_blank">
                     <div className='card-body d-flex mt-2 profileCard'>
@@ -193,7 +212,7 @@ const UserProfile = (id) => {
             }
 
             {
-              userData.tiktok!== '' ?
+              userData.tiktok !== '' ?
                 <>
                   <a href={`${userData.tiktok}`} target="_blank">
                     <div className='card-body d-flex mt-2 profileCard'>
@@ -218,24 +237,12 @@ const UserProfile = (id) => {
             }
 
             {
-             userData.printest !== '' ?
+              userData.printest !== '' ?
                 <>
                   <a href={`${userData.printest}`} target="_blank">
                     <div className='card-body d-flex mt-2 profileCard'>
                       <p style={{ color: "#7453fc" }}><i className="fa-2x mt-1 fa-brands fa-pinterest" /></p>
                       <p className='text-white ms-auto mt-1'>My Pinterest Account</p>
-                    </div>
-                  </a>
-                </> : null
-            }
-
-            {
-             userData.gmail !== '' ?
-                <>
-                  <a href={`${userData.gmail}`} target="_blank">
-                    <div className='card-body d-flex mt-2 profileCard'>
-                      <p style={{ color: "#7453fc" }}><i className="fa-2x mt-1 fa-solid fa-envelope" /></p>
-                      <p className='text-white ms-auto mt-1'>My Email Account</p>
                     </div>
                   </a>
                 </> : null
@@ -267,10 +274,10 @@ const UserProfile = (id) => {
                 }
 
                 {
-                  userData.designation  !== '' ?
+                  userData.designation !== '' ?
                     <>
                       <h3 className='mt-3' style={{ color: "#7453fc" }}>Designation:</h3>
-                      <p className='mt-3'>{userData.designation }</p>
+                      <p className='mt-3'>{userData.designation}</p>
                     </>
                     :
                     null
@@ -336,7 +343,7 @@ const UserProfile = (id) => {
                 }
               </div>
               {
-                cv ?
+                userData.cv ?
                   <button onClick={saveFile} className='buttonx w-25 p-3' >View CV</button> : null
               }
             </div>
@@ -360,6 +367,17 @@ const UserProfile = (id) => {
               <div className="section-heading">
                 <div className="line-dec" />
                 <h1 className='mt-2'>My Professional Accounts</h1>
+                {
+                  userData.gmail !== '' ?
+                    <>
+                      <a href={`${userData.gmail}`} target="_blank">
+                        <div className='card-body d-flex mt-2 profileCard'>
+                          <p style={{ color: "#7453fc" }}><i className="fa-2x mt-1 fa-solid fa-envelope" /></p>
+                          <p className='text-white ms-auto mt-1'>My Email Account</p>
+                        </div>
+                      </a>
+                    </> : null
+                }
 
                 {
                   userData.linkedin !== '' ?
@@ -400,7 +418,7 @@ const UserProfile = (id) => {
                 {
                   userData.upword !== '' ?
                     <>
-                      <a href={`${  userData.upword }`} target="_blank">
+                      <a href={`${userData.upword}`} target="_blank">
                         <div className='card-body d-flex mt-2 profileCard' style={{ height: "63px" }}>
                           <p style={{ color: "#7453fc" }}><img src="./source/assets/images/upwork.png" className='mt-1' style={{ height: "29px", width: "29px" }} alt="" /> </p>
                           <p className='text-white ms-auto mt-1'>My Upwork Account</p>
@@ -464,12 +482,50 @@ const UserProfile = (id) => {
                       return (
                         <>
                           <div className='col-lg-4 p-3'>
-                            <img src={`${allImagesUrl.itemImage}${items.image}`} style={{ height: "350px", borderRadius: "10px" }} alt="" />
+                            <img src={`${Imagesurl}${items.image}`} style={{ height: "350px", borderRadius: "10px" }} alt="" />
+                            <div className='d-flex justify-content-center mt-2'>
+                              {
+                                userID == Id ?
+                                  <button className='buttonx col-lg-4' onClick={() => deleteImage(items.id)} ><i className="fa-2x fa-solid fa-trash" style={{ cursor: 'pointer' }} /></button>
+                                  : null
+                              }
+                            </div>
                           </div>
                         </>
                       )
                     }) : null
                 }
+
+                {
+                  userID == Id && datas.length > 0 ? (
+                    <>
+                      <div className='col-lg-4 mt-3'>
+                        <div className='second-upload-file mb-3'>
+                          <input onChange={(e) => setFile(e.target.files[0])} type="file" />
+                          <div className='content-icon'>
+                            <i className='fa-solid fa-plus' />
+                          </div>
+                          <button className='text-center buttonx mt-3 col-lg-12' onClick={postImages} type="submit">Upload</button>
+                        </div>
+                      </div>
+                    </>
+                  ) : null
+                }
+
+                {
+                  datas.length < 0 ? (
+                    <>
+                      <div className=''>
+                        <div className='main-upload-file mb-3'>
+                          <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+                          <p>Drag your files here or click in this area.</p>
+                          <button className='text-center buttonx col-lg-12 mt-3' onClick={postImages} type="submit">Upload</button>
+                        </div>
+                      </div>
+                    </>
+                  ) : null
+                }
+
 
               </div>
             </div>
@@ -595,7 +651,7 @@ const UserProfile = (id) => {
           <div className='d-flex'>
             <div>
               {
-          userData.profile_photo ?
+                userData.profile_photo ?
                   <img src={`${allImagesUrl}${userData.profile_photo}`} className='profileImage' alt="profile-image" /> : <img src={MainLogo} className='profileImage' alt="profile-image" />
               }
             </div>
@@ -603,10 +659,12 @@ const UserProfile = (id) => {
               <p className='mt-3 fs-2' style={{ letterSpacing: '5px' }}>{userData.name}</p>
               <p className='fs-4 mt-1' style={{ color: 'gray', letterSpacing: '5px' }}><b>{userData.profession}</b></p>
             </div>
+
             {purchasedProduct === "0" ?
               <div className='ms-auto me-2'>
                 <p>User is not active</p>
               </div> : null}
+
           </div>
           <div className='card border-line'>
             <div className='bio-container mx-auto mt-3'>
@@ -638,7 +696,9 @@ const UserProfile = (id) => {
                 </div>
               </> :
               <>
-                <ReturnData />
+                <div>
+                  <ReturnData />
+                </div>
               </>
           }
         </div>
