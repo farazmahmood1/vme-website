@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 const ErrorPage = () => {
   return (
-    <div className="bg-purple">
+    <div className="bg-purple" style={{height:'100vh'}}>
       <div className="stars">
         <div className="central-body">
           <div className="image-404 text-white" style={{ fontSize: "150px" }}>

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import SignIn from '../Auth/SignIn';
 import SignUp from '../Auth/SignUp';
 import Baseurl from '../SourceFiles/url';
-import { toast } from 'react-toastify';
 import allImagesUrl from '../SourceFiles/baseimageurl';
 
 const MyOrders = () => {

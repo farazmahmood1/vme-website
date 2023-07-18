@@ -5,16 +5,18 @@ import Baseurl from '../SourceFiles/url'
 import { saveAs } from "file-saver";
 import allImagesUrl from '../SourceFiles/baseimageurl';
 import coverImage from '../SourceFiles/heading-bg.jpg'
-import { useSearchParams, useParams } from 'react-router-dom';
 import { Modal } from 'pretty-modal'
 import { toast } from 'react-toastify';
 import MainLogo from '../../Components/SourceFiles/images/MainLogo.png'
+import UserProfileEdit from '../Modal/UserProfileEdit';
 
 const UserProfile = (id) => {
 
   const Id = id.id
 
+  const [userID, setUserID] = useState()
   const [buyItems, setBuyItems] = useState('')
+  const [editProfileModal, setProfileModal] = useState(false)
   const [openModal, setOpenModal] = useState(false);
   const [purchasedProduct, setPurchased] = useState("")
   const [gender, setGender] = useState('')
@@ -29,8 +31,6 @@ const UserProfile = (id) => {
   const [github, setGithub] = useState('')
   const [facebook, setFacebook] = useState('')
   const [bio, setBio] = useState('')
-  const [shortBio, setShortBio] = useState('')
-  const [longBio, setLongBio] = useState('')
   const [cv, setCv] = useState('')
   const [whatsapp, setWhatsapp] = useState('')
   const [whatsappBusiness, setWhatsappBusiness] = useState('')
@@ -50,10 +50,10 @@ const UserProfile = (id) => {
   const [designation, setDesignation] = useState('')
   const [name, setName] = useState('')
   const [pic, setPic] = useState('')
-  const [userName, setuserName] = useState()
-  const [userLname, setUserLname] = useState()
 
-  const [profile, setProfile] = useState('userProfile')
+
+  const [userData, setUserData] = useState('')
+  const [profile, setProfile] = useState("userProfile")
   const [loader, setLoader] = useState(false)
   const [datas, setDatas] = useState([])
 
@@ -63,18 +63,16 @@ const UserProfile = (id) => {
     profileData();
     getImages();
     topFunction();
-  }, [id])
+  }, [])
 
   const SetLocalLogin = async () => {
     try {
       let user = await localStorage.getItem("user");
       let parsed_user = JSON.parse(user);
       if (parsed_user) {
+        setUserID(parsed_user.id)
         setBuyItems(parsed_user.is_purchased);
         setEmail(parsed_user.is_purchased);
-        setName(parsed_user.firstname)
-        setUserLname(parsed_user.lastname)
-        setProfile(parsed_user.profile_pic)
       }
     } catch {
       return null;
@@ -97,47 +95,14 @@ const UserProfile = (id) => {
       redirect: 'follow'
     };
 
-    // fetch(`${Baseurl}fetch_webdata_by_userid/${id}`, requestOptions)
     fetch(`${Baseurl}fetch_webdata_by_userid/${String(Id)}`, requestOptions)
       .then(response => response.json())
       .then(result => {
 
         setLoader(false)
+
+        setUserData(result.Data)
         setPurchased(result.Data.is_purchased)
-        console.log(result)
-        setDesignation(result.Data.designation)
-        setProfession(result.Data.profession)
-        setAdress(result.Data.address)
-        setUpwork(result.Data.upword)
-        setFiver(result.Data.fiverr)
-        setStackOverflow(result.Data.stackoverflow)
-        setCnic(result.Data.cnic)
-        setRegion(result.Data.region)
-        setReligion(result.Data.religion)
-        setAge(result.Data.age)
-        setPintrest(result.Data.printest)
-        setSkype(result.Data.skype)
-        setTiktok(result.Data.tiktok)
-        setTelegram(result.Data.telegram)
-        setWhatsapp(result.Data.whatsapp)
-        setWhatsappBusiness(result.Data.whatsapp_b)
-        setCv(result.Data.cv)
-        setLongBio(result.Data.long_des)
-        setShortBio(result.Data.short_bio)
-        setBio(result.Data.bio)
-        setFacebook(result.Data.facebook)
-        setGithub(result.Data.github)
-        setTwitter(result.Data.twitter)
-        setLinkedin(result.Data.linkedin)
-        setInstagram(result.Data.instagram)
-        setSnapchat(result.Data.snapchat)
-        setEmail(result.Data.gmail)
-        setPhone(result.Data.phone)
-        setName(result.Data.name)
-        setCover(result.Data.cover_photo)
-        setPic(result.Data.profile_photo)
-        setProfDesc(result.Data.professional_desc)
-        setGender(result.Data.gender)
 
       })
       .catch(error => console.log('error', error));
@@ -167,8 +132,8 @@ const UserProfile = (id) => {
           <div className='col-lg-5 mx-auto'>
 
             {
-              whatsapp !== '' ?
-                <a href={`${whatsapp}`} target="_blank">
+              userData.phone !== '' ?
+                <a href={`${userData.phone}`} target="_blank">
                   <div className='card-body d-flex mt-2 profileCard'>
                     <p style={{ color: "#7453fc" }}><i className="fa-2x mt-1 fa-brands fa-whatsapp" /></p>
                     <p className='text-white ms-auto mt-1'>My Whatsapp no.</p>
@@ -178,9 +143,9 @@ const UserProfile = (id) => {
             }
 
             {
-              facebook !== '' ?
+              userData.facebook !== '' ?
                 <>
-                  <a href={`${facebook}`} target="_blank">
+                  <a href={`${userData.facebook}`} target="_blank">
                     <div className='card-body d-flex mt-2 profileCard'>
                       <p style={{ color: "#7453fc" }}><i className="fa-2x mt-1 fa-brands fa-facebook" /></p>
                       <p className='text-white ms-auto mt-1'>My Facebook Account</p>
@@ -192,9 +157,9 @@ const UserProfile = (id) => {
             }
 
             {
-              instagram !== '' ?
+              userData.instagram !== '' ?
                 <>
-                  <a href={`${instagram}`} target="_blank" >
+                  <a href={`${userData.instagram}`} target="_blank" >
                     <div className='card-body d-flex mt-2 profileCard'>
                       <p style={{ color: "#7453fc" }}><i className="fa-2x mt-1 fa-brands fa-instagram" /></p>
                       <p className='text-white ms-auto mt-1'>My Instagram Account</p>
@@ -204,9 +169,9 @@ const UserProfile = (id) => {
             }
 
             {
-              twitter !== '' ?
+        userData.twitter !== '' ?
                 <>
-                  <a href={`${twitter}`} target="_blank">
+                  <a href={`${userData.twitter}`} target="_blank">
                     <div className='card-body d-flex mt-2 profileCard'>
                       <p style={{ color: "#7453fc" }}><i className="fa-2x mt-1 fa-brands fa-twitter" /></p>
                       <p className='text-white ms-auto mt-1'>My Twitter Account</p>
@@ -216,22 +181,9 @@ const UserProfile = (id) => {
             }
 
             {
-              telegram !== '' ?
+            userData.snapchat !== '' ?
                 <>
-                  <a href={`${telegram}`} target="_blank">
-                    <div className='card-body d-flex mt-2 profileCard'>
-                      <p style={{ color: "#7453fc" }}><i className="fa-2x mt-1 fa-brands fa-telegram" /></p>
-                      <p className='text-white ms-auto mt-1'>My telegram Link</p>
-                    </div>
-                  </a>
-                </> : null
-            }
-
-
-            {
-              snapchat !== '' ?
-                <>
-                  <a href={`${snapchat}`} target="_blank">
+                  <a href={`${userData.snapchat}`} target="_blank">
                     <div className='card-body d-flex mt-2 profileCard'>
                       <p style={{ color: "#7453fc" }}><i className="fa-2x mt-1 fa-brands fa-snapchat" /></p>
                       <p className='text-white ms-auto mt-1'>My Snapchat Account</p>
@@ -241,9 +193,9 @@ const UserProfile = (id) => {
             }
 
             {
-              tiktok !== '' ?
+              userData.tiktok!== '' ?
                 <>
-                  <a href={`${tiktok}`} target="_blank">
+                  <a href={`${userData.tiktok}`} target="_blank">
                     <div className='card-body d-flex mt-2 profileCard'>
                       <p style={{ color: "#7453fc" }}><i className="fa-2x mt-1 fa-brands fa-tiktok" /></p>
                       <p className='text-white ms-auto mt-1'>My tiktok Account</p>
@@ -254,9 +206,9 @@ const UserProfile = (id) => {
 
 
             {
-              skype !== '' ?
+              userData.skype !== '' ?
                 <>
-                  <a href={`${skype}`} target="_blank">
+                  <a href={`${userData.skype}`} target="_blank">
                     <div className='card-body d-flex mt-2 profileCard'>
                       <p style={{ color: "#7453fc" }}><i className="fa-2x mt-1 fa-brands fa-skype" /></p>
                       <p className='text-white ms-auto mt-1'>My Skype Account</p>
@@ -266,9 +218,9 @@ const UserProfile = (id) => {
             }
 
             {
-              pintrest !== '' ?
+             userData.printest !== '' ?
                 <>
-                  <a href={`${pintrest}`} target="_blank">
+                  <a href={`${userData.printest}`} target="_blank">
                     <div className='card-body d-flex mt-2 profileCard'>
                       <p style={{ color: "#7453fc" }}><i className="fa-2x mt-1 fa-brands fa-pinterest" /></p>
                       <p className='text-white ms-auto mt-1'>My Pinterest Account</p>
@@ -278,9 +230,9 @@ const UserProfile = (id) => {
             }
 
             {
-              mail !== '' ?
+             userData.gmail !== '' ?
                 <>
-                  <a href={`${mail}`} target="_blank">
+                  <a href={`${userData.gmail}`} target="_blank">
                     <div className='card-body d-flex mt-2 profileCard'>
                       <p style={{ color: "#7453fc" }}><i className="fa-2x mt-1 fa-solid fa-envelope" /></p>
                       <p className='text-white ms-auto mt-1'>My Email Account</p>
@@ -307,7 +259,7 @@ const UserProfile = (id) => {
               <div className="section-heading">
                 <div className="line-dec" />
 
-                {designation !== '' || bio !== '' ?
+                {userData.designation !== '' || userData.professional_desc !== '' ?
                   <>
                     <h1 className='mt-2'>Information about me</h1>
                   </>
@@ -315,10 +267,10 @@ const UserProfile = (id) => {
                 }
 
                 {
-                  designation !== '' ?
+                  userData.designation  !== '' ?
                     <>
                       <h3 className='mt-3' style={{ color: "#7453fc" }}>Designation:</h3>
-                      <p className='mt-3'>{designation}</p>
+                      <p className='mt-3'>{userData.designation }</p>
                     </>
                     :
                     null
@@ -326,10 +278,10 @@ const UserProfile = (id) => {
 
 
                 {
-                  profDes !== '' ?
+                  userData.professional_desc !== '' ?
                     <>
                       <h3 className='mt-3' style={{ color: "#7453fc" }}>Description:</h3>
-                      <p className='mt-3'>{profDes}</p>
+                      <p className='mt-3'>{userData.professional_desc}</p>
                     </>
                     :
                     null
@@ -343,42 +295,42 @@ const UserProfile = (id) => {
                 <h1 className='mt-2'>Contact me</h1>
 
                 {
-                  phone !== '' ?
+                  userData.phone !== '' ?
                     <>
                       <div className='d-flex mt-3'>
                         <h2 style={{ color: "#7453fc" }}><i className="fa-solid fa-phone" /></h2>
-                        <p className='mt-3 ms-auto'>{phone}</p>
+                        <p className='mt-3 ms-auto'>{userData.phone}</p>
                       </div>
                     </> : null
                 }
 
                 {
-                  cnic !== '' ?
+                  userData.cnic !== '' ?
                     <>
                       <div className='d-flex mt-3'>
                         <h2 style={{ color: "#7453fc" }}><i className="fa-solid fa-address-card" /></h2>
-                        <p className='mt-2 ms-auto'>{cnic}</p>
+                        <p className='mt-2 ms-auto'>{userData.cnic}</p>
                       </div>
                     </> : null
                 }
 
                 {
-                  address !== '' ?
+                  userData.address !== '' ?
                     <>
                       <div className='d-flex mt-3'>
                         <h2 style={{ color: "#7453fc" }}><i className="fa-solid fa-address-book" /></h2>
-                        <p className='mt-3 ms-auto ' style={{ textAlign: 'right' }}>{address}</p>
+                        <p className='mt-3 ms-auto ' style={{ textAlign: 'right' }}>{userData.address}</p>
                       </div>
                     </> : null
                 }
 
 
                 {
-                  region !== '' ?
+                  userData.region !== '' ?
                     <>
                       <div className='d-flex mt-3'>
                         <h2><i className="fa-solid fa-location-dot" style={{ color: "#7453fc" }} /> <span style={{ fontSize: '13px' }}></span></h2>
-                        <p className='mt-2 ms-auto' style={{ textAlign: 'right' }} >{region}</p>
+                        <p className='mt-2 ms-auto' style={{ textAlign: 'right' }} >{userData.region}</p>
                       </div>
                     </> : null
                 }
@@ -410,21 +362,9 @@ const UserProfile = (id) => {
                 <h1 className='mt-2'>My Professional Accounts</h1>
 
                 {
-                  whatsappBusiness !== '' ?
+                  userData.linkedin !== '' ?
                     <>
-                      <a href={`${whatsappBusiness}`} target="_blank">
-                        <div className='card-body d-flex mt-2 profileCard'>
-                          <p style={{ color: "#7453fc" }}><i className="fa-2x mt-1 fa-brands fa-whatsapp" /></p>
-                          <p className='text-white ms-auto mt-1'>My Business Whatsapp</p>
-                        </div>
-                      </a>
-                    </> : null
-                }
-
-                {
-                  linkedin !== '' ?
-                    <>
-                      <a href={`${linkedin}`} target="_blank">
+                      <a href={`${userData.linkedin}`} target="_blank">
                         <div className='card-body d-flex mt-2 profileCard'>
                           <p style={{ color: "#7453fc" }}><i className="fa-2x mt-1 fa-brands fa-linkedin" /></p>
                           <p className='text-white ms-auto mt-1'>My LinkedIn Account</p>
@@ -434,9 +374,9 @@ const UserProfile = (id) => {
                 }
 
                 {
-                  github !== '' ?
+                  userData.github !== '' ?
                     <>
-                      <a href={`${github}`} target="_blank">
+                      <a href={`${userData.github}`} target="_blank">
                         <div className='card-body d-flex mt-2 profileCard'>
                           <p style={{ color: "#7453fc" }}><i className="fa-2x mt-1 fa-brands fa-github" /></p>
                           <p className='text-white ms-auto mt-1'>My Github Account</p>
@@ -446,9 +386,9 @@ const UserProfile = (id) => {
                 }
 
                 {
-                  stackoverflow !== '' ?
+                  userData.stackoverflow !== '' ?
                     <>
-                      <a href={`${stackoverflow}`} target="_blank">
+                      <a href={`${userData.stackoverflow}`} target="_blank">
                         <div className='card-body d-flex mt-2 profileCard'>
                           <p style={{ color: "#7453fc" }}><i className="fa-2x mt-1 fa-brands fa-stack-overflow" /></p>
                           <p className='text-white ms-auto mt-1'>My StackOverflow Account</p>
@@ -458,9 +398,9 @@ const UserProfile = (id) => {
                 }
 
                 {
-                  upwork !== '' ?
+                  userData.upword !== '' ?
                     <>
-                      <a href={`${upwork}`} target="_blank">
+                      <a href={`${  userData.upword }`} target="_blank">
                         <div className='card-body d-flex mt-2 profileCard' style={{ height: "63px" }}>
                           <p style={{ color: "#7453fc" }}><img src="./source/assets/images/upwork.png" className='mt-1' style={{ height: "29px", width: "29px" }} alt="" /> </p>
                           <p className='text-white ms-auto mt-1'>My Upwork Account</p>
@@ -469,9 +409,9 @@ const UserProfile = (id) => {
                     </> : null
                 }
 
-                {fiver !== '' ?
+                {userData.fiverr !== '' ?
                   <>
-                    <a href={`${fiver}`} target="_blank">
+                    <a href={`${userData.fiverr}`} target="_blank">
                       <div className='card-body d-flex mt-2  profileCard' style={{ height: "63px" }}>
                         <p style={{ color: "#7453fc" }}> <img src="./source/assets/images/fiverr.png" className='mt-1' style={{ height: "29px", width: "29px" }} alt="" /> </p>
                         <p className='text-white ms-auto mt-1'>My Fiver Account</p>
@@ -566,8 +506,12 @@ const UserProfile = (id) => {
 
   // Save the CV
   const saveFile = () => {
-    saveAs(`${Imagesurl}${cv}`);
+    saveAs(`${Imagesurl}${userData.cv}`);
   };
+
+  const openEditModal = () => {
+    setProfileModal((prev) => !prev)
+  }
 
   const copyUrl = () => {
     const currentUrl = window.location.href;
@@ -601,7 +545,7 @@ const UserProfile = (id) => {
 
   return (
     <div>
-
+      {/* Modal */}
       <div>
         <Modal
           open={openModal}
@@ -629,29 +573,35 @@ const UserProfile = (id) => {
         </Modal>
       </div>
 
-      <div className="CoverImage" style={{ backgroundImage: cover !== "" ? `url(${Imagesurl}${cover})` : "url(./source/assets/images/heading-bg.jpg)" }} />
-      <div className="container">
-        <div className='col-lg-1 ms-auto mt-5 buttonProfile'>
-          <button onClick={() => setProfile("userProfile")} className={profile === 'userProfile' ? 'btn  buttonx actives rounded-pill me-2 mb-2' : 'btn hoverBtn buttonx rounded-pill me-2 mb-2'} style={{ color: "white", borderColor: " #7453fc" }}><i className="fa-solid fa-house p-2" /></button>
-          <button onClick={() => setProfile("Portfolio")} className={profile === 'Portfolio' ? 'btn  buttonx actives rounded-pill me-2 mb-2' : 'btn hoverBtn buttonx rounded-pill me-2 mb-2'} style={{ color: "white", borderColor: "#7453fc" }} ><i className="fa-solid fa-newspaper p-2" /></button>
-          <button onClick={() => setProfile("About")} className={profile === 'About' ? 'btn  buttonx actives rounded-pill me-2 mb-2' : 'btn hoverBtn buttonx rounded-pill me-2 mb-2'} style={{ color: "white", borderColor: " #7453fc" }} ><i className="fa-solid fa-user p-2" /></button>
-          <button onClick={() => setProfile("Social")} className={profile === 'Social' ? 'btn  buttonx actives rounded-pill me-2 mb-2' : 'btn hoverBtn buttonx rounded-pill me-2 mb-2'} style={{ color: "white", borderColor: "#7453fc" }} ><i className="fa-solid fa-envelope p-2" /></button>
-          <button onClick={copyUrl} className='btn hoverBtn buttonx rounded-pill me-2 mb-2' style={{ color: "white", borderColor: "#7453fc" }} ><i className="fa-solid fa-copy p-2" /></button>
-        </div>
-      </div>
-
+      <div className="CoverImage" style={{ backgroundImage: userData.cover_photo !== "" ? `url(${Imagesurl}${userData.cover_photo})` : "url(./source/assets/images/heading-bg.jpg)" }} />
       <div className="darkbg" style={{ backgroundImage: "url(./source/assets/images/dark-bg.jpg)" }}>
+        <div className="container">
+          <div className='col-lg-1 buttonProfile'>
+            <button onClick={() => setProfile("userProfile")} className={profile === 'userProfile' ? 'btn  buttonx actives rounded-pill me-2 mb-2' : 'btn hoverBtn buttonx rounded-pill me-2 mb-2'} style={{ color: "white", borderColor: " #7453fc" }}><i className="fa-solid fa-house p-2" /></button>
+            <button onClick={() => setProfile("Portfolio")} className={profile === 'Portfolio' ? 'btn  buttonx actives rounded-pill me-2 mb-2' : 'btn hoverBtn buttonx rounded-pill me-2 mb-2'} style={{ color: "white", borderColor: "#7453fc" }} ><i className="fa-solid fa-newspaper p-2" /></button>
+            <button onClick={() => setProfile("About")} className={profile === 'About' ? 'btn  buttonx actives rounded-pill me-2 mb-2' : 'btn hoverBtn buttonx rounded-pill me-2 mb-2'} style={{ color: "white", borderColor: " #7453fc" }} ><i className="fa-solid fa-user p-2" /></button>
+            <button onClick={() => setProfile("Social")} className={profile === 'Social' ? 'btn  buttonx actives rounded-pill me-2 mb-2' : 'btn hoverBtn buttonx rounded-pill me-2 mb-2'} style={{ color: "white", borderColor: "#7453fc" }} ><i className="fa-solid fa-envelope p-2" /></button>
+            <button onClick={copyUrl} className='btn hoverBtn buttonx rounded-pill me-2 mb-2' style={{ color: "white", borderColor: "#7453fc" }} ><i className="fa-solid fa-copy p-2" /></button>
+          </div>
+        </div>
+        {
+          userID == Id ?
+            <div className='container'>
+              <button className='add-button btn buttonx rounded-pill me-2' onClick={openEditModal} style={{ color: "white", borderColor: "#7453fc" }} > <i className=' fa-solid fa-plus p-2' /> </button>
+            </div> : null
+        }
+
         <div className="row">
           <div className='d-flex'>
             <div>
               {
-                pic ?
-                  <img src={`${allImagesUrl}${pic}`} className='profileImage' alt="profile-image" /> : <img src={MainLogo} className='profileImage' alt="profile-image" />
+          userData.profile_photo ?
+                  <img src={`${allImagesUrl}${userData.profile_photo}`} className='profileImage' alt="profile-image" /> : <img src={MainLogo} className='profileImage' alt="profile-image" />
               }
             </div>
             <div className='ms-4'>
-              <p className='mt-3 fs-2' style={{ letterSpacing: '5px' }}>{name}</p>
-              <p className='fs-4 mt-1' style={{ color: 'gray', letterSpacing: '5px' }}><b>{profession}</b></p>
+              <p className='mt-3 fs-2' style={{ letterSpacing: '5px' }}>{userData.name}</p>
+              <p className='fs-4 mt-1' style={{ color: 'gray', letterSpacing: '5px' }}><b>{userData.profession}</b></p>
             </div>
             {purchasedProduct === "0" ?
               <div className='ms-auto me-2'>
@@ -665,7 +615,7 @@ const UserProfile = (id) => {
                   <>
                     <p style={{ color: '#7453fc' }} className='bio-heading'>Bio</p>
                     <div className='bio-box '>
-                      <p style={{ letterSpacing: '2px' }}>{bio}</p>
+                      <p style={{ letterSpacing: '2px' }}>{userData.bio}</p>
                     </div>
                   </> : null
               }
@@ -693,6 +643,13 @@ const UserProfile = (id) => {
           }
         </div>
       </div>
+      {
+        userID ?
+          <UserProfileEdit
+            closeModal={openEditModal}
+            editProfileModal={editProfileModal}
+          /> : null
+      }
     </div >
   )
 }

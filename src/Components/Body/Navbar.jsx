@@ -92,18 +92,23 @@ const Navbar = () => {
                         {/* <i className="fa-solid fa-gear" /> */}
                       </a>
                       <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                      <li className='d-flex updateNav'>
+                        <li className='d-flex updateNav'>
                           <i className="fa-solid fa-boxes-stacked mt-2 ms-2" />
                           <Link className="dropdown-item updateNav" to='/MyOrders'>My Orders</Link>
                         </li>
                         <li className='d-flex updateNav'>
-                          <i className="fa-solid fa-question mt-2 ms-2" />
-                          <Link className="dropdown-item updateNav" to='/WorkingVideo'>Need Help</Link>
+                          <i className="fa-solid fa-pen-to-square mt-2 ms-2" />
+                          <Link className="dropdown-item updateNav" to='/WorkingVideo'>Edit my website</Link>
                         </li>
                         <li className='d-flex updateNav'>
                           <i className="fa-solid fa-trash mt-2 ms-2" />
                           <Link className="dropdown-item updateNav" to='/WorkingVideo'>Delete my website</Link>
                         </li>
+                        <li className='d-flex updateNav'>
+                          <i className="fa-solid fa-question mt-2 ms-2" />
+                          <Link className="dropdown-item updateNav" to='/WorkingVideo'>Need Help</Link>
+                        </li>
+
                       </ul>
                     </li>
                   </ul>
