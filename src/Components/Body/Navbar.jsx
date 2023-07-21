@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import SignIn from '../Auth/SignIn';
 import SignUp from '../Auth/SignUp'
-import MainLogo from '../../Components/SourceFiles/images/MainLogo.png'
+import MainLogo from '../SourceFiles/images/MainLogo.png'
 import { toast } from 'react-toastify'
+import Baseurl from '../SourceFiles/url';
 
 const Navbar = () => {
 
@@ -33,6 +34,24 @@ const Navbar = () => {
     } catch {
       return null;
     }
+  }
+
+  const deleteWebsite = () => {
+    var requestOptions = {
+      method: 'POST',
+      redirect: 'follow'
+    };
+
+    fetch(`${Baseurl}deleteDataByUserId`, requestOptions)
+      .then(response => response.json())
+      .then(result => {
+        console.log(result)
+        toast.success('Website Deleted Successfully')
+      })
+      .catch(error => {
+        console.log('error', error)
+        toast.warn('Error while deleting')
+      });
   }
 
   return (
@@ -92,18 +111,26 @@ const Navbar = () => {
                         {/* <i className="fa-solid fa-gear" /> */}
                       </a>
                       <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li className='d-flex updateNav'>
-                          <i className="fa-solid fa-boxes-stacked mt-2 ms-2" />
-                          <Link className="dropdown-item updateNav" to='/MyOrders'>My Orders</Link>
-                        </li>
-                        <li className='d-flex updateNav'>
-                          <i className="fa-solid fa-pen-to-square mt-2 ms-2" />
-                          <Link className="dropdown-item updateNav" to='/WorkingVideo'>Edit my website</Link>
-                        </li>
-                        <li className='d-flex updateNav'>
-                          <i className="fa-solid fa-trash mt-2 ms-2" />
-                          <Link className="dropdown-item updateNav" to='/WorkingVideo'>Delete my website</Link>
-                        </li>
+                        {
+                          userID ?
+                            (
+                              <>
+                                <li className='d-flex updateNav'>
+                                  <i className="fa-solid fa-boxes-stacked mt-2 ms-2" />
+                                  <Link className="dropdown-item updateNav" to='/MyOrders'>My Orders</Link>
+                                </li>
+                                <li className='d-flex updateNav'>
+                                  <i className="fa-solid fa-pen-to-square mt-2 ms-2" />
+                                  <Link className="dropdown-item updateNav" to='/WorkingVideo'>Edit my website</Link>
+                                </li>
+                                <li className='d-flex updateNav'>
+                                  <i className="fa-solid fa-trash mt-2 ms-2" />
+                                  <Link className="dropdown-item updateNav" onClick={deleteWebsite} >Delete my website</Link>
+                                </li>
+                              </>
+                            ) : null
+                        }
+
                         <li className='d-flex updateNav'>
                           <i className="fa-solid fa-question mt-2 ms-2" />
                           <Link className="dropdown-item updateNav" to='/WorkingVideo'>Need Help</Link>

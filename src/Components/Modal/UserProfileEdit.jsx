@@ -11,9 +11,13 @@ import SignUp from '../Auth/SignUp';
 import MainLogo from '../../Components/SourceFiles/images/MainLogo.png'
 
 
-const UserProfileEdit = ({ closeModal, editProfileModal }) => {
+const UserProfileEdit = ({ closeModal, editProfileModal, userData }) => {
 
-    useEffect(() => { topFunction(); SetLocalLogin() }, [])
+    useEffect(() => {
+        updateComponentState(userData);
+        topFunction();
+        SetLocalLogin()
+    }, [userData])
 
     const SetLocalLogin = async () => {
         try {
@@ -27,40 +31,76 @@ const UserProfileEdit = ({ closeModal, editProfileModal }) => {
         }
     }
 
-    const [valueLimit, setValueLimit] = useState('')
+    const updateComponentState = (userData) => {
+        Setname(userData.name);
+        setGender(userData.gender);
+        setPhone(userData.phone);
+        setAddress(userData.address);
+        setProfession(userData.profession);
+        setDesignation(userData.designation);
+        setCover(userData.cover_photo);
+        setProfile(userData.profile_photo);
+        setEmail(userData.gmail);
+        setFacebook(userData.facebook);
+        setInstagram(userData.instagram);
+        setTwitter(userData.twitter);
+        setSnapchat(userData.snapchat);
+        setTiktok(userData.tiktok);
+        setSkype(userData.skype);
+        setPintreset(userData.printest);
+        setBio(userData.bio);
+        setAge(userData.age);
+        setRegion(userData.region);
+        setLinkedin(userData.linkedin);
+        setGithub(userData.setGithub);
+        setStackoverflow(userData.stackoverflow);
+        setFiver(userData.fiverr);
+        setUpwork(userData.upword);
+        setCv(userData.cv);
+        setProfessionalDesc(userData.professional_desc);
+    };
+
     const [index, setIndex] = useState(0)
     const [userID, setUserID] = useState()
-    const [name, Setname] = useState("");
-    const [gender, setGender] = useState("")
-    const [phone, setPhone] = useState("");
-    const [address, setAddress] = useState("");
-    const [profession, setProfession] = useState('')
-    const [designation, setDesignation] = useState('')
-    const [cover, setCover] = useState("");
-    const [profile, setProfile] = useState("");
-    const [email, setEmail] = useState("");
-    const [facebook, setFacebook] = useState("");
-    const [instagram, setInstagram] = useState("")
-    const [twitter, setTwitter] = useState("");
-    const [snapchat, setSnapchat] = useState("");
-    const [tiktok, setTiktok] = useState("");
-    const [skype, setSkype] = useState("");
-    const [pinterest, setPintreset] = useState("");
-    const [bio, setBio] = useState("");
-    const [age, setAge] = useState("");
-    const [region, setRegion] = useState("");
-    const [linkedin, setLinkedin] = useState("");
-    const [github, setGithub] = useState("");
-    const [stackoverflow, setStackoverflow] = useState("");
-    const [fiver, setFiver] = useState("");
-    const [upwork, setUpwork] = useState("");
-    const [cv, setCv] = useState("");
-    const [proffesionalDesc, setProfessionalDesc] = useState('')
+    const [name, Setname] = useState('');
+    const [gender, setGender] = useState('')
+    const [phone, setPhone] = useState('');
+    const [address, setAddress] = useState(userData.address);
+    const [profession, setProfession] = useState(userData.profession)
+    const [designation, setDesignation] = useState(userData.designation)
+    const [cover, setCover] = useState(userData.cover_photo);
+    const [profile, setProfile] = useState(userData.profile_photo);
+    const [email, setEmail] = useState(userData.gmail);
+    const [facebook, setFacebook] = useState(userData.facebook);
+    const [instagram, setInstagram] = useState(userData.instagram)
+    const [twitter, setTwitter] = useState(userData.twitter);
+    const [snapchat, setSnapchat] = useState(userData.snapchat);
+    const [tiktok, setTiktok] = useState(userData.tiktok);
+    const [skype, setSkype] = useState(userData.skype);
+    const [pinterest, setPintreset] = useState(userData.printest);
+    const [bio, setBio] = useState(userData.bio);
+    const [age, setAge] = useState(userData.age);
+    const [region, setRegion] = useState(userData.region);
+    const [linkedin, setLinkedin] = useState(userData.linkedin);
+    const [github, setGithub] = useState(userData.setGithub);
+    const [stackoverflow, setStackoverflow] = useState(userData.stackoverflow);
+    const [fiver, setFiver] = useState(userData.fiverr);
+    const [upwork, setUpwork] = useState(userData.upword);
+    const [cv, setCv] = useState(userData.cv);
+    const [proffesionalDesc, setProfessionalDesc] = useState(userData.professional_desc)
 
     const submitData = () => {
         var formdata = new FormData();
-        formdata.append("profile_photo", profile);
-        formdata.append("cover_photo", cover);
+        {
+            profile ?
+                formdata.append("profile_photo", profile)
+                : formdata.append("profile_photo", "");
+        }
+        {
+            cover ?
+                formdata.append("cover_photo", cover)
+                : formdata.append("cover_photo", "")
+        }
         formdata.append("name", name);
         formdata.append("phone", phone);
         formdata.append("gmail", email);
@@ -73,7 +113,10 @@ const UserProfileEdit = ({ closeModal, editProfileModal }) => {
         formdata.append("bio", bio);
         formdata.append("short_desc", "");
         formdata.append("long_desc", "");
-        formdata.append("cv", cv);
+        {
+            cv ?
+                formdata.append("cv", cv) : formdata.append("cv", "");
+        }
         formdata.append("whatsapp", "");
         formdata.append("whatsapp_b", "");
         formdata.append("payment_status", "unpaid");
@@ -138,6 +181,10 @@ const UserProfileEdit = ({ closeModal, editProfileModal }) => {
         document.documentElement.scrollTop = 0;
     }
 
+    const hideModal = () => {
+        setIndex(0);
+        closeModal();
+    }
 
     return (
         <div>
@@ -147,7 +194,7 @@ const UserProfileEdit = ({ closeModal, editProfileModal }) => {
                         <div>
                             <img src="./source/assets/images/logo.png" style={{ width: "115px" }} alt="" />
                         </div>
-                        <button onClick={closeModal} className='btn btn-outline-danger btn-sm ms-auto'>X</button>
+                        <button onClick={hideModal} className='btn btn-outline-danger btn-sm ms-auto'>X</button>
                     </div>
 
 
@@ -156,11 +203,11 @@ const UserProfileEdit = ({ closeModal, editProfileModal }) => {
                             <>
                                 <h5 className='mt-3 mb-1'>Add Information to your website:</h5>
                                 <div className="mb-3">
-                                    <input type="text" onChange={(e) => Setname(e.target.value)} className="form-control text-white" style={{ backgroundColor: "#23222D", borderColor: "#9254F3" }} placeholder='Full Name' defaultValue={name} id="exampleInputEmail1" aria-describedby="emailHelp" />
+                                    <input type="text" onChange={(e) => Setname(e.target.value)} className="form-control text-white" style={{ backgroundColor: "#23222D", borderColor: "#9254F3" }} placeholder='Full Name' defaultValue={userData.name} id="exampleInputEmail1" aria-describedby="emailHelp" />
                                 </div>
                                 <div className='d-flex mb-3'>
                                     <div className="">
-                                        <input type="number" onChange={(e) => setAge(e.target.value)} className="form-control text-white me-1" style={{ backgroundColor: "#23222D", borderColor: "#9254F3" }} placeholder='Your Age' defaultValue={age} id="exampleInputEmail1" aria-describedby="emailHelp" />
+                                        <input type="number" onChange={(e) => setAge(e.target.value)} className="form-control text-white me-1" style={{ backgroundColor: "#23222D", borderColor: "#9254F3" }} placeholder='Your Age' defaultValue={userData.age} id="exampleInputEmail1" aria-describedby="emailHelp" />
                                     </div>
                                     <div className="">
                                         <input type="text" onChange={(e) => setGender(e.target.value)} className="form-control text-white ms-1" style={{ backgroundColor: "#23222D", borderColor: "#9254F3" }} placeholder='Gender' defaultValue={gender} id="exampleInputEmail1" aria-describedby="emailHelp" />
@@ -284,10 +331,6 @@ const UserProfileEdit = ({ closeModal, editProfileModal }) => {
 
 
                     <div className='d-flex'>
-                        {
-                            index !== 0 ?
-                                <button className="btn btn-outline-warning" onClick={() => setIndex(index - 1)} ><i className='fa-solid fa-chevron-left' /></button> : null
-                        }
 
                         {
                             index !== 4 ?

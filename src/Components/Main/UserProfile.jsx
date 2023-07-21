@@ -142,7 +142,6 @@ const UserProfile = (id) => {
       })
   }
 
-
   // show social button
   const showSocials = () => {
     if (purchasedProduct === "1") {
@@ -500,7 +499,7 @@ const UserProfile = (id) => {
                   userID == Id && datas.length > 0 ? (
                     <>
                       <div className='col-lg-4 mt-3'>
-                        <div className='second-upload-file mb-3'>
+                        <div className='second-upload-file mb-3' style={{ border : '2px dashed', borderColor: file ? 'green' : 'red' }}>
                           <input onChange={(e) => setFile(e.target.files[0])} type="file" />
                           <div className='content-icon'>
                             <i className='fa-solid fa-plus' />
@@ -516,7 +515,7 @@ const UserProfile = (id) => {
                   datas.length < 0 ? (
                     <>
                       <div className=''>
-                        <div className='main-upload-file mb-3'>
+                        <div className='main-upload-file mb-3' style={{ border : '2px dashed', borderColor: file ? 'green' : 'red' }}>
                           <input type="file" onChange={(e) => setFile(e.target.files[0])} />
                           <p>Drag your files here or click in this area.</p>
                           <button className='text-center buttonx col-lg-12 mt-3' onClick={postImages} type="submit">Upload</button>
@@ -708,6 +707,7 @@ const UserProfile = (id) => {
           <UserProfileEdit
             closeModal={openEditModal}
             editProfileModal={editProfileModal}
+            userData={userData}
           /> : null
       }
     </div >
