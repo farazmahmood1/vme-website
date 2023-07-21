@@ -642,7 +642,7 @@ const UserProfile = (id) => {
         {
           userID == Id ?
             <div className='container'>
-              <button className='add-button btn buttonx rounded-pill me-2' onClick={openEditModal} style={{ color: "white", borderColor: "#7453fc" }} > <i className=' fa-solid fa-plus p-2' /> </button>
+              <button className='add-button btn buttonx actives rounded-pill me-2' onClick={openEditModal} style={{ color: "white", borderColor: "#7453fc" }} > <i className=' fa-solid fa-plus p-2' /> </button>
             </div> : null
         }
 

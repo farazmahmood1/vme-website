@@ -8,6 +8,7 @@ import '../Modal/SignInUser'
 import SignInUser from '../Modal/SignInUser';
 import SignIn from '../Auth/SignIn';
 import SignUp from '../Auth/SignUp';
+import Authorization from '../Modal/Authorization';
 
 toast.configure()
 const ItemForm = () => {
@@ -239,13 +240,14 @@ const ItemForm = () => {
                         </div>
 
                         {
-                            !userID ?
+                           !userID ?
                                 <>
-                                    <SignInUser />
+                                    <Authorization setOpenModals={setOpenModals} />
                                 </>
                                 :
                                 null
                         }
+
                     </div>
                 </div>
             </div>
