@@ -3,7 +3,7 @@ import React from 'react'
 const Authorization = ({ setOpenModals }) => {
     return (
         <div>
-            <div className="container ">
+            <div className="">
                 <div className="modals">
                     <div className="row justify-content-center" >
                         <div className="col-12 text-center align-self-center py-5">
@@ -25,8 +25,7 @@ const Authorization = ({ setOpenModals }) => {
                                                         <input type="password" className="form-stylex" placeholder="Password" />
                                                         <i className="input-icon uil uil-lock-alt" />
                                                     </div>
-                                                    <a href="https://www.web-leb.com/code" className="btny mt-4">Login</a>
-                                                    <p className="mb-0 mt-4 text-center"><a href="https://www.web-leb.com/code" className="link">Forgot your password?</a></p>
+                                                    <a className="btny mt-4">Login</a>
                                                 </div>
                                             </div>
                                         </div>

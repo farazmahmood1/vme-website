@@ -5,9 +5,6 @@ import { Modal } from 'pretty-modal'
 import { Link, useLocation } from 'react-router-dom'
 import Baseurl from '../SourceFiles/url';
 import '../Modal/SignInUser'
-import SignInUser from '../Modal/SignInUser';
-import SignIn from '../Auth/SignIn';
-import SignUp from '../Auth/SignUp';
 import Authorization from '../Modal/Authorization';
 
 toast.configure()
@@ -32,8 +29,14 @@ const ItemForm = () => {
     const [loader, setLoader] = useState(false)
     const [orderData, setOrderData] = useState([])
 
-    useEffect(() => { topFunction(); SetLocalLogin() }, [])
-
+    useEffect(() => {
+        topFunction();
+        SetLocalLogin();
+      
+        // Add or remove the blur class based on the openModals state
+        document.body.classList.toggle("blur-background", openModals);
+      }, [openModals]); // Make sure to include openModals in the dependency array to trigger the effect when it changes.
+      
     const SetLocalLogin = async () => {
         try {
             let user = await localStorage.getItem('user');
