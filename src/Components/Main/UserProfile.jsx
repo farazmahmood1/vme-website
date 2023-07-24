@@ -69,10 +69,15 @@ const UserProfile = (id) => {
     fetch(`${Baseurl}fetch_webdata_by_userid/${String(Id)}`, requestOptions)
       .then(response => response.json())
       .then(result => {
-        setLoader(false)
-        setUserData(result.Data)
-        setPurchased(result.Data.is_purchased)
-
+        if (result.status === "200") {
+          setLoader(false)
+          setUserData(result.Data)
+          setPurchased(result.Data.is_purchased)
+        }
+        else if (result.status === "401") {
+          setLoader(false)
+          setProfileModal(true)
+        }
       })
       .catch(error => console.log('error', error));
   }
@@ -499,7 +504,7 @@ const UserProfile = (id) => {
                   userID == Id && datas.length > 0 ? (
                     <>
                       <div className='col-lg-4 mt-3'>
-                        <div className='second-upload-file mb-3' style={{ border : '2px dashed', borderColor: file ? 'green' : 'red' }}>
+                        <div className='second-upload-file mb-3' style={{ border: '2px dashed', borderColor: file ? 'green' : 'red' }}>
                           <input onChange={(e) => setFile(e.target.files[0])} type="file" />
                           <div className='content-icon'>
                             <i className='fa-solid fa-plus' />
@@ -515,7 +520,7 @@ const UserProfile = (id) => {
                   datas.length < 0 ? (
                     <>
                       <div className=''>
-                        <div className='main-upload-file mb-3' style={{ border : '2px dashed', borderColor: file ? 'green' : 'red' }}>
+                        <div className='main-upload-file mb-3' style={{ border: '2px dashed', borderColor: file ? 'green' : 'red' }}>
                           <input type="file" onChange={(e) => setFile(e.target.files[0])} />
                           <p>Drag your files here or click in this area.</p>
                           <button className='text-center buttonx col-lg-12 mt-3' onClick={postImages} type="submit">Upload</button>

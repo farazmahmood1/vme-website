@@ -8,10 +8,10 @@ const ErrorPage = () => {
           <div className="image-404 text-white" style={{ fontSize: "150px" }}>
             <b>404</b>
           </div>
-          <p style={{ letterSpacing: "3px" }}>
+          <p className="mb-4" style={{ letterSpacing: "3px" }}>
             Sorry, an error has occurred, Request page not found!
           </p>
-          <Link to="/" className="btn-go-home">
+          <Link to="/" className="buttonx">
             GO BACK HOME
           </Link>
         </div>

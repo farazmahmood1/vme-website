@@ -149,7 +149,7 @@ const ShopScreem = () => {
                       <div className="col-lg-6">
 
                         <div className="product">
-                          <div className="product-title">
+                          <div style={{marginTop:'20px'}}>
                             <h2>{items.name}</h2>
                           </div>
                           <div className="product-rating">

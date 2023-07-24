@@ -53,7 +53,10 @@ const SignUp = ({ setOpenSignUp }) => {
                     if (result.status === "200") {
                         setLoading(false)
                         toast.success('User Registered Successfully')
-                        localStorage.setItem('user', JSON.stringify(result.user));
+                        localStorage.setItem('user', JSON.stringify(result.data.user));
+                        setInterval(() => {
+                            window.location.reload()
+                        }, 1500);
                     }
                     else if (result.status === "401") {
                         setLoading(false)

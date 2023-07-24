@@ -28,15 +28,13 @@ const ItemForm = () => {
     const [userID, setUserID] = useState()
     const [loader, setLoader] = useState(false)
     const [orderData, setOrderData] = useState([])
+    const [authModal, setAuthModal] = useState(true)
 
     useEffect(() => {
         topFunction();
         SetLocalLogin();
-      
-        // Add or remove the blur class based on the openModals state
-        document.body.classList.toggle("blur-background", openModals);
-      }, [openModals]); // Make sure to include openModals in the dependency array to trigger the effect when it changes.
-      
+    }, []);
+
     const SetLocalLogin = async () => {
         try {
             let user = await localStorage.getItem('user');
@@ -104,16 +102,18 @@ const ItemForm = () => {
     window.onscroll = function () {
         scrollFunction();
     };
+
     function scrollFunction() {
         if (
             document.body.scrollTop > 400 ||
             document.documentElement.scrollTop > 400
         ) {
-            mybutton = "block";
+            mybutton.style.display = "block";
         } else {
-            mybutton = "none";
+            mybutton.style.display = "none";
         }
     }
+
     function topFunction() {
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
@@ -155,105 +155,108 @@ const ItemForm = () => {
                 </div>
             </Modal>
 
-            <div className="page-heading normal-space">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-12 mb-4">
-                            <h6>DigiCard Market</h6>
-                            <h2>Buy Your DigiCard Now.</h2>
-                            <span className=''> <Link state={{ values: 'Card' }} to='/ShopMain'>Shop</Link>  &gt; <a style={{ cursor: 'default' }}>Buy Item</a></span>
+            <div className={!userID ? 'mainbackground' : ''}>
+                <div className="page-heading normal-space">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg-12 mb-4">
+                                <h6>DigiCard Market</h6>
+                                <h2>Buy Your DigiCard Now.</h2>
+                                <span className=''> <Link state={{ values: 'Card' }} to='/ShopMain'>Shop</Link>  &gt; <a style={{ cursor: 'default' }}>Buy Item</a></span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="item-details-page">
-                <div className="container">
-                    <div className="row">
+                <div className="item-details-page">
+                    <div className="container">
+                        <div className="row">
 
-                        <a target={'_blank'} href="https://api.whatsapp.com/send?phone=00923034450790&text=Hello%20I%20would%20like%20more%20information" className='contactWhatsapp card-body col-lg-2' >
-                            <div className='d-flex '>
-                                <a className='text-white mt-1 me-2'  >Buy through Whatsapp</a>
-                                <img src="./source/assets/images/whatsapp-color-icon.png" alt="whatsapp icon" style={{ height: "40px", width: "40px" }} />
-                            </div>
-                        </a>
+                            <a target={'_blank'} href="https://api.whatsapp.com/send?phone=00923034450790&text=Hello%20I%20would%20like%20more%20information" className='contactWhatsapp card-body col-lg-2' >
+                                <div className='d-flex '>
+                                    <a className='text-white mt-1 me-2'  >Buy through Whatsapp</a>
+                                    <img src="./source/assets/images/whatsapp-color-icon.png" alt="whatsapp icon" style={{ height: "40px", width: "40px" }} />
+                                </div>
+                            </a>
 
-                        <div className="col-lg-12">
-                            <div className="section-heading">
-                                <div className="line-dec" />
-                                <h2>Apply For <em>Your Item</em> Here.</h2>
-                            </div>
-                        </div>
-                        <div className="col-lg-12">
-                            <div id="contact" >
-                                <div className="row">
-                                    <p style={{ zIndex: '0' }}>Hello <span style={{ fontSize: '20px', color: "#7453fc" }}>{userName}&nbsp;{userLname}</span> , Thank you for trusting VME, Please verify the mailing address</p>
-                                    <hr style={{ width: "320px", height: "3px", color: "#7453fc", borderRadius: "10px" }} />
-                                    <h3 className='mb-2' style={{ color: "#7453fc" }}></h3>
-
-                                    <div className="col-lg-6">
-                                        <fieldset>
-                                            <label htmlFor="title">Phone Number*</label>
-                                            <input onChange={(e) => setPhone(e.target.value)} style={{ borderRadius: "16px", backgroundColor: "#282b2f", borderColor: phone === "" && submit === true ? "red" : '#404245' }} id="inputName5" placeholder="Enter your current phone no." autoComplete="on" type='number' />
-                                            {/* {name === "" && submit === true ? <span className='text-danger'>input empty</span> : ""} */}
-                                        </fieldset>
-                                    </div>
-                                    <div className="col-lg-12 mb-3">
-                                        <fieldset>
-                                            <label htmlFor="title">Address</label>
-                                            <textarea className="form-control text-white" onChange={(e) => setAddress(e.target.value)} style={{ borderRadius: "16px", backgroundColor: '#282b2f', borderColor: address === '' && submit === true ? 'red' : '#404245', borderRadius: "20px" }} id="exampleFormControlTextarea1" rows={7} placeholder="Enter your shipping address ..." defaultValue={""} />
-                                            {/* {name === "" && submit === true ? <span className='text-danger'>input empty</span> : ""} */}
-                                        </fieldset>
-                                    </div>
-                                    <div className="col-lg-12 mb-3">
-                                        <fieldset>
-                                            <label htmlFor="title">Additional Directions</label>
-                                            <textarea className="form-control text-white" onChange={(e) => setAdditionalDirection(e.target.value)} style={{ borderRadius: "16px", backgroundColor: '#282b2f', borderColor: address === '' && submit === true ? 'red' : '#404245', borderRadius: "20px" }} id="exampleFormControlTextarea1" rows={3} placeholder="Additional directions for the rider" defaultValue={""} />
-                                            {/* {name === "" && submit === true ? <span className='text-danger'>input empty</span> : ""} */}
-                                        </fieldset>
-                                    </div>
-                                    <div className="col-lg-6">
-                                        <fieldset>
-                                            <label htmlFor="title">Country, Region</label>
-                                            <input onChange={(e) => setRegion(e.target.value)} style={{ borderRadius: "16px", backgroundColor: "#282b2f", borderColor: region === "" && submit === true ? "red" : '#404245' }} id="inputName5" placeholder="Enter your region" autoComplete="on" type='text' />
-                                            {/* {name === "" && submit === true ? <span className='text-danger'>input empty</span> : ""} */}
-                                        </fieldset>
-                                    </div>
-                                    <div className="col-lg-6">
-                                        <fieldset>
-                                            <label htmlFor="title">City*</label>
-                                            <input onChange={(e) => setCity(e.target.value)} style={{ borderRadius: "16px", backgroundColor: "#282b2f", borderColor: city === "" && submit === true ? "red" : '#404245' }} id="inputName5" placeholder="Your current city" autoComplete="on" type='text' />
-                                            {/* {name === "" && submit === true ? <span className='text-danger'>input empty</span> : ""} */}
-                                        </fieldset>
-                                    </div>
-
-                                    <div className="col-lg-6 mx-auto">
-                                        <fieldset>
-                                            {
-                                                loader === true ?
-                                                    <button type="submit" id="form-submit" className="orange-button" >Loading <i className="fa-solid fa-spinner fa-spin-pulse" /></button>
-                                                    :
-
-                                                    <button onClick={() => { submitData() }} type="submit" id="form-submit" className="orange-button" >Submit Your Applying</button>
-                                            }
-                                        </fieldset>
-                                    </div>
-
+                            <div className="col-lg-12">
+                                <div className="section-heading">
+                                    <div className="line-dec" />
+                                    <h2>Apply For <em>Your Item</em> Here.</h2>
                                 </div>
                             </div>
+                            <div className="col-lg-12">
+                                <div id="contact" >
+                                    <div className="row">
+                                        <p style={{ zIndex: '0' }}>Hello <span style={{ fontSize: '20px', color: "#7453fc" }}>{userName}&nbsp;{userLname}</span> , Thank you for trusting VME, Please verify the mailing address</p>
+                                        <hr style={{ width: "320px", height: "3px", color: "#7453fc", borderRadius: "10px" }} />
+                                        <h3 className='mb-2' style={{ color: "#7453fc" }}></h3>
+
+                                        <div className="col-lg-6">
+                                            <fieldset>
+                                                <label htmlFor="title">Phone Number*</label>
+                                                <input onChange={(e) => setPhone(e.target.value)} style={{ borderRadius: "16px", backgroundColor: "#282b2f", borderColor: phone === "" && submit === true ? "red" : '#404245' }} id="inputName5" placeholder="Enter your current phone no." autoComplete="on" type='number' />
+                                                {/* {name === "" && submit === true ? <span className='text-danger'>input empty</span> : ""} */}
+                                            </fieldset>
+                                        </div>
+                                        <div className="col-lg-12 mb-3">
+                                            <fieldset>
+                                                <label htmlFor="title">Address</label>
+                                                <textarea className="form-control text-white" onChange={(e) => setAddress(e.target.value)} style={{ borderRadius: "16px", backgroundColor: '#282b2f', borderColor: address === '' && submit === true ? 'red' : '#404245', borderRadius: "20px" }} id="exampleFormControlTextarea1" rows={7} placeholder="Enter your shipping address ..." defaultValue={""} />
+                                                {/* {name === "" && submit === true ? <span className='text-danger'>input empty</span> : ""} */}
+                                            </fieldset>
+                                        </div>
+                                        <div className="col-lg-12 mb-3">
+                                            <fieldset>
+                                                <label htmlFor="title">Additional Directions</label>
+                                                <textarea className="form-control text-white" onChange={(e) => setAdditionalDirection(e.target.value)} style={{ borderRadius: "16px", backgroundColor: '#282b2f', borderColor: address === '' && submit === true ? 'red' : '#404245', borderRadius: "20px" }} id="exampleFormControlTextarea1" rows={3} placeholder="Additional directions for the rider" defaultValue={""} />
+                                                {/* {name === "" && submit === true ? <span className='text-danger'>input empty</span> : ""} */}
+                                            </fieldset>
+                                        </div>
+                                        <div className="col-lg-6">
+                                            <fieldset>
+                                                <label htmlFor="title">Country, Region</label>
+                                                <input onChange={(e) => setRegion(e.target.value)} style={{ borderRadius: "16px", backgroundColor: "#282b2f", borderColor: region === "" && submit === true ? "red" : '#404245' }} id="inputName5" placeholder="Enter your region" autoComplete="on" type='text' />
+                                                {/* {name === "" && submit === true ? <span className='text-danger'>input empty</span> : ""} */}
+                                            </fieldset>
+                                        </div>
+                                        <div className="col-lg-6">
+                                            <fieldset>
+                                                <label htmlFor="title">City*</label>
+                                                <input onChange={(e) => setCity(e.target.value)} style={{ borderRadius: "16px", backgroundColor: "#282b2f", borderColor: city === "" && submit === true ? "red" : '#404245' }} id="inputName5" placeholder="Your current city" autoComplete="on" type='text' />
+                                                {/* {name === "" && submit === true ? <span className='text-danger'>input empty</span> : ""} */}
+                                            </fieldset>
+                                        </div>
+
+                                        <div className="col-lg-6 mx-auto">
+                                            <fieldset>
+                                                {
+                                                    loader === true ?
+                                                        <button type="submit" id="form-submit" className="orange-button" >Loading <i className="fa-solid fa-spinner fa-spin-pulse" /></button>
+                                                        :
+
+                                                        <button onClick={() => { submitData() }} type="submit" id="form-submit" className="orange-button" >Submit Your Applying</button>
+                                                }
+                                            </fieldset>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
                         </div>
-
-                        {
-                           !userID ?
-                                <>
-                                    <Authorization setOpenModals={setOpenModals} />
-                                </>
-                                :
-                                null
-                        }
-
                     </div>
                 </div>
             </div>
+            {
+                !userID ?
+                    <>
+                        <Authorization authModal={authModal} setAuthModal={setAuthModal} />
+                    </>
+                    :
+                    null
+            }
+
         </div>
     )
 }

@@ -42,7 +42,7 @@ const Navbar = () => {
       redirect: 'follow'
     };
 
-    fetch(`${Baseurl}deleteDataByUserId`, requestOptions)
+    fetch(`${Baseurl}deleteDataByUserId/${userID}`, requestOptions)
       .then(response => response.json())
       .then(result => {
         console.log(result)
