@@ -518,6 +518,7 @@ input {
   background-repeat: no-repeat;
   background-size: cover;
   padding-bottom: 50px;
+  min-height: 100vh;
 }
 
 /* contact rhiugh whatsapp button */
@@ -622,7 +623,6 @@ input {
   color: #7453fc;
   margin-top: 200px;
   margin-bottom: 0px;
-
   z-index: 9998;
   font-size: 70px;
   text-indent: -9999em;

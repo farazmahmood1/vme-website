@@ -1,5 +1,5 @@
 import "./App.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Footer from "./Components/Body/Footer";
@@ -15,8 +15,20 @@ import FAQ from "./Components/Main/FAQ";
 import Navbar from "./Components/Body/Navbar";
 import Shop from "./Components/Main/Shop";
 import Blogs from "./Components/Main/Blogs";
+import PreLoader from "./Components/Body/PreLoader";
 
 function App() {
+
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   var mybutton = document.getElementById("myBtn");
   window.onscroll = function () {
     scrollFunction();
@@ -42,7 +54,9 @@ function App() {
 
   return (
     <div>
-      <Router>
+     {
+      loading ? ( <PreLoader/> ) : (
+        <Router>
         <Navbar />
         <Routes>
           <Route path="/" element={<Decider />} />
@@ -58,6 +72,8 @@ function App() {
         </Routes>
         <Footer />
       </Router>
+      )
+     }
     </div>
   );
 }
